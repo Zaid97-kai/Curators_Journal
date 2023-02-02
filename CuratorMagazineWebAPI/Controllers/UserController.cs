@@ -90,7 +90,7 @@ public class UserController : BaseController
     /// <param name="user">The user.</param>
     /// <returns>ActionResult&lt;User&gt;.</returns>
     [HttpPut]
-    public async Task<BaseResponseActionResult<User>> Put(User? user)
+    public async Task<BaseResponseActionResult<User>> Put([FromBody] User? user)
     {
         if (user == null)
         {
