@@ -52,7 +52,13 @@ public partial class ChangeVDEWModalWindow
     /// Gets or sets the selected division.
     /// </summary>
     /// <value>The selected division.</value>
-    private string? _selectedDivision { get; set; }
+    private string? _selectedValue { get; set; }
+
+    /// <summary>
+    /// Gets or sets the selected division.
+    /// </summary>
+    /// <value>The selected division.</value>
+    private Division? _selectedDivision { get; set; }
 
     /// <summary>
     /// Called when [finish].
@@ -82,8 +88,8 @@ public partial class ChangeVDEWModalWindow
     {
         var ret = await DivisionService?.PostAsync()!;
         _divisions = JsonConvert.DeserializeObject<List<Division>>(ret.Result.Items?.ToString() ?? string.Empty);
-
-        _selectedDivision = VDEW.Division.Name;
+        _selectedValue = VDEW.Division.Name;
+        _selectedDivision = VDEW.Division;
     }
 
     /// <summary>
@@ -110,8 +116,17 @@ public partial class ChangeVDEWModalWindow
     /// <param name="e">The <see cref="MouseEventArgs" /> instance containing the event data.</param>
     private async void HandleOk(MouseEventArgs e)
     {
+        VDEW.Division = _selectedDivision;
+        VDEW.DivisionId = _selectedDivision.Id;
+
+
         if (VDEW != null) await UserService?.PutAsync(VDEW)!;
 
         Visible = false;
+    }
+
+    private void OnSelectedItemChangedHandler(Division value)
+    {
+        _selectedDivision = value;
     }
 }
