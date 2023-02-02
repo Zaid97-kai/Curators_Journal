@@ -1,0 +1,20 @@
+{
+  "id": 0,
+  "name": "string",
+  "password": "string",
+  "email": "string",
+  "phone": "string",
+  "profilePhoto": "",
+  "birthDate": "2022-12-22T11:41:26.296Z",
+  "address": "string",
+  "motherId": null,
+  "mother": null,
+  "fatherId": null,
+  "father": null,
+  "groupId": null,
+  "group": null,
+  "roleId": null,
+  "role": null,
+  "divisionId": null,
+  "division": null
+}

@@ -1,0 +1,39 @@
+﻿@using CuratorMagazineBlazorApp.Shared.StatsCollect
+@using CuratorMagazineBlazorApp.Shared.VDEW
+@using CuratorMagazineWebAPI.Models.Entities.Domains
+@switch (@StateRoleNavBar?.RoleName)
+{
+    case "WorkWithVDEW":
+        <WorkWithVDEW CurrentUser="CurrentUser"></WorkWithVDEW>
+        break;
+    case "StatsCollect":
+        <StatsCollect></StatsCollect>
+        break;
+    case "WorkWithGroupVDEW":
+        <WorkWithGroupVDEW CurrentUser="CurrentUser" ></WorkWithGroupVDEW>
+        break;
+    case "StatsCollectionPage":
+        <StatsCollectionPage CurrentUser="CurrentUser"></StatsCollectionPage>
+        break;
+    case "WorkWithCuratorVDEW":
+        <WorkWithCuratorVDEW CurrentUser="CurrentUser"></WorkWithCuratorVDEW>
+        break;
+    default:
+        <CarouselComponent></CarouselComponent>
+        <Introduction></Introduction>
+        break;
+}
+
+@code {
+    [Parameter]
+    public User? CurrentUser { get; set; }
+
+    [Parameter]
+    public Group? Group { get; set; }
+
+    [Parameter]
+    public StateRoleNavBar? StateRoleNavBar { get; set; }
+
+    [Parameter]
+    public EventCallback<StateRoleNavBar> StateRoleNavBarCallback { get; set; }
+}

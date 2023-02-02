@@ -1,0 +1,29 @@
+﻿<div class="modal fade" aria-labelledby="signInModelLabel" aria-hidden="true" tabindex="-1" id="signInModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title">ВОЙТИ В ЛИЧНЫЙ КАБИНЕТ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <Form Model="@_model"
+                      OnFinish="OnFinish"
+                      OnFinishFailed="OnFinishFailed"
+                      LabelColSpan="8"
+                      WrapperColSpan="16">
+                    <FormItem>
+                        <Input @bind-Value="@context.Name" />
+                    </FormItem>
+                    <FormItem>
+                        <InputPassword @bind-Value="@context.Password" />
+                    </FormItem>
+                    <FormItem WrapperColOffset="8" WrapperColSpan="16">
+                        <Button Type="@ButtonType.Primary" HtmlType="submit" OnClick="Authorization">
+                            ВОЙТИ
+                        </Button>
+                    </FormItem>
+                </Form>
+            </div>
+        </div>
+    </div>
+</div>

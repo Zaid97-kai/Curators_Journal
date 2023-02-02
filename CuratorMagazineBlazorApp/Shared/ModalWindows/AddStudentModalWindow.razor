@@ -1,0 +1,83 @@
+﻿<div class="modal fade" aria-labelledby="addStudentModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="addStudentModal">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                  <h5 class="modal-title">Добавление</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-6 text-center">
+                        <img class="img-fluid" src="../img/no-img.jpg" alt="">
+                        <button type="image" class="btn btn-outline-secondary mt-3">Обзор</button>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="inputSurame" class="col-md-2 col-form-label">Фамилия</label>
+                        <div class="col-ms-10">
+                          <input type="text" class="form-control" id="inputSurame">
+                        </div>
+                        <label for="inputName" class="col-md-2 col-form-label">Имя</label>
+                        <div class="col-ms-10">
+                          <input type="text" class="form-control" id="inputName">
+                        </div>
+                        <label for="inputSecondname" class="col-md-2 col-form-label">Отчество</label>
+                        <div class="col-ms-10">
+                          <input type="text" class="form-control" id="inputSecondname">
+                        </div>
+                        <label for="inputDate" class="col-md-6 col-form-label">Дата рождения</label>
+                        <div class="col-ms-10">
+                            <input type="text" class="form-control" id="inputDate">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="inputTel" class="col-md-2 col-form-label">Телефон</label>
+                        <div class="col-ms-10">
+                          <input type="tel" class="form-control" id="inputTel">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="inputEmail" class="col-md-2 col-form-label">Email</label>
+                        <div class="col-ms-10">
+                          <input type="email" class="form-control" id="inputEmail">
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <label for="inputInfParents" class="col-md-6 col-form-label">Информация о родителях</label>
+                        <div class="col-ms-10">
+                          <input type="email" class="form-control" id="inputInfParents">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" @onclick="(() => AddStudent.InvokeAsync(_student))">Сохранить</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+@code {
+    private User _student = new User();
+
+    [Parameter]
+    public EventCallback<User> RoleCallback { get; set; }
+
+    public UserService UserService { get; set; }
+
+    private void OnFinish(EditContext editContext)
+    {
+        Console.WriteLine($"Success:{JsonSerializer.Serialize(_student)}");
+    }
+
+    private void OnFinishFailed(EditContext editContext)
+    {
+        Console.WriteLine($"Failed:{JsonSerializer.Serialize(_student)}");
+    }
+
+
+    [Parameter]
+    public EventCallback<User> AddStudent { get; set; }
+}

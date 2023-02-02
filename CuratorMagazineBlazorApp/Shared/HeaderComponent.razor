@@ -1,0 +1,45 @@
+﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
+<header  class="container">
+    <MainHeader CurrentUser="@CurrentUser"></MainHeader>
+    <EnterModalWindow RoleCallback="@SetUser"></EnterModalWindow>
+    <ExitModalWindow UserNullCallback="@SetUserNull"></ExitModalWindow>
+    <NavBar></NavBar>
+    <RoleNavBar CurrentUser="@CurrentUser" StateRoleNavBar="@StateRoleNavBar"  StateRoleNavBarCallback="@SetStateRoleNavBar"></RoleNavBar>
+    <MainBody CurrentUser="@CurrentUser" StateRoleNavBar="@StateRoleNavBar"></MainBody>
+</header>
+
+@code {
+    [Parameter]
+    public User? CurrentUser { get; set; }
+
+    [Parameter]
+    public EventCallback<User?> RoleCallback { get; set; }
+
+    [Parameter]
+    public EventCallback<User> UserNullCallback { get; set; }
+
+    [Parameter]
+    public StateRoleNavBar? StateRoleNavBar { get; set; } = new();
+
+    [Parameter]
+    public EventCallback<StateRoleNavBar> StateRoleNavBarCallback { get; set; }
+
+    public void SetUser(User? user)
+    {
+        CurrentUser = user;
+        RoleCallback.InvokeAsync(user);
+    }
+
+    public void SetUserNull()
+    {
+        CurrentUser = null;
+        UserNullCallback.InvokeAsync();
+    }
+
+    public void SetStateRoleNavBar(StateRoleNavBar roleNavBar)
+    {
+        StateRoleNavBar = roleNavBar;
+        StateRoleNavBarCallback.InvokeAsync(roleNavBar);
+    }
+}
+ 

@@ -1,0 +1,100 @@
+{
+  "success": true,
+  "error": null,
+  "result": {
+    "items": [
+      {
+        "id": 1,
+        "name": "Administrator",
+        "password": "Administrator",
+        "email": "ripogroyippe-2863@yopmail.com",
+        "phone": "9(421)001-31-15",
+        "profilePhoto": null,
+        "birthDate": null,
+        "address": "342340, Волгоградская область, город Москва, пл. Ленина, 80",
+        "motherId": null,
+        "mother": null,
+        "fatherId": null,
+        "father": null,
+        "groupId": null,
+        "group": null,
+        "roleId": 1,
+        "role": {
+          "id": 1,
+          "name": "Administrator"
+        },
+        "divisionId": 1,
+        "division": {
+          "id": 1,
+          "name": "УВР"
+        }
+      },
+      {
+        "id": 2,
+        "name": "Associate Director",
+        "password": "Associate Director",
+        "email": "croummauroicegeu-1550@yopmail.com",
+        "phone": "608(51)713-94-41",
+        "profilePhoto": null,
+        "birthDate": null,
+        "address": "383478, Брянская область, город Люберцы, ул. Ломоносова, 72",
+        "motherId": null,
+        "mother": null,
+        "fatherId": null,
+        "father": null,
+        "groupId": null,
+        "group": null,
+        "roleId": 2,
+        "role": {
+          "id": 2,
+          "name": "Deputy Director"
+        },
+        "divisionId": 6,
+        "division": {
+          "id": 6,
+          "name": "КИТ"
+        }
+      },
+      {
+        "id": 3,
+        "name": "Рахимов Ранис Рамилевич",
+        "password": "Рахимов Ранис Рамилевич",
+        "email": "treledoddoiseu-5434@yopmail.com",
+        "phone": "9(421)001-31-15",
+        "profilePhoto": null,
+        "birthDate": null,
+        "address": "342340, Волгоградская область, город Москва, пл. Ленина, 80",
+        "motherId": 2,
+        "mother": {
+          "id": 2,
+          "name": "Иванова Инна Ивановна",
+          "workName": "Преподаватель",
+          "phone": "429(521)755-17-83"
+        },
+        "fatherId": 1,
+        "father": {
+          "id": 1,
+          "name": "Иванов Иван Иванович",
+          "workName": "Ассистент менеджера по продажам",
+          "phone": "3(67)992-09-22"
+        },
+        "groupId": 4,
+        "group": {
+          "id": 4,
+          "name": "4132"
+        },
+        "roleId": 3,
+        "role": {
+          "id": 3,
+          "name": "Curator"
+        },
+        "divisionId": 6,
+        "division": {
+          "id": 6,
+          "name": "КИТ"
+        }
+      }
+    ],
+    "pageCount": 1
+  }
+}

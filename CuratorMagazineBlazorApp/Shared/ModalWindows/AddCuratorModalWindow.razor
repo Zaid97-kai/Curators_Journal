@@ -1,0 +1,84 @@
+﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
+<div class="modal fade" aria-labelledby="addModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="addModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title">Добавление</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <Form Model="@_curator"
+                          OnFinish="OnFinish"
+                          OnFinishFailed="OnFinishFailed"
+                          LabelColSpan="8"
+                          WrapperColSpan="16">
+                        <Row>
+                            <GridCol>
+                                <img class="img-thumbnail" height="300px" width="300px" src="../img/no-img.jpg" alt="">
+                            </GridCol>
+
+                            <GridCol Span="13">
+                                <FormItem Label="ФИО">
+                                    <div class="col-ms-10">
+                                        <Input @bind-Value="@context.Name" />
+                                    </div>
+                                </FormItem>
+                                <FormItem Label="Подразделение">
+                                    <div class="col-ms-10">
+                                        <Select Mode="default"
+                                                DataSource="@_divisions"
+                                                TItem="Division"
+                                                TItemValue="string"
+                                                @bind-Value="@SelectedDivision"
+                                                LabelName="@nameof(Division.Name)"
+                                                ValueName="@nameof(Division.Name)">
+                                        </Select>
+                                    </div>
+                                </FormItem>
+                                <FormItem Label="Телефон">
+                                    <div class="col-ms-10">
+                                        <Input @bind-Value="@context.Phone" />
+                                    </div>
+                                </FormItem>
+                                <FormItem Label="Email">
+                                    <div class="col-ms-10">
+                                        <Input @bind-Value="@context.Email" />
+                                    </div>
+                                </FormItem>
+                            </GridCol>
+                        </Row>
+                        <Row>
+                            <GridCol Span="10" Style="text-align:center;">
+                                <Button type="image" class="btn btn-outline-secondary mt-3">Обзор</Button>
+                            </GridCol>
+                            <GridCol Span="13">
+                                <FormItem Label="Пароль">
+                                    <div class="col-ms-10">
+                                        <Input @bind-Value="@context.Password" />
+                                    </div>
+                                </FormItem>
+                            </GridCol>
+                        </Row>
+                        <Row>
+                            <GridCol Span="24" Style="text-align:right;">
+                                <FormItem WrapperColOffset="8" WrapperColSpan="16">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Отмена
+                                    </button>
+                                    <Button Type="@ButtonType.Primary" HtmlType="submit" Style="height: 37px" OnClick="@AddCurator">
+                                        Добавить
+                                    </Button>
+                                </FormItem>
+                            </GridCol>
+                        </Row>
+                    </Form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

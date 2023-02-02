@@ -1,0 +1,19 @@
+﻿@using CuratorMagazineBlazorApp.Shared.ModalWindows
+<div class="container my-4 bg-secondary bg-opacity-50">
+    <div class="container-fluid">
+        <BodySearchBar></BodySearchBar>
+       <div class="overflow-auto container scroll">
+            @foreach (var item in _users)
+            {
+                <IndividualCuratorVDEW group="item"></IndividualCuratorVDEW>
+            }
+        </div>
+        <div class="row">
+            <div class="row-md text-center mb-2">
+                <hr>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addModal">Добавить</button>
+                <AddCuratorModalWindow ></AddCuratorModalWindow>
+            </div>
+        </div>
+    </div>
+</div>

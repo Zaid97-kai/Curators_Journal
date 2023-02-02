@@ -1,0 +1,28 @@
+﻿@using CuratorMagazineBlazorApp.Data.Services
+@using CuratorMagazineBlazorApp.Shared.ModalWindows
+@using CuratorMagazineWebAPI.Models.Entities.Domains
+<ChangeCuratorModalWindow></ChangeCuratorModalWindow>
+<div class="row mt-3 group rounded">
+    <div class="col-md-1">
+        <img class="rounded img-fluid mt-1" src="../img/no-img.jpg" alt="">
+    </div>
+    <div class="col-md-8 mt-1">
+        <h5><a class="text-dark" style="text-decoration: none;">@User.Name</a></h5>
+        <p class="text-dark">@User.Email</p>
+        @*Пометка придумать как достать куратора*@
+
+    </div>
+    <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#changeModal">Изменить</button>
+        <button type="button" class="btn btn-secondary">Удалить</button>
+    </div>
+    <hr class="mb-0 mt-0">
+</div>
+
+@code {
+    [Parameter]
+    public User? User { get; set; }
+
+    [Inject]
+    public GroupService? UserService { get; set; }
+}

@@ -1,0 +1,16 @@
+﻿<div class="container my-4 bg-secondary bg-opacity-50" @onload="GetGroups">
+    <div class="container-fluid">
+        <div class="overflow-auto container scroll">
+            @foreach (var item in _groups)
+            {
+                <IndividualGroup CurrentUser="CurrentUser" group="item"></IndividualGroup>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="row-md text-center mb-2">
+            <hr>
+            <a href="../Curator/cur3.html" type="button" class="btn btn-secondary">Добавить</a>
+        </div>
+    </div>
+</div>

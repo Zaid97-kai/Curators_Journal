@@ -1,0 +1,49 @@
+﻿@using CuratorMagazineBlazorApp.Shared.ModalWindows
+@using CuratorMagazineWebAPI.Models.Entities.Domains
+<div class="row">
+    <div class="col-1">
+        @if (_vdew?.ProfilePhoto == null)
+        {
+            <img class="rounded img-fluid" src="../img/no-img.jpg" alt="">
+        }
+        else
+        {
+
+        }
+    </div>
+    <div class="col-8">
+        <h5>@_vdew?.Name</h5>
+        
+        <p>@_vdew?.Email</p>
+    </div>
+    <div class="col-3 text-end">
+        <button type="button" class="btn btn-secondary me-2" @onclick="ShowModalChangeVdewWindow">Изменить</button>
+        <button type="button" class="btn btn-secondary" @onclick="(() => DeleteVDEW.InvokeAsync(_vdew))">Удалить</button>
+    </div>
+</div>
+@if (IsVisibleModalChangeVdewWindow)
+{
+    <ChangeVDEWModalWindow Visible="IsVisibleModalChangeVdewWindow" VDEW="@_vdew"></ChangeVDEWModalWindow>
+}
+
+
+@code {
+
+    [Parameter]
+    public User? _vdew { get; set; }
+
+    [Parameter] 
+    public EventCallback<User> DeleteVDEW { get; set; }
+
+    private bool IsVisibleModalChangeVdewWindow { get; set; }
+
+    public void ShowModalChangeVdewWindow()
+    {
+        IsVisibleModalChangeVdewWindow = !IsVisibleModalChangeVdewWindow;
+    }
+
+    void SaveVDEW(User user)
+    {
+
+    }
+}

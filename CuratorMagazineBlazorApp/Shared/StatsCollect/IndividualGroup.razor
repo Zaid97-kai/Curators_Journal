@@ -1,0 +1,40 @@
+﻿@using CuratorMagazineBlazorApp.Data.Services
+@using CuratorMagazineBlazorApp.Shared.Curator
+@using CuratorMagazineWebAPI.Models.Entities.Domains
+<div class="row group rounded">
+    <div class="col-md-1">
+        <img class="rounded img-fluid mt-1" src="../img/no-img.jpg" alt="">
+    </div>
+    <div class="col-md-8 mt-1">
+        <h5><a class="text-dark" style="text-decoration: none;">@group.Name</a></h5>
+        <p>@*@Curator.Name*@</p>
+        
+    </div>
+    @if (CurrentUser?.Role?.Name == "Curator")
+    {
+        <div class="col-md-3 text-end mt-3">
+            <a href="../Curator/cur3.html" type="button" class="btn btn-secondary me-2">Изменить</a>
+        </div>
+        <ChangeGroup group="group"></ChangeGroup>
+    }
+    <hr class="mb-0">
+</div>
+
+@code {
+    [Parameter]
+    public Group group { get; set; }
+
+    [Parameter]
+    public User? CurrentUser { get; set; }
+
+    [Inject]
+    public GroupService? GroupService { get; set; }
+
+    private User? Curator { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var ret = await GroupService?.GetGroupCuratorAsync(group.Id)!;
+        Curator = JsonConvert.DeserializeObject<User>(ret.Result?.ToString() ?? string.Empty);
+    }
+} 

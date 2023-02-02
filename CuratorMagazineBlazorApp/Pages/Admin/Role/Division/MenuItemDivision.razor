@@ -1,0 +1,78 @@
+﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
+@using Microsoft.AspNetCore.Components
+
+<Table @ref="_table"
+       TItem="Division"
+       DataSource="@_divisions"
+       Total="_total"
+       RowClassName="@(_ => "editable-row")"
+       @bind-PageIndex="_pageIndex"
+       @bind-PageSize="_pageSize"
+       @bind-SelectedRows="_selectedRows"
+       OnChange="OnChange">
+    <ChildContent Context="data">
+        <Selection Key="@(data.Id.ToString())"/>
+        <PropertyColumn Property="c => c.Id" Sortable>
+            @if (!_editCache[data.Id.ToString()].edit)
+            {
+                @data.Id
+            }
+            else
+            {
+                <Input @bind-Value="_editCache[data.Id.ToString()].data.Id"/>
+            }
+        </PropertyColumn>
+        <PropertyColumn Property="c => c.Name" Sortable>
+            @if (!_editCache[data.Id.ToString()].edit)
+            {
+                @data.Name
+            }
+            else
+            {
+                <Input @bind-Value="_editCache[data.Id.ToString()].data.Name"/>
+            }
+        </PropertyColumn>
+        <ActionColumn Title="Action">
+            @if (!_editCache[data.Id.ToString()].edit)
+            {
+                <a @onclick="() => StartEdit(data.Id.ToString())">Edit</a>
+            }
+            else
+            {
+                <a @onclick="() => SaveEdit(data.Id.ToString())" class="save">Save</a>
+                <Popconfirm Title="Sure to cancel?"
+                            OnConfirm="() => CancelEdit(data.Id.ToString())"
+                            OkText="Yes"
+                            CancelText="No">
+                    <a>Cancel</a>
+                </Popconfirm>
+            }
+        </ActionColumn>
+        <ActionColumn>
+            <Space>
+                <SpaceItem><Button Danger OnClick="() => Delete(data.Id)">Delete</Button></SpaceItem>
+            </Space>
+        </ActionColumn>
+    </ChildContent>
+</Table>
+
+<br />
+<p>Всего подразделений: @_total</p>
+
+<br />
+<h5>Выбраны следующие элементы:</h5>
+@if (_selectedRows != null && _selectedRows.Any())
+{
+    <Button Danger Size="small" OnClick="@(e => { _selectedRows = null; })">Clear</Button>
+
+    @foreach (var selected in _selectedRows)
+    {
+        <Tag @key="selected.Id" Closable OnClose="e=>RemoveSelection(selected.Id)">@selected.Id - @selected.Name</Tag>
+    }
+}
+
+<style>
+    .save {
+        margin-right: 8px;
+    }
+</style>

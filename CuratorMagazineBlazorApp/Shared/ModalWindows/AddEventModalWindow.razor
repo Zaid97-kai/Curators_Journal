@@ -1,0 +1,48 @@
+﻿<div class="modal fade" aria-labelledby="addEventModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="addEventModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title">Добавление</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <img class="img-fluid" src="../img/no-img.jpg" alt="">
+                            <button type="image" class="btn btn-outline-secondary mt-3">Обзор</button>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputEventName" class="col-md-2 col-form-label">Название</label>
+                            <div class="col-ms-10">
+                                <input type="text" class="form-control" id="inputEventName">
+                            </div>
+                            <label for="inputEventDate" class="col-md-6 col-form-label">Дата проведения</label>
+                            <div class="col-ms-10">
+                                <input type="text" class="form-control" id="inputEventDate">
+                            </div>
+                            <label for="inputCount" class="col-md-6 col-form-label">Кол-во участников</label>
+                            <div class="col-ms-10">
+                                <input type="text" class="form-control" id="inputCount">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="inputCom" class="col-md-2 col-form-label">Комментарий</label>
+                            <div class="col-ms-10">
+                                <input type="email" class="form-control" id="inputCom">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

@@ -1,0 +1,35 @@
+﻿<div class="modal fade" aria-labelledby="studInfoModelLabel" aria-hidden="true" tabindex="-1" id="studInfoModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title">Участник группы</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <img class="img-fluid" src="../img/no-img.jpg" alt="">
+                        </div>
+                        <div class="col-md-6 text-start">
+                            <h5>@Student?.Name</h5>
+                            <h5>@Student!.BirthDate</h5>
+                            <h5>@Student.Phone</h5>
+                            <h5>@Student.Address</h5>
+                            <h5>@Student.Mother?.Name</h5>
+                            <h5>@Student.Father?.Name</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Назад</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public User? Student { get; set; }
+}

@@ -1,0 +1,70 @@
+﻿@using CuratorMagazineBlazorApp.Pages.Admin.Role.Group
+<Menu Mode=MenuMode.Horizontal OnMenuItemClicked="@ChangeState">
+    <SubMenu Title="Справочники">
+        <MenuItem Key="MenuItemDivision" Title="Подразделения">
+            
+        </MenuItem>        
+        <MenuItem Key="MenuItemGroup" Title="Группы">
+            
+        </MenuItem>        
+        <MenuItem Key="MenuItemParent" Title="Родители">
+            
+        </MenuItem>        
+        <MenuItem Key="MenuItemRole" Title="Роли">
+            
+        </MenuItem>        
+        <MenuItem Key="MenuItemUser" Title="Пользователи">
+            
+        </MenuItem>
+    </SubMenu>
+</Menu>
+
+@if (_stateMenuItem == StateMenuItem.MenuItemDivision)
+{
+    <CuratorMagazineBlazorApp.Pages.Admin.Role.Division.MenuItemDivision></CuratorMagazineBlazorApp.Pages.Admin.Role.Division.MenuItemDivision>
+}
+else if (_stateMenuItem == StateMenuItem.MenuItemUser)
+{
+    <CuratorMagazineBlazorApp.Pages.Admin.Role.User.MenuItemUser></CuratorMagazineBlazorApp.Pages.Admin.Role.User.MenuItemUser>
+}
+else if (_stateMenuItem == StateMenuItem.MenuItemGroup)
+{
+    <CuratorMagazineBlazorApp.Pages.Admin.Role.Group.MenuItemGroup></CuratorMagazineBlazorApp.Pages.Admin.Role.Group.MenuItemGroup>
+}
+else if (_stateMenuItem == StateMenuItem.MenuItemParent)
+{
+    <CuratorMagazineBlazorApp.Pages.Admin.Role.Parent.MenuItemParent></CuratorMagazineBlazorApp.Pages.Admin.Role.Parent.MenuItemParent>
+}
+else if (_stateMenuItem == StateMenuItem.MenuItemRole)
+{
+    <CuratorMagazineBlazorApp.Pages.Admin.Role.Role.MenuItemRole></CuratorMagazineBlazorApp.Pages.Admin.Role.Role.MenuItemRole>
+}
+
+@code
+{
+    private StateMenuItem _stateMenuItem = StateMenuItem.MenuItemDefault;
+
+    public void ChangeState(MenuItem e)
+    {
+        switch (e.Key)
+        {
+            case "MenuItemDivision":
+                _stateMenuItem = StateMenuItem.MenuItemDivision;
+                break;
+            case "MenuItemGroup":
+                _stateMenuItem = StateMenuItem.MenuItemGroup;
+                break;
+            case "MenuItemParent":
+                _stateMenuItem = StateMenuItem.MenuItemParent;
+                break;
+            case "MenuItemRole":
+                _stateMenuItem = StateMenuItem.MenuItemRole;
+                break;
+            case "MenuItemUser":
+                _stateMenuItem = StateMenuItem.MenuItemUser;
+                break;
+            default:
+                break;
+        }
+    }
+}
