@@ -1,5 +1,4 @@
-﻿using AntDesign;
-using CuratorMagazineBlazorApp.Data.Services;
+﻿using CuratorMagazineBlazorApp.Data.Services;
 using CuratorMagazineWebAPI.Models.Entities.Domains;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
@@ -52,13 +51,13 @@ public partial class ChangeVDEWModalWindow
     /// Gets or sets the selected division.
     /// </summary>
     /// <value>The selected division.</value>
-    private string? _selectedValue { get; set; }
+    private string? SelectedValue { get; set; }
 
     /// <summary>
     /// Gets or sets the selected division.
     /// </summary>
     /// <value>The selected division.</value>
-    private Division? _selectedDivision { get; set; }
+    private Division? SelectedDivision { get; set; }
 
     /// <summary>
     /// Called when [finish].
@@ -89,18 +88,10 @@ public partial class ChangeVDEWModalWindow
         var ret = await DivisionService?.PostAsync()!;
         _divisions = JsonConvert.DeserializeObject<List<Division>>(ret.Result.Items?.ToString() ?? string.Empty);
 
-        _selectedValue = VDEW.Division.Name;
-        _selectedDivision = VDEW.Division;
+        SelectedValue = VDEW?.Division?.Name;
+        SelectedDivision = VDEW?.Division;
     }
-
-    /// <summary>
-    /// Changes the vdew.
-    /// </summary>
-    public void ChangeVDEW()
-    {
-
-    }
-
+    
     /// <summary>
     /// Handles the cancel.
     /// </summary>
@@ -117,16 +108,23 @@ public partial class ChangeVDEWModalWindow
     /// <param name="e">The <see cref="MouseEventArgs" /> instance containing the event data.</param>
     private async void HandleOk(MouseEventArgs e)
     {
-        VDEW.Division = _selectedDivision;
-        VDEW.DivisionId = _selectedDivision.Id;
+        if (VDEW != null)
+        {
+            VDEW.Division = SelectedDivision;
+            VDEW.DivisionId = SelectedDivision?.Id;
 
-        if (VDEW != null) await UserService?.PutAsync(VDEW)!;
+            await UserService?.PutAsync(VDEW)!;
+        }
 
         Visible = false;
     }
 
+    /// <summary>
+    /// Called when [selected item changed handler].
+    /// </summary>
+    /// <param name="value">The value.</param>
     private void OnSelectedItemChangedHandler(Division value)
     {
-        _selectedDivision = value;
+        SelectedDivision = value;
     }
 }
