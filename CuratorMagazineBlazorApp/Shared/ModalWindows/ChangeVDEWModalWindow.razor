@@ -24,9 +24,11 @@
                                     DataSource="@_divisions"
                                     TItem="Division"
                                     TItemValue="string"
-                                    @bind-Value="@context.Division.Name"
+                                    @bind-Value="@_selectedValue"
                                     LabelName="@nameof(Division.Name)"
-                                    ValueName="@nameof(Division.Name)">
+                                    ValueName="@nameof(Division.Name)"
+                                    IgnoreItemChanges="false"
+                                    OnSelectedItemChanged="OnSelectedItemChangedHandler">
                             </Select>
                         </FormItem>
                         <FormItem Label="Телефон">
