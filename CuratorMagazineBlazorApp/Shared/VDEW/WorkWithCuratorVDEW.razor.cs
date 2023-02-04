@@ -29,7 +29,9 @@ public partial class WorkWithCuratorVDEW
     /// <summary>
     /// The users
     /// </summary>
-    private List<User>? _users = new();
+    private List<User>? _curators = new();
+
+    private bool IsVisibleModalAddCuratorWindow { get; set; }
 
     /// <summary>
     /// Deletes the curator.
@@ -49,13 +51,21 @@ public partial class WorkWithCuratorVDEW
 
     }
 
-    /// <summary>
-    /// Gets the curator.
-    /// </summary>
-    async Task GetCurator()
+    protected override async Task OnInitializedAsync()
     {
-        _users = new List<User>();
         var users = await UserService?.PostAsync()!;
-        _users = JsonConvert.DeserializeObject<List<User>>(users.Result.Items?.ToString() ?? string.Empty);
+        _curators = JsonConvert.DeserializeObject<List<User>>(users.Result.Items?.ToString() ?? string.Empty);
+    }
+
+    public void ModalAddCuratorWindow()
+    {
+        if (IsVisibleModalAddCuratorWindow)
+        {
+            IsVisibleModalAddCuratorWindow = false;
+        }
+        else
+        {
+            IsVisibleModalAddCuratorWindow = true;
+        }
     }
 }

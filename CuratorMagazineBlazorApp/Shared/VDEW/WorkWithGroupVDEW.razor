@@ -3,19 +3,42 @@
     <div class="container-fluid">
         <BodySearchBar></BodySearchBar>
         <div class="overflow-auto container scroll">
-            @if (Groups != null)
+            @if (_groups != null)
             {
-                @foreach (var item in Groups)
+                @if (_groups == null || _groups.Count == 0)
                 {
-                    <IndividualGroupVDEW Group="item"></IndividualGroupVDEW>
+                    <div class="row">
+                        <div class="col-12">
+                            <p><em>Loading...</em></p>
+                        </div>
+                    </div>
+
+                }
+                else
+                {
+                    foreach (var item in _groups)
+                    {
+                        @*if (item.Division?.Name == CurrentUser.Division?.Name)
+                        {*@
+                            <IndividualGroupVDEW Group="item"></IndividualGroupVDEW>
+                        @*}*@
+                    }
                 }
             }
+            else
+            {
+                //ChangeOnDefaultStateRoleNavBar();
+            } 
         </div>
         <div class="row">
             <div class="row-md text-center mb-2">
                 <hr>
-                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addModal">Добавить</button>
-                <AddGroupModalWindow></AddGroupModalWindow>
+                <button type="button" class="btn btn-secondary" @onclick="ModalAddGroupWindow">Добавить</button>
+                @if (IsVisibleModalAddGroupWindow)
+                {
+                    <AddGroupModalWindow Visible="IsVisibleModalAddGroupWindow"></AddGroupModalWindow>
+                }
+                
             </div>
         </div>
     </div>

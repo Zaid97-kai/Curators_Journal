@@ -3,6 +3,7 @@ using CuratorMagazineWebAPI.Models.Entities.Domains;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace CuratorMagazineBlazorApp.Shared.ModalWindows;
 
@@ -27,18 +28,53 @@ public partial class ChangeCuratorModalWindow
     [Parameter]
     public EventCallback<User> RoleCallback { get; set; }
 
+    [Parameter]
+    public bool Visible { get; set; }
+
     /// <summary>
     /// Gets or sets the selected division.
     /// </summary>
     /// <value>The selected division.</value>
-    private string? SelectedDivision { get; set; }
+    private string? SelectedDivisionValue { get; set; }
+
+    /// <summary>
+    /// Gets or sets the selected division.
+    /// </summary>
+    /// <value>The selected division.</value>
+    private Division? SelectedDivision { get; set; }
+
+    /// <summary>
+    /// Gets or sets the selected division.
+    /// </summary>
+    /// <value>The selected division.</value>
+    private string? SelectedGroupValue { get; set; }
+
+    /// <summary>
+    /// Gets or sets the selected division.
+    /// </summary>
+    /// <value>The selected division.</value>
+    private Group? SelectedGroup { get; set; }
+
+    /// <summary>
+    /// Gets or sets the division service.
+    /// </summary>
+    /// <value>The user service.</value>
+    [Inject]
+    public DivisionService? DivisionService { get; set; }
 
     /// <summary>
     /// Gets or sets the user service.
     /// </summary>
     /// <value>The user service.</value>
     [Inject]
-    public DivisionService? DivisionService { get; set; }
+    public UserService? UserService { get; set; }
+
+    /// <summary>
+    /// Gets or sets the group service.
+    /// </summary>
+    /// <value>The user service.</value>
+    [Inject]
+    public GroupService? GroupService { get; set; }
 
     /// <summary>
     /// Gets or sets the navigation manager.
@@ -51,6 +87,11 @@ public partial class ChangeCuratorModalWindow
     /// The divisions
     /// </summary>
     private List<Division>? _divisions;
+
+    /// <summary>
+    /// The groups
+    /// </summary>
+    private List<Group>? _groups;
 
     /// <summary>
     /// Called when [finish].
@@ -78,14 +119,59 @@ public partial class ChangeCuratorModalWindow
     {
         var ret = await DivisionService?.PostAsync()!;
         _divisions = JsonConvert.DeserializeObject<List<Division>>(ret.Result.Items?.ToString() ?? string.Empty);
+
+        var gret = await GroupService?.PostAsync()!;
+        _groups = JsonConvert.DeserializeObject<List<Group>>(gret.Result.Items?.ToString() ?? string.Empty);
+
+        SelectedDivisionValue = Curator?.Division?.Name;
+        SelectedDivision = Curator?.Division;
+
+        SelectedGroupValue = Curator?.Group?.Name;
+        SelectedGroup = Curator?.Group;
+    }
+
+    private void HandleCancel(MouseEventArgs e)
+    {
+        Console.WriteLine("e");
+        Visible = false;
     }
 
 
     /// <summary>
-    /// Changes the curator.
+    /// on modal OK button is click, submit form manually
     /// </summary>
-    private void ChangeCurator()
+    /// <param name="e"></param>
+    private async void HandleOk(MouseEventArgs e)
     {
+        if (Curator != null)
+        {
+            Curator.Division = SelectedDivision;
+            Curator.DivisionId = SelectedDivision?.Id;
 
+            Curator.Group = SelectedGroup;
+            Curator.GroupId = SelectedGroup?.Id;
+
+            await UserService?.PutAsync(Curator)!;
+        }
+
+        Visible = false;
+    }
+
+    /// <summary>
+    /// Called when [selected item changed handler].
+    /// </summary>
+    /// <param name="value">The value.</param>
+    private void OnSelectedDivisionItemChangedHandler(Division value)
+    {
+        SelectedDivision = value;
+    }
+
+    /// <summary>
+    /// Called when [selected item changed handler].
+    /// </summary>
+    /// <param name="value">The value.</param>
+    private void OnSelectedGroupItemChangedHandler(Group value)
+    {
+        SelectedGroup = value;
     }
 }

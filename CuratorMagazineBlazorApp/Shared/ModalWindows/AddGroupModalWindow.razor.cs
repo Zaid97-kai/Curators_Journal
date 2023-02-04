@@ -2,13 +2,17 @@
 using CuratorMagazineWebAPI.Models.Entities.Domains;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Web;
 using Newtonsoft.Json;
 
 namespace CuratorMagazineBlazorApp.Shared.ModalWindows
 {
     public partial class AddGroupModalWindow
     {
-        private Group _group;
+        private Group _group = new();
+
+        [Parameter]
+        public bool Visible { get; set; }
 
         [Parameter]
         public User? CurrentUser { get; set; }
@@ -22,10 +26,10 @@ namespace CuratorMagazineBlazorApp.Shared.ModalWindows
         public EventCallback<User> RoleCallback { get; set; }
 
         /// <summary>
-        /// Gets or sets the selected division.
+        /// Gets or sets the selected curator.
         /// </summary>
         /// <value>The selected division.</value>
-        private string? SelectedDivision { get; set; }
+        private string? SelectedCurator { get; set; }
 
         /// <summary>
         /// Gets or sets the user service.
@@ -73,15 +77,23 @@ namespace CuratorMagazineBlazorApp.Shared.ModalWindows
         {
             var ret = await UserService?.PostAsync()!;
             var curarots = JsonConvert.DeserializeObject<List<User>>(ret.Result.Items?.ToString() ?? string.Empty);
-            _curators = curarots.Where(i => i.Role.Name == "admin3").ToList(); ;
+            _curators = curarots.Where(i => i.Role.Name == "Curator").ToList(); 
         }
 
-        /// <summary>
-        /// Adds the curator.
-        /// </summary>
-        private void AddGroup()
+        private void HandleCancel(MouseEventArgs e)
         {
+            Console.WriteLine("e");
+            Visible = false;
+        }
 
+
+        /// <summary>
+        /// on modal OK button is click, submit form manually
+        /// </summary>
+        /// <param name="e"></param>
+        private void HandleOk(MouseEventArgs e)
+        {
+            Visible = false;
         }
     }
 }
