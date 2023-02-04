@@ -1,8 +1,6 @@
 ﻿using CuratorMagazineWebAPI.Models.Entities.Domains;
 using CuratorMagazineWebAPI.Models.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
-using System.IO;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using DataProtectionKey = Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey;
 
 namespace CuratorMagazineWebAPI.Models.Context
