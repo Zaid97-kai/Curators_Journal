@@ -11,7 +11,10 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
+using CuratorMagazineWebAPI.Data;
 using CuratorMagazineWebAPI.Models.Context;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace CuratorMagazineWebAPI.DependencyInjection;
@@ -29,12 +32,23 @@ public static class PersistenceServiceCollectionExtensions
     /// <returns>IServiceCollection.</returns>
     public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration["ConnectionStrings:DbConnection"];
+        var firstConnectionString = configuration["ConnectionStrings:DbConnection"];
+        var secondConnectionString = configuration["ConnectionStrings:AuthDbConnection"];
         services.AddDbContext<CuratorMagazineContext>(options =>
         {
             //options.UseSqlServer(connectionString);
-            options.UseNpgsql(connectionString);
+            options.UseNpgsql(firstConnectionString);
         });
+        
+        services.AddDbContext<ApplicationDbContext>(options =>
+        {
+            options.UseNpgsql(secondConnectionString);
+        });
+
+        services.AddIdentity<ApplicationUser, ApplicationRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
         services.AddScoped<ICuratorMagazineContext>(provider => provider.GetService<CuratorMagazineContext>());
         return services;
     }
