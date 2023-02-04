@@ -138,4 +138,6 @@ public class ApplicationRoleController : BaseController
         }
         return Ok();
     }
+
+    //todo: https://social.technet.microsoft.com/wiki/contents/articles/36804.asp-net-core-mvc-authentication-and-role-based-authorization-with-asp-net-core-identity.aspx
 }
