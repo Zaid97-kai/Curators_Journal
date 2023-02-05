@@ -1,4 +1,6 @@
-﻿using AntDesign.TableModels;
+﻿using AntDesign;
+using AntDesign.TableModels;
+using API.Models.Authorization;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
 using WebClient.Data.Services;
@@ -18,17 +20,17 @@ public partial class MenuItemRole
     /// </summary>
     /// <value>The role service.</value>
     [Inject]
-    private RoleService? RoleService { get; set; }
+    private ApplicationRoleService? RoleService { get; set; }
 
     /// <summary>
     /// The divisions
     /// </summary>
-    private List<API.Models.Entities.Domains.Role>? _roles;
+    private List<ApplicationRoleListViewModel>? _roles;
 
     /// <summary>
     /// The selected rows
     /// </summary>
-    private IEnumerable<API.Models.Entities.Domains.Role>? _selectedRows;
+    private IEnumerable<ApplicationRoleListViewModel>? _selectedRows;
 
     /// <summary>
     /// The table
@@ -38,27 +40,27 @@ public partial class MenuItemRole
     /// <summary>
     /// The edit cache
     /// </summary>
-    private IDictionary<string, (bool edit, API.Models.Entities.Domains.Role data)> _editCache = new Dictionary<string, (bool edit, API.Models.Entities.Domains.Role data)>();
+    private IDictionary<string?, (bool edit, ApplicationRoleListViewModel data)> _editCache = new Dictionary<string?, (bool edit, ApplicationRoleListViewModel data)>();
 
     /// <summary>
     /// The page index
     /// </summary>
-    int _pageIndex = 1;
+    private int _pageIndex = 1;
 
     /// <summary>
     /// The page size
     /// </summary>
-    int _pageSize = 10;
+    private int _pageSize = 10;
 
     /// <summary>
     /// The total
     /// </summary>
-    int _total = 0;
+    private int _total = 0;
 
     /// <summary>
     /// The i
     /// </summary>
-    int i = 0;
+    private int i = 0;
 
     /// <summary>
     /// The edit identifier
@@ -71,22 +73,23 @@ public partial class MenuItemRole
     /// <returns>A Task representing the asynchronous operation.</returns>
     protected override async Task OnInitializedAsync()
     {
-        var ret = await RoleService?.PostAsync()!;
-        _roles = JsonConvert.DeserializeObject<List<API.Models.Entities.Domains.Role>>(ret.Result.Items?.ToString() ?? string.Empty);
+        var ret = await RoleService?.GetAsync()!;
+        _roles = ret.Result;
 
         _roles?.ForEach(item =>
         {
-            _editCache[item.Id.ToString()] = (false, item);
+            _editCache[item.Id?.ToString()] = (false, item);
         });
 
-        if (_roles != null) _total = _roles.Count;
+        if (_roles != null) 
+            _total = _roles.Count;
     }
 
     /// <summary>
     /// Starts the edit.
     /// </summary>
     /// <param name="id">The identifier.</param>
-    private void StartEdit(string id)
+    private void StartEdit(string? id)
     {
         var data = _editCache[id];
         _editCache[id] = (true, data.data);
@@ -96,11 +99,11 @@ public partial class MenuItemRole
     /// Cancels the edit.
     /// </summary>
     /// <param name="id">The identifier.</param>
-    private void CancelEdit(string id)
+    private void CancelEdit(string? id)
     {
         if (_roles != null)
         {
-            var data = _roles.FirstOrDefault(item => item.Id == Convert.ToInt32(id));
+            var data = _roles.FirstOrDefault(item => item.Id == id);
             _editCache[id] = (false, data)!;
         }
     }
@@ -109,16 +112,16 @@ public partial class MenuItemRole
     /// Saves the edit.
     /// </summary>
     /// <param name="id">The identifier.</param>
-    private async void SaveEdit(string id)
+    private async void SaveEdit(string? id)
     {
         if (_roles != null)
         {
-            var index = _roles.FindIndex(item => item.Id == Convert.ToInt32(id));
+            var index = _roles.FindIndex(item => item.Id == id);
             _roles[index] = _editCache[id].data;
             _editCache[id] = (false, _roles[index]);
         }
 
-        var ret = await RoleService?.PutAsync(_editCache[id].data)!;
+        var ret = await RoleService?.CreateRole("0", _editCache[id].data)!;
 
         Console.WriteLine(ret.Success ? $"{_editCache[id].data} is updated!" : ret.Error);
     }
@@ -127,7 +130,7 @@ public partial class MenuItemRole
     /// Called when [change].
     /// </summary>
     /// <param name="queryModel">The query model.</param>
-    public async Task OnChange(QueryModel<API.Models.Entities.Domains.Role> queryModel)
+    public async Task OnChange(QueryModel<ApplicationRoleListViewModel> queryModel)
     {
         Console.WriteLine(JsonConvert.SerializeObject(queryModel));
     }
@@ -140,7 +143,7 @@ public partial class MenuItemRole
     {
         if (_selectedRows != null)
         {
-            var selected = _selectedRows.Where(x => x.Id != id);
+            var selected = _selectedRows.Where(x => x.Id != id.ToString());
             _selectedRows = selected;
         }
     }
@@ -153,7 +156,7 @@ public partial class MenuItemRole
     {
         if (_roles != null)
         {
-            _roles = _roles.Where(x => x.Id != id).ToList();
+            _roles = _roles.Where(x => x.Id != id.ToString()).ToList();
             _total = _roles.Count;
         }
     }

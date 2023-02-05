@@ -1,8 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Components
 @using API.Models.Entities.Domains
+@using API.Models.Authorization
 
 <Table @ref="_table"
-       TItem="Role"
+       TItem="ApplicationRoleListViewModel"
        DataSource="@_roles"
        Total="_total"
        RowClassName="@(_ => "editable-row")"
@@ -11,7 +12,7 @@
        @bind-SelectedRows="_selectedRows"
        OnChange="OnChange">
     <ChildContent Context="data">
-        <Selection Key="@(data.Id.ToString())"/>
+        <Selection Key="@(data.Id)"/>
         <PropertyColumn Property="c => c.Id" Sortable>
             @if (!_editCache[data.Id.ToString()].edit)
             {
@@ -19,17 +20,17 @@
             }
             else
             {
-                <Input @bind-Value="_editCache[data.Id.ToString()].data.Id"/>
+                <Input @bind-Value="_editCache[data.Id].data.Id"/>
             }
         </PropertyColumn>
-        <PropertyColumn Property="c => c.Name" Sortable>
-            @if (!_editCache[data.Id.ToString()].edit)
+        <PropertyColumn Property="c => c.RoleName" Sortable>
+            @if (!_editCache[data.Id].edit)
             {
-                @data.Name
+                @data.RoleName
             }
             else
             {
-                <Input @bind-Value="_editCache[data.Id.ToString()].data.Name"/>
+                <Input @bind-Value="_editCache[data.Id.ToString()].data.RoleName"/>
             }
         </PropertyColumn>
         <ActionColumn Title="Action">
@@ -50,7 +51,7 @@
         </ActionColumn>
         <ActionColumn>
             <Space>
-                <SpaceItem><Button Danger OnClick="() => Delete(data.Id)">Delete</Button></SpaceItem>
+                <SpaceItem><Button Danger OnClick="() => Delete(Convert.ToInt32(data.Id))">Delete</Button></SpaceItem>
             </Space>
         </ActionColumn>
     </ChildContent>
@@ -67,7 +68,7 @@
 
     @foreach (var selected in _selectedRows)
     {
-        <Tag @key="selected.Id" Closable OnClose="e=>RemoveSelection(selected.Id)">@selected.Id - @selected.Name</Tag>
+        <Tag @key="selected.Id" Closable OnClose="e=>RemoveSelection(Convert.ToInt32(selected.Id))">@selected.Id - @selected.RoleName</Tag>
     }
 }
 

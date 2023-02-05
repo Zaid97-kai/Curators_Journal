@@ -9,6 +9,8 @@ builder.Services.AddAntDesign();
 builder.Services.AddCors();
 
 #region Services
+builder.Services.AddSingleton<AccountService>();
+builder.Services.AddSingleton<ApplicationRoleService>();
 builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<DivisionService>();
 builder.Services.AddSingleton<GroupService>();

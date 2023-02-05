@@ -71,7 +71,7 @@ public class UserService : BaseService
     /// <returns>A Task&lt;BaseResponse`1&gt; representing the asynchronous operation.</returns>
     public override async Task<BaseResponse<BaseDtoListResult>> PostAsync(string query = "")
     {
-        var parameters = new Dictionary<string, string>
+        var parameters = new Dictionary<string, string?>
         {
             { "query", query }, 
             { "page", "1" },

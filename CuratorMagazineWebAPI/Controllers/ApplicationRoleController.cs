@@ -33,7 +33,7 @@ public class ApplicationRoleController : BaseController
     /// </summary>
     /// <returns>IActionResult.</returns>
     [HttpGet]
-    public async Task<BaseResponseActionResult<List<ApplicationRoleListViewModel>>> Index()
+    public async Task<BaseResponseActionResult<List<ApplicationRoleListViewModel>>> GetRoles()
     {
         var model = _roleManager.Roles.ToList()
             .Select(r => new ApplicationRoleListViewModel
@@ -76,23 +76,27 @@ public class ApplicationRoleController : BaseController
     /// <param name="idNum">The identifier.</param>
     /// <param name="model">The model.</param>
     /// <returns>BaseResponseActionResult&lt;ApplicationRoleListViewModel&gt;.</returns>
-    [HttpPost]
+    [HttpPost("CreateRole")]
     public async Task<BaseResponseActionResult<ApplicationRoleListViewModel>> AddEditApplicationRole(string idNum, ApplicationRoleListViewModel model)
     {
-        if (ModelState.IsValid)
+        switch (ModelState.IsValid)
         {
-            var isExist = !string.IsNullOrEmpty(idNum);
-            var applicationRole = isExist ? await _roleManager.FindByIdAsync(idNum) :
-                new ApplicationRole
-                {
-                    CreatedDate = DateTime.UtcNow
-                };
-            applicationRole.Name = model.RoleName;
-            applicationRole.Description = model.Description;
-            applicationRole.IPAddress = Request.HttpContext.Connection.RemoteIpAddress?.ToString();
+            case true:
+            {
+                var isExist = !string.IsNullOrEmpty(idNum);
+                var applicationRole = isExist ? await _roleManager.FindByIdAsync(idNum) :
+                    new ApplicationRole
+                    {
+                        CreatedDate = DateTime.UtcNow
+                    };
+                applicationRole.Name = model.RoleName;
+                applicationRole.Description = model.Description;
+                applicationRole.IPAddress = Request.HttpContext.Connection.RemoteIpAddress?.ToString();
 
-            var roleRuslt = isExist ? await _roleManager.UpdateAsync(applicationRole)
-                : await _roleManager.CreateAsync(applicationRole);
+                var roleRuslt = isExist ? await _roleManager.UpdateAsync(applicationRole)
+                    : await _roleManager.CreateAsync(applicationRole);
+                break;
+            }
         }
 
         return model;

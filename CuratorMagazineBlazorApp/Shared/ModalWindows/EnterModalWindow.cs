@@ -14,11 +14,6 @@ namespace WebClient.Shared.ModalWindows;
 public partial class EnterModalWindow
 {
     /// <summary>
-    /// The model
-    /// </summary>
-    private User _model = new();
-
-    /// <summary>
     /// Gets or sets the role callback.
     /// </summary>
     /// <value>The role callback.</value>
@@ -33,11 +28,23 @@ public partial class EnterModalWindow
     public UserService? UserService { get; set; }
 
     /// <summary>
+    /// Gets or sets the authorization service.
+    /// </summary>
+    /// <value>The authorization service.</value>
+    [Inject]
+    public AccountService? AuthorizationService { get; set; }
+
+    /// <summary>
     /// Gets or sets the navigation manager.
     /// </summary>
     /// <value>The navigation manager.</value>
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
+
+    /// <summary>
+    /// The model
+    /// </summary>
+    private User _model = new();
 
     /// <summary>
     /// Called when [finish].
@@ -66,12 +73,7 @@ public partial class EnterModalWindow
         var list = JsonConvert.DeserializeObject<List<User>>(users.Result.Items?.ToString() ?? string.Empty);
 
         await FindUser(list);
-
-        //if (_model.Role?.Name == "Администратор")
-        //{
-        //    NavigationManager.NavigateTo($"admin", true);
-        //}
-
+        
         await RoleCallback.InvokeAsync(_model);
     }
 
