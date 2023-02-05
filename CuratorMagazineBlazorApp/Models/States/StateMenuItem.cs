@@ -1,4 +1,4 @@
-﻿namespace CuratorMagazineBlazorApp.Models.States;
+﻿namespace WebClient.Models.States;
 
 /// <summary>
 /// Enum StateMenuItem

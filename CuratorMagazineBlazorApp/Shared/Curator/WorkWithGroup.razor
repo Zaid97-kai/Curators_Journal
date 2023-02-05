@@ -1,9 +1,9 @@
 ﻿<div class="container my-4 bg-secondary bg-opacity-50" @onload="GetGroups">
     <div class="container-fluid">
         <div class="overflow-auto container scroll">
-            @foreach (var item in _groups)
+            @foreach (var item in _groups!)
             {
-                <IndividualGroup CurrentUser="CurrentUser" group="item"></IndividualGroup>
+                <IndividualGroup CurrentUser="CurrentUser" Group="item"></IndividualGroup>
             }
         </div>
     </div>

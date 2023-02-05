@@ -1,4 +1,4 @@
-﻿namespace CuratorMagazineBlazorApp.Data.Interfaces;
+﻿namespace WebClient.Data.Interfaces;
 
 /// <summary>
 /// Interface IHaveDataObject

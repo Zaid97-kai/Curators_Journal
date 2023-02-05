@@ -1,26 +1,13 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 12-25-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-25-2022
-// ***********************************************************************
-// <copyright file="BaseRepository.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using CuratorMagazineWebAPI.Models.Context;
-using CuratorMagazineWebAPI.Models.Entities.Repositories.Interfaces;
-using System.Linq.Expressions;
-using CuratorMagazineWebAPI.Models.Bases.Filters;
+﻿using System.Linq.Expressions;
+using API.Models.Bases.Filters;
+using API.Models.Context;
+using API.Models.Entities.Repositories.Interfaces;
 using Shared.Bases.Dtos.BaseHelpers;
 
-namespace CuratorMagazineWebAPI.Models.Entities.Repositories.Entities;
+namespace API.Models.Entities.Repositories.Entities;
 
 /// <summary>
-/// Class GenericRepository.
+/// Class BaseRepository.
 /// Implements the <see cref="IBaseRepository{T}" />
 /// </summary>
 /// <typeparam name="T"></typeparam>
@@ -59,6 +46,7 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
     /// Adds the specified entity.
     /// </summary>
     /// <param name="entity">The entity.</param>
+    /// <returns>Task.</returns>
     public async Task Add(T entity)
     {
         Context.Set<T>().Add(entity);
@@ -69,6 +57,7 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
     /// Updates the specified entity.
     /// </summary>
     /// <param name="entity">The entity.</param>
+    /// <returns>Task.</returns>
     public async Task Update(T entity)
     {
         Context.Set<T>().Update(entity);
@@ -99,6 +88,7 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
     /// Removes the specified entity.
     /// </summary>
     /// <param name="entity">The entity.</param>
+    /// <returns>Task.</returns>
     public async Task Remove(T entity)
     {
         Context.Set<T>().Remove(entity);

@@ -1,11 +1,10 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
 using System.Text;
-using CuratorMagazineBlazorApp.Data.Common;
+using Newtonsoft.Json;
 using Shared.Bases;
 
-namespace CuratorMagazineBlazorApp.Models.Bases;
+namespace WebClient.Models.Bases;
 
 /// <summary>
 /// Class BaseHttpService.

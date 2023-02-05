@@ -1,11 +1,11 @@
-﻿using CuratorMagazineWebAPI.Data;
-using CuratorMagazineWebAPI.Models.Authorization;
-using CuratorMagazineWebAPI.Models.Bases.ActionResults;
+﻿using API.Data;
+using API.Models.Authorization;
+using API.Models.Bases.ActionResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace CuratorMagazineWebAPI.Controllers;
+namespace API.Controllers;
 
 /// <summary>
 /// Class ApplicationUserController.

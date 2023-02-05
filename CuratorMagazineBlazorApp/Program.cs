@@ -1,4 +1,4 @@
-using CuratorMagazineBlazorApp.Data.Services;
+using WebClient.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,4 +1,4 @@
-﻿@using CuratorMagazineBlazorApp.Pages.Admin.Role.Group
+﻿@using WebClient.Models.States
 <Menu Mode=MenuMode.Horizontal OnMenuItemClicked="@ChangeState">
     <SubMenu Title="Справочники">
         <MenuItem Key="MenuItemDivision" Title="Подразделения">
@@ -21,23 +21,23 @@
 
 @if (_stateMenuItem == StateMenuItem.MenuItemDivision)
 {
-    <CuratorMagazineBlazorApp.Pages.Admin.Role.Division.MenuItemDivision></CuratorMagazineBlazorApp.Pages.Admin.Role.Division.MenuItemDivision>
+    <WebClient.Pages.Admin.Role.Division.MenuItemDivision></WebClient.Pages.Admin.Role.Division.MenuItemDivision>
 }
 else if (_stateMenuItem == StateMenuItem.MenuItemUser)
 {
-    <CuratorMagazineBlazorApp.Pages.Admin.Role.User.MenuItemUser></CuratorMagazineBlazorApp.Pages.Admin.Role.User.MenuItemUser>
+    <WebClient.Pages.Admin.Role.User.MenuItemUser></WebClient.Pages.Admin.Role.User.MenuItemUser>
 }
 else if (_stateMenuItem == StateMenuItem.MenuItemGroup)
 {
-    <CuratorMagazineBlazorApp.Pages.Admin.Role.Group.MenuItemGroup></CuratorMagazineBlazorApp.Pages.Admin.Role.Group.MenuItemGroup>
+    <WebClient.Pages.Admin.Role.Group.MenuItemGroup></WebClient.Pages.Admin.Role.Group.MenuItemGroup>
 }
 else if (_stateMenuItem == StateMenuItem.MenuItemParent)
 {
-    <CuratorMagazineBlazorApp.Pages.Admin.Role.Parent.MenuItemParent></CuratorMagazineBlazorApp.Pages.Admin.Role.Parent.MenuItemParent>
+    <WebClient.Pages.Admin.Role.Parent.MenuItemParent></WebClient.Pages.Admin.Role.Parent.MenuItemParent>
 }
 else if (_stateMenuItem == StateMenuItem.MenuItemRole)
 {
-    <CuratorMagazineBlazorApp.Pages.Admin.Role.Role.MenuItemRole></CuratorMagazineBlazorApp.Pages.Admin.Role.Role.MenuItemRole>
+    <WebClient.Pages.Admin.Role.Role.MenuItemRole></WebClient.Pages.Admin.Role.Role.MenuItemRole>
 }
 
 @code

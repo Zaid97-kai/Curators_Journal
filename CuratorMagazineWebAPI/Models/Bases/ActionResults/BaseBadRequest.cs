@@ -1,31 +1,19 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 12-22-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-22-2022
-// ***********************************************************************
-// <copyright file="BaseBadRequest.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using System.Net;
+﻿using System.Net;
 
-namespace CuratorMagazineWebAPI.Models.Bases.ActionResults;
+namespace API.Models.Bases.ActionResults;
 
 /// <summary>
 /// Class BaseBadRequest.
-/// Implements the <see cref="CuratorMagazineWebAPI.Models.Bases.ActionResults.BaseActionResult" />
+/// Implements the <see cref="BaseActionResult" />
 /// </summary>
-/// <seealso cref="CuratorMagazineWebAPI.Models.Bases.ActionResults.BaseActionResult" />
+/// <seealso cref="BaseActionResult" />
 public class BaseBadRequest : BaseActionResult
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseBadRequest" /> class.
     /// </summary>
     public BaseBadRequest() { }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseBadRequest" /> class.
     /// </summary>
@@ -53,6 +41,7 @@ public class BaseBadRequest : BaseActionResult
     /// </summary>
     /// <value>The return status code.</value>
     protected override HttpStatusCode ReturnStatusCode => HttpStatusCode.BadRequest;
+
     /// <summary>
     /// Gets the error message.
     /// </summary>

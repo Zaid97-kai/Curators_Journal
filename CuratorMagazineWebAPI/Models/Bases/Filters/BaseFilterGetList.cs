@@ -1,17 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 12-21-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-21-2022
-// ***********************************************************************
-// <copyright file="BaseFilterGetList.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-namespace CuratorMagazineWebAPI.Models.Bases.Filters;
+﻿namespace API.Models.Bases.Filters;
 
 /// <summary>
 /// Class BaseFilterGetList.
@@ -39,5 +26,9 @@ public class BaseFilterGetList
         set => _page = value;
     }
 
+    /// <summary>
+    /// Gets or sets the group identifier.
+    /// </summary>
+    /// <value>The group identifier.</value>
     public int? groupId { get; set; }
 }

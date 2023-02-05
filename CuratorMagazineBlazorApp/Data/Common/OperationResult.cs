@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace CuratorMagazineBlazorApp.Data.Common;
+namespace WebClient.Data.Common;
 
 /// <summary>
 /// Class OperationResult.
@@ -122,10 +122,10 @@ public abstract class OperationResult
 
 /// <summary>
 /// Class OperationResult.
-/// Implements the <see cref="CuratorMagazineBlazorApp.Data.Common.OperationResult" />
+/// Implements the <see cref="OperationResult" />
 /// </summary>
 /// <typeparam name="T"></typeparam>
-/// <seealso cref="CuratorMagazineBlazorApp.Data.Common.OperationResult" />
+/// <seealso cref="OperationResult" />
 [Serializable]
 public class OperationResult<T> : OperationResult
 {

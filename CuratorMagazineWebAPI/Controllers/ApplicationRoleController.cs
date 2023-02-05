@@ -1,11 +1,11 @@
-﻿using CuratorMagazineWebAPI.Controllers.Bases;
-using CuratorMagazineWebAPI.Data;
-using CuratorMagazineWebAPI.Models.Authorization;
-using CuratorMagazineWebAPI.Models.Bases.ActionResults;
+﻿using API.Controllers.Bases;
+using API.Data;
+using API.Models.Authorization;
+using API.Models.Bases.ActionResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CuratorMagazineWebAPI.Controllers;
+namespace API.Controllers;
 
 /// <summary>
 /// Class ApplicationRoleController.

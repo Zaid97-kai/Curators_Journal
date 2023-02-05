@@ -1,9 +1,9 @@
-﻿using CuratorMagazineBlazorApp.Models.Bases;
-using CuratorMagazineWebAPI.Models.Entities.Domains;
-using Shared.Bases.Dtos.BaseHelpers;
+﻿using API.Models.Entities.Domains;
 using Shared.Bases;
+using Shared.Bases.Dtos.BaseHelpers;
+using WebClient.Models.Bases;
 
-namespace CuratorMagazineBlazorApp.Data.Services;
+namespace WebClient.Data.Services;
 
 /// <summary>
 /// Class UserService.

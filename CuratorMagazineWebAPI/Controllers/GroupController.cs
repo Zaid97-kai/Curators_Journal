@@ -1,25 +1,12 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 11-04-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-25-2022
-// ***********************************************************************
-// <copyright file="GroupController.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using Shared.Bases.Dtos.BaseHelpers;
+﻿using API.Controllers.Bases;
+using API.Models.Bases.ActionResults;
+using API.Models.Bases.Filters;
+using API.Models.Entities.Domains;
+using API.Models.Entities.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using CuratorMagazineWebAPI.Models.Entities.Repositories.Interfaces;
-using CuratorMagazineWebAPI.Models.Entities.Domains;
-using CuratorMagazineWebAPI.Models.Bases.Filters;
-using CuratorMagazineWebAPI.Models.Bases.ActionResults;
-using CuratorMagazineWebAPI.Controllers.Bases;
+using Shared.Bases.Dtos.BaseHelpers;
 
-namespace CuratorMagazineWebAPI.Controllers;
+namespace API.Controllers;
 
 /// <summary>
 /// Class GroupController.
@@ -33,12 +20,16 @@ public class GroupController : BaseController
     /// </summary>
     private readonly IGroupRepository _repository;
 
+    /// <summary>
+    /// The user repository
+    /// </summary>
     private readonly IUserRepository _userRepository;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GroupController" /> class.
     /// </summary>
     /// <param name="repository">The repository.</param>
+    /// <param name="userRepository">The user repository.</param>
     public GroupController(IGroupRepository repository, IUserRepository userRepository)
     {
         _repository = repository;
@@ -73,6 +64,11 @@ public class GroupController : BaseController
         return ret;
     }
 
+    /// <summary>
+    /// Gets the group curator.
+    /// </summary>
+    /// <param name="groupId">The group identifier.</param>
+    /// <returns>BaseResponseActionResult&lt;BaseDtoListResult&gt;.</returns>
     [HttpPost("GetGroupCurator")]
     public async Task<BaseResponseActionResult<BaseDtoListResult>> GetGroupCurator(int groupId)
     {

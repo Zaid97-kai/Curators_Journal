@@ -1,34 +1,34 @@
 ﻿using AntDesign.TableModels;
-using CuratorMagazineBlazorApp.Data.Services;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
+using WebClient.Data.Services;
 using ITable = AntDesign.ITable;
 
-namespace CuratorMagazineBlazorApp.Pages.Admin.Role.Parent;
+namespace WebClient.Pages.Admin.Role.Group;
 
 /// <summary>
-/// Class MenuItemParent.
+/// Class MenuItemGroup.
 /// Implements the <see cref="ComponentBase" />
 /// </summary>
 /// <seealso cref="ComponentBase" />
-public partial class MenuItemParent
+public partial class MenuItemGroup
 {
     /// <summary>
-    /// Gets or sets the parent service.
+    /// Gets or sets the group service.
     /// </summary>
-    /// <value>The parent service.</value>
+    /// <value>The group service.</value>
     [Inject]
-    private ParentService? ParentService { get; set; }
+    private GroupService? GroupService { get; set; }
 
     /// <summary>
-    /// The parents
+    /// The groups
     /// </summary>
-    private List<CuratorMagazineWebAPI.Models.Entities.Domains.Parent>? _parents;
+    private List<API.Models.Entities.Domains.Group>? _groups;
 
     /// <summary>
     /// The selected rows
     /// </summary>
-    private IEnumerable<CuratorMagazineWebAPI.Models.Entities.Domains.Parent>? _selectedRows;
+    private IEnumerable<API.Models.Entities.Domains.Group>? _selectedRows;
 
     /// <summary>
     /// The table
@@ -38,7 +38,7 @@ public partial class MenuItemParent
     /// <summary>
     /// The edit cache
     /// </summary>
-    private IDictionary<string, (bool edit, CuratorMagazineWebAPI.Models.Entities.Domains.Parent data)> _editCache = new Dictionary<string, (bool edit, CuratorMagazineWebAPI.Models.Entities.Domains.Parent data)>();
+    private IDictionary<string, (bool edit, API.Models.Entities.Domains.Group data)> _editCache = new Dictionary<string, (bool edit, API.Models.Entities.Domains.Group data)>();
 
     /// <summary>
     /// The page index
@@ -71,15 +71,15 @@ public partial class MenuItemParent
     /// <returns>A Task representing the asynchronous operation.</returns>
     protected override async Task OnInitializedAsync()
     {
-        var ret = await ParentService?.PostAsync()!;
-        _parents = JsonConvert.DeserializeObject<List<CuratorMagazineWebAPI.Models.Entities.Domains.Parent>>(ret.Result.Items?.ToString() ?? string.Empty);
+        var ret = await GroupService?.PostAsync()!;
+        _groups = JsonConvert.DeserializeObject<List<API.Models.Entities.Domains.Group>>(ret.Result.Items?.ToString() ?? string.Empty);
 
-        _parents?.ForEach(item =>
+        _groups?.ForEach(item =>
         {
             _editCache[item.Id.ToString()] = (false, item);
         });
 
-        if (_parents != null) _total = _parents.Count;
+        if (_groups != null) _total = _groups.Count;
     }
 
     /// <summary>
@@ -98,9 +98,9 @@ public partial class MenuItemParent
     /// <param name="id">The identifier.</param>
     private void CancelEdit(string id)
     {
-        if (_parents != null)
+        if (_groups != null)
         {
-            var data = _parents.FirstOrDefault(item => item.Id == Convert.ToInt32(id));
+            var data = _groups.FirstOrDefault(item => item.Id == Convert.ToInt32(id));
             _editCache[id] = (false, data)!;
         }
     }
@@ -111,14 +111,14 @@ public partial class MenuItemParent
     /// <param name="id">The identifier.</param>
     private async void SaveEdit(string id)
     {
-        if (_parents != null)
+        if (_groups != null)
         {
-            var index = _parents.FindIndex(item => item.Id == Convert.ToInt32(id));
-            _parents[index] = _editCache[id].data;
-            _editCache[id] = (false, _parents[index]);
+            var index = _groups.FindIndex(item => item.Id == Convert.ToInt32(id));
+            _groups[index] = _editCache[id].data;
+            _editCache[id] = (false, _groups[index]);
         }
 
-        var ret = await ParentService?.PutAsync(_editCache[id].data)!;
+        var ret = await GroupService?.PutAsync(_editCache[id].data)!;
 
         Console.WriteLine(ret.Success ? $"{_editCache[id].data} is updated!" : ret.Error);
     }
@@ -127,7 +127,7 @@ public partial class MenuItemParent
     /// Called when [change].
     /// </summary>
     /// <param name="queryModel">The query model.</param>
-    public async Task OnChange(QueryModel<CuratorMagazineWebAPI.Models.Entities.Domains.Parent> queryModel)
+    public async Task OnChange(QueryModel<API.Models.Entities.Domains.Group> queryModel)
     {
         Console.WriteLine(JsonConvert.SerializeObject(queryModel));
     }
@@ -151,10 +151,10 @@ public partial class MenuItemParent
     /// <param name="id">The identifier.</param>
     private void Delete(int id)
     {
-        if (_parents != null)
+        if (_groups != null)
         {
-            _parents = _parents.Where(x => x.Id != id).ToList();
-            _total = _parents.Count;
+            _groups = _groups.Where(x => x.Id != id).ToList();
+            _total = _groups.Count;
         }
     }
 }

@@ -1,35 +1,35 @@
-﻿using System.Text;
-using AntDesign.TableModels;
-using CuratorMagazineBlazorApp.Data.Services;
+﻿using AntDesign.TableModels;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
+using WebClient.Data.Services;
 using ITable = AntDesign.ITable;
 
-namespace CuratorMagazineBlazorApp.Pages.Admin.Role.Division;
+namespace WebClient.Pages.Admin.Role.Role;
 
 /// <summary>
-/// Class MenuItemDivision.
+/// Class MenuItemRole.
 /// Implements the <see cref="ComponentBase" />
 /// </summary>
 /// <seealso cref="ComponentBase" />
-public partial class MenuItemDivision
+public partial class MenuItemRole
 {
     /// <summary>
-    /// Gets or sets the division service.
+    /// Gets or sets the role service.
     /// </summary>
-    /// <value>The division service.</value>
+    /// <value>The role service.</value>
     [Inject]
-    private DivisionService? DivisionService { get; set; }
+    private RoleService? RoleService { get; set; }
 
     /// <summary>
     /// The divisions
     /// </summary>
-    private List<CuratorMagazineWebAPI.Models.Entities.Domains.Division>? _divisions;
+    private List<API.Models.Entities.Domains.Role>? _roles;
 
     /// <summary>
     /// The selected rows
     /// </summary>
-    private IEnumerable<CuratorMagazineWebAPI.Models.Entities.Domains.Division>? _selectedRows;
+    private IEnumerable<API.Models.Entities.Domains.Role>? _selectedRows;
+
     /// <summary>
     /// The table
     /// </summary>
@@ -38,7 +38,7 @@ public partial class MenuItemDivision
     /// <summary>
     /// The edit cache
     /// </summary>
-    private IDictionary<string, (bool edit, CuratorMagazineWebAPI.Models.Entities.Domains.Division data)> _editCache = new Dictionary<string, (bool edit, CuratorMagazineWebAPI.Models.Entities.Domains.Division data)>();
+    private IDictionary<string, (bool edit, API.Models.Entities.Domains.Role data)> _editCache = new Dictionary<string, (bool edit, API.Models.Entities.Domains.Role data)>();
 
     /// <summary>
     /// The page index
@@ -56,21 +56,30 @@ public partial class MenuItemDivision
     int _total = 0;
 
     /// <summary>
+    /// The i
+    /// </summary>
+    int i = 0;
+
+    /// <summary>
+    /// The edit identifier
+    /// </summary>
+    private string? _editId;
+
+    /// <summary>
     /// On initialized as an asynchronous operation.
     /// </summary>
     /// <returns>A Task representing the asynchronous operation.</returns>
     protected override async Task OnInitializedAsync()
     {
-        var ret = await DivisionService?.PostAsync()!;
-        
-        _divisions = JsonConvert.DeserializeObject<List<CuratorMagazineWebAPI.Models.Entities.Domains.Division>>(ret.Result.Items?.ToString() ?? string.Empty);
+        var ret = await RoleService?.PostAsync()!;
+        _roles = JsonConvert.DeserializeObject<List<API.Models.Entities.Domains.Role>>(ret.Result.Items?.ToString() ?? string.Empty);
 
-        _divisions?.ForEach(item =>
+        _roles?.ForEach(item =>
         {
             _editCache[item.Id.ToString()] = (false, item);
         });
 
-        if (_divisions != null) _total = _divisions.Count;
+        if (_roles != null) _total = _roles.Count;
     }
 
     /// <summary>
@@ -89,9 +98,9 @@ public partial class MenuItemDivision
     /// <param name="id">The identifier.</param>
     private void CancelEdit(string id)
     {
-        if (_divisions != null)
+        if (_roles != null)
         {
-            var data = _divisions.FirstOrDefault(item => item.Id == Convert.ToInt32(id));
+            var data = _roles.FirstOrDefault(item => item.Id == Convert.ToInt32(id));
             _editCache[id] = (false, data)!;
         }
     }
@@ -102,14 +111,14 @@ public partial class MenuItemDivision
     /// <param name="id">The identifier.</param>
     private async void SaveEdit(string id)
     {
-        if (_divisions != null)
+        if (_roles != null)
         {
-            var index = _divisions.FindIndex(item => item.Id == Convert.ToInt32(id));
-            _divisions[index] = _editCache[id].data;
-            _editCache[id] = (false, _divisions[index]);
+            var index = _roles.FindIndex(item => item.Id == Convert.ToInt32(id));
+            _roles[index] = _editCache[id].data;
+            _editCache[id] = (false, _roles[index]);
         }
 
-        var ret = await DivisionService?.PutAsync(_editCache[id].data)!;
+        var ret = await RoleService?.PutAsync(_editCache[id].data)!;
 
         Console.WriteLine(ret.Success ? $"{_editCache[id].data} is updated!" : ret.Error);
     }
@@ -118,7 +127,7 @@ public partial class MenuItemDivision
     /// Called when [change].
     /// </summary>
     /// <param name="queryModel">The query model.</param>
-    public async Task OnChange(QueryModel<CuratorMagazineWebAPI.Models.Entities.Domains.Division> queryModel)
+    public async Task OnChange(QueryModel<API.Models.Entities.Domains.Role> queryModel)
     {
         Console.WriteLine(JsonConvert.SerializeObject(queryModel));
     }
@@ -142,10 +151,10 @@ public partial class MenuItemDivision
     /// <param name="id">The identifier.</param>
     private void Delete(int id)
     {
-        if (_divisions != null)
+        if (_roles != null)
         {
-            _divisions = _divisions.Where(x => x.Id != id).ToList();
-            _total = _divisions.Count;
+            _roles = _roles.Where(x => x.Id != id).ToList();
+            _total = _roles.Count;
         }
     }
 }

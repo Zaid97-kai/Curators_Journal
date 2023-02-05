@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "CuratorMagazineBlazorApp": {
+    "WebClient": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

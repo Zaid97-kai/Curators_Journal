@@ -1,32 +1,19 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 12-19-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-25-2022
-// ***********************************************************************
-// <copyright file="RoleRepository.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using CuratorMagazineWebAPI.Models.Bases.Filters;
-using CuratorMagazineWebAPI.Models.Context;
-using CuratorMagazineWebAPI.Models.Entities.Domains;
-using CuratorMagazineWebAPI.Models.Entities.Repositories.Interfaces;
+﻿using API.Models.Bases.Filters;
+using API.Models.Context;
+using API.Models.Entities.Domains;
+using API.Models.Entities.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Shared.Bases.Dtos.BaseHelpers;
 using X.PagedList;
 
-namespace CuratorMagazineWebAPI.Models.Entities.Repositories.Entities;
+namespace API.Models.Entities.Repositories.Entities;
 
 /// <summary>
 /// Class RoleRepository.
-/// Implements the <see cref="BaseRepository{T}.Models.Entities.Role}" />
+/// Implements the <see cref="API.Models.Entities.Repositories.Entities.BaseRepository{API.Models.Entities.Domains.Role}" />
 /// Implements the <see cref="IRoleRepository" />
 /// </summary>
-/// <seealso cref="BaseRepository{T}.Models.Entities.Role}" />
+/// <seealso cref="API.Models.Entities.Repositories.Entities.BaseRepository{API.Models.Entities.Domains.Role}" />
 /// <seealso cref="IRoleRepository" />
 public class RoleRepository : BaseRepository<Role>, IRoleRepository
 {

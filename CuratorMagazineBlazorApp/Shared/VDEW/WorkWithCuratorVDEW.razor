@@ -1,8 +1,7 @@
-﻿@using CuratorMagazineBlazorApp.Shared.ModalWindows
-<div class="container my-4 bg-secondary bg-opacity-50">
+﻿<div class="container my-4 bg-secondary bg-opacity-50">
     <div class="container-fluid">
         <BodySearchBar></BodySearchBar>
-       <div class="overflow-auto container scroll">
+        <div class="overflow-auto container scroll">
             @if (CurrentUser != null)
             {
                 @if (_curators == null || _curators.Count == 0)
@@ -12,7 +11,6 @@
                             <p><em>Loading...</em></p>
                         </div>
                     </div>
-
                 }
                 else
                 {
@@ -20,7 +18,7 @@
                     {
                         @*if (item.Division?.Name == CurrentUser.Division?.Name && item.Role?.Name == "Curator")
                         {*@
-                            <IndividualCuratorVDEW Curator="item"></IndividualCuratorVDEW>
+                        <IndividualCuratorVDEW Curator="item"></IndividualCuratorVDEW>
                         @*}*@
                     }
                 }

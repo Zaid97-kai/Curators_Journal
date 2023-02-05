@@ -1,19 +1,6 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 12-19-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-25-2022
-// ***********************************************************************
-// <copyright file="Division.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace CuratorMagazineWebAPI.Models.Entities.Domains;
+namespace API.Models.Entities.Domains;
 
 /// <summary>
 /// Class Division.
@@ -25,11 +12,13 @@ public class Division
     /// </summary>
     /// <value>The identifier.</value>
     public int Id { get; set; }
+
     /// <summary>
     /// Gets or sets the name.
     /// </summary>
     /// <value>The name.</value>
     public string Name { get; set; }
+
     /// <summary>
     /// Gets or sets the users.
     /// </summary>

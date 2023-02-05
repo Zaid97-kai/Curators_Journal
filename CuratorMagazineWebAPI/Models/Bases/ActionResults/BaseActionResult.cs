@@ -11,11 +11,12 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Bases;
-using System.Net;
 
-namespace CuratorMagazineWebAPI.Models.Bases.ActionResults;
+namespace API.Models.Bases.ActionResults;
 
 /// <summary>
 /// Class BaseActionResult.
