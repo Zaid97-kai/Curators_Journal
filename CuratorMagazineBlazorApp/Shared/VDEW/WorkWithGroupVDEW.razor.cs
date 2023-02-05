@@ -38,7 +38,9 @@ public partial class WorkWithGroupVDEW
     /// Gets or sets the groups.
     /// </summary>
     /// <value>The groups.</value>
-    private List<Group>? Groups { get; set; }
+    private List<Group>? _groups { get; set; }
+
+    private bool IsVisibleModalAddGroupWindow { get; set; }
 
     /// <summary>
     /// On initialized as an asynchronous operation.
@@ -47,33 +49,18 @@ public partial class WorkWithGroupVDEW
     protected override async Task OnInitializedAsync()
     {
         var ret = await GroupService?.PostAsync()!;
-        Groups = JsonConvert.DeserializeObject<List<CuratorMagazineWebAPI.Models.Entities.Domains.Group>>(ret.Result.Items?.ToString() ?? string.Empty);
+        _groups = JsonConvert.DeserializeObject<List<Group>>(ret.Result.Items?.ToString() ?? string.Empty);
     }
 
-    /// <summary>
-    /// Deletes the group.
-    /// </summary>
-    /// <param name="group">The group.</param>
-    void DeleteGroup(Group group)
+    public void ModalAddGroupWindow()
     {
-
-    }
-
-    /// <summary>
-    /// Adds the group.
-    /// </summary>
-    /// <param name="group">The group.</param>
-    void AddGroup(Group group)
-    {
-
-    }
-    /// <summary>
-    /// Gets the groups.
-    /// </summary>
-    public async Task GetGroups()
-    {
-        //Groups = new List<Group>();
-        //var groups = await UserService.PostAsync();
-        //Groups = JsonConvert.DeserializeObject<List<Group>>(groups.Result.Items?.ToString() ?? string.Empty);
+        if (IsVisibleModalAddGroupWindow)
+        {
+            IsVisibleModalAddGroupWindow = false;
+        }
+        else
+        {
+            IsVisibleModalAddGroupWindow = true;
+        }
     }
 }

@@ -2,7 +2,7 @@
 @using CuratorMagazineWebAPI.Models.Entities.Domains
 <div class="row">
     <div class="col-1">
-        @if (_vdew?.ProfilePhoto == null)
+        @if (VDEW?.ProfilePhoto == null)
         {
             <img class="rounded img-fluid" src="../img/no-img.jpg" alt="">
         }
@@ -12,25 +12,25 @@
         }
     </div>
     <div class="col-8">
-        <h5>@_vdew?.Name</h5>
+        <h5>@VDEW?.Name</h5>
         
-        <p>@_vdew?.Email</p>
+        <p>@VDEW?.Email</p>
     </div>
     <div class="col-3 text-end">
         <button type="button" class="btn btn-secondary me-2" @onclick="ShowModalChangeVdewWindow">Изменить</button>
-        <button type="button" class="btn btn-secondary" @onclick="(() => DeleteVDEW.InvokeAsync(_vdew))">Удалить</button>
+        <button type="button" class="btn btn-secondary" @onclick="(() => DeleteVDEW.InvokeAsync(VDEW))">Удалить</button>
     </div>
 </div>
 @if (IsVisibleModalChangeVdewWindow)
 {
-    <ChangeVDEWModalWindow Visible="IsVisibleModalChangeVdewWindow" VDEW="@_vdew"></ChangeVDEWModalWindow>
+    <ChangeVDEWModalWindow Visible="IsVisibleModalChangeVdewWindow" VDEW="@VDEW"></ChangeVDEWModalWindow>
 }
 
 
 @code {
 
     [Parameter]
-    public User? _vdew { get; set; }
+    public User? VDEW { get; set; }
 
     [Parameter] 
     public EventCallback<User> DeleteVDEW { get; set; }

@@ -1,7 +1,7 @@
 ﻿@using CuratorMagazineBlazorApp.Data.Services
 @using CuratorMagazineBlazorApp.Shared.ModalWindows
 @using CuratorMagazineWebAPI.Models.Entities.Domains
-<ChangeGroupModalWindow _group="Group" ></ChangeGroupModalWindow>
+
 <div class="row mt-3 group rounded">
     <div class="col-md-1">
         <img class="rounded img-fluid mt-1" src="../img/no-img.jpg" alt="">
@@ -14,11 +14,16 @@
 
     </div>
     <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#changeModal">Изменить</button>
+        <button type="button" class="btn btn-secondary me-2" @onclick="ShowModalChangeGroupWindow">Изменить</button>
         <button type="button" class="btn btn-secondary">Удалить</button>
     </div>
     <hr class="mb-0 mt-0">
 </div>
+@if (IsVisibleModalChangeGroupWindow)
+{
+
+    <ChangeGroupModalWindow Visible="IsVisibleModalChangeGroupWindow" Group="Group"></ChangeGroupModalWindow>
+}
 
 @code {
     [Parameter]
@@ -28,4 +33,11 @@
     public GroupService? GroupService { get; set; }
 
     public User? User => GroupService?.GetGroupCuratorAsync(Group!.Id).Result.Result;
+
+    private bool IsVisibleModalChangeGroupWindow { get; set; }
+
+    public void ShowModalChangeGroupWindow()
+    {
+        IsVisibleModalChangeGroupWindow = !IsVisibleModalChangeGroupWindow;
+    }
 }

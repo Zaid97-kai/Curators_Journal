@@ -2,6 +2,7 @@
 using CuratorMagazineWebAPI.Models.Entities.Domains;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Web;
 using Newtonsoft.Json;
 
 namespace CuratorMagazineBlazorApp.Shared.ModalWindows;
@@ -25,6 +26,9 @@ public partial class AddCuratorModalWindow
     [Parameter]
     public EventCallback<User> RoleCallback { get; set; }
 
+    [Parameter]
+    public bool Visible { get; set; }
+
     /// <summary>
     /// Gets or sets the selected division.
     /// </summary>
@@ -32,11 +36,24 @@ public partial class AddCuratorModalWindow
     private string? SelectedDivision { get; set; }
 
     /// <summary>
-    /// Gets or sets the user service.
+    /// Gets or sets the selected division.
+    /// </summary>
+    /// <value>The selected division.</value>
+    private string? SelectedGroup { get; set; }
+
+    /// <summary>
+    /// Gets or sets the division service.
     /// </summary>
     /// <value>The user service.</value>
     [Inject]
     public DivisionService? DivisionService { get; set; }
+
+    /// <summary>
+    /// Gets or sets the group service.
+    /// </summary>
+    /// <value>The user service.</value>
+    [Inject]
+    public GroupService? GroupService { get; set; }
 
     /// <summary>
     /// Gets or sets the navigation manager.
@@ -48,7 +65,12 @@ public partial class AddCuratorModalWindow
     /// <summary>
     /// The divisions
     /// </summary>
-    private List<Division>? _divisions;
+    private List<Division>? _divisions; 
+
+    /// <summary>
+    /// The divisions
+    /// </summary>
+    private List<Group>? _groups;
 
     /// <summary>
     /// Called when [finish].
@@ -77,13 +99,24 @@ public partial class AddCuratorModalWindow
     {
         var ret = await DivisionService?.PostAsync()!;
         _divisions = JsonConvert.DeserializeObject<List<Division>>(ret.Result.Items?.ToString() ?? string.Empty);
+
+        var gret = await GroupService?.PostAsync()!;
+        _groups = JsonConvert.DeserializeObject<List<Group>>(ret.Result.Items?.ToString() ?? string.Empty);
     }
 
-    /// <summary>
-    /// Adds the curator.
-    /// </summary>
-    private void AddCurator()
+    private void HandleCancel(MouseEventArgs e)
     {
+        Console.WriteLine("e");
+        Visible = false;
+    }
 
+
+    /// <summary>
+    /// on modal OK button is click, submit form manually
+    /// </summary>
+    /// <param name="e"></param>
+    private void HandleOk(MouseEventArgs e)
+    {
+        Visible = false;
     }
 }

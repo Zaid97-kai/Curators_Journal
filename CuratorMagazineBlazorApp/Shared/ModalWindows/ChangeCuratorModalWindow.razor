@@ -1,83 +1,65 @@
 ﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
-<div class="modal fade" aria-labelledby="addModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="ChangeModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h5 class="modal-title">Добавление</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <Form Model="@Curator"
-                          OnFinish="OnFinish"
-                          OnFinishFailed="OnFinishFailed"
-                          LabelColSpan="8"
-                          WrapperColSpan="16">
-                        <Row>
-                            <GridCol>
-                                <img class="img-thumbnail" height="300px" width="300px" src="../img/no-img.jpg" alt="">
-                            </GridCol>
+<Modal Title="@("Изменение")"
+       Visible="@Visible"
+       OnOk="@HandleOk"
+       OnCancel="@HandleCancel">
+    <div class="container-fluid">
+        <Form Model="@Curator"
+              OnFinish="OnFinish"
+              OnFinishFailed="OnFinishFailed">
+            <Row Gutter="24">
+                <GridCol Span="11">
+                    <img class="img-thumbnail" height="400px" width="400px" src="../img/no-img.jpg" alt="">
+                    <FormItem>
+                        <Button type="image" class="btn btn-outline-secondary mt-3">Обзор</Button>
+                    </FormItem>
 
-                            <GridCol Span="13">
-                                <FormItem Label="ФИО">
-                                    <div class="col-ms-10">
-                                        <Input @bind-Value="@context.Name" />
-                                    </div>
-                                </FormItem>
-                                <FormItem Label="Подразделение">
-                                    <div class="col-ms-10">
-                                        <Select Mode="default"
-                                                DataSource="@_divisions"
-                                                TItem="Division"
-                                                TItemValue="string"
-                                                @bind-Value="@SelectedDivision"
-                                                LabelName="@nameof(Division.Name)"
-                                                ValueName="@nameof(Division.Name)">
-                                        </Select>
-                                    </div>
-                                </FormItem>
-                                <FormItem Label="Телефон">
-                                    <div class="col-ms-10">
-                                        <Input @bind-Value="@context.Phone" />
-                                    </div>
-                                </FormItem>
-                                <FormItem Label="Email">
-                                    <div class="col-ms-10">
-                                        <Input @bind-Value="@context.Email" />
-                                    </div>
-                                </FormItem>
-                            </GridCol>
-                        </Row>
-                        <Row>
-                            <GridCol Span="10" Style="text-align:center;">
-                                <Button type="image" class="btn btn-outline-secondary mt-3">Обзор</Button>
-                            </GridCol>
-                            <GridCol Span="13">
-                                <FormItem Label="Пароль">
-                                    <div class="col-ms-10">
-                                        <Input @bind-Value="@context.Password" />
-                                    </div>
-                                </FormItem>
-                            </GridCol>
-                        </Row>
-                        <Row>
-                            <GridCol Span="24" Style="text-align:right;">
-                                <FormItem WrapperColOffset="8" WrapperColSpan="16">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                        Отмена
-                                    </button>
-                                    <Button Type="@ButtonType.Primary" HtmlType="submit" Style="height: 37px" OnClick="@ChangeCurator">
-                                        Добавить
-                                    </Button>
-                                </FormItem>
-                            </GridCol>
-                        </Row>
-                    </Form>
-                </div>
-            </div>
-        </div>
+                </GridCol>
+
+                <GridCol Span="13">
+                    <FormItem Label="ФИО">
+                        <Input @bind-Value="@context.Name" />
+                    </FormItem>
+                    <FormItem Label="Подразделение">
+                        <Select Mode="default"
+                                DataSource="@_divisions"
+                                TItem="Division"
+                                TItemValue="string"
+                                @bind-Value="@SelectedDivisionValue"
+                                LabelName="@nameof(Division.Name)"
+                                ValueName="@nameof(Division.Name)"
+                                IgnoreItemChanges="false"
+                                OnSelectedItemChanged="OnSelectedDivisionItemChangedHandler">
+                        </Select>
+                    </FormItem>
+                    <FormItem Label="Группы">
+                        <Select Mode="default"
+                                DataSource="@_groups"
+                                TItem="Group"
+                                TItemValue="string"
+                                @bind-Value="@SelectedGroupValue"
+                                LabelName="@nameof(Group.Name)"
+                                ValueName="@nameof(Group.Name)"
+                                IgnoreItemChanges="false"
+                                OnSelectedItemChanged="OnSelectedGroupItemChangedHandler">
+                        </Select>
+                    </FormItem>
+                    <FormItem Label="Телефон">
+                        <Input @bind-Value="@context.Phone" />
+                    </FormItem>
+                    <FormItem Label="Email">
+                        <Input @bind-Value="@context.Email" />
+                    </FormItem>
+                    <FormItem Label="Пароль">
+                        <Input @bind-Value="@context.Password" />
+                    </FormItem>
+                </GridCol>
+            </Row>
+        </Form>
     </div>
-</div>
+</Modal>
+
+
 
 @code {
 
