@@ -73,16 +73,16 @@ public class ApplicationRoleController : BaseController
     /// <summary>
     /// Adds the edit application role.
     /// </summary>
-    /// <param name="id">The identifier.</param>
+    /// <param name="idNum">The identifier.</param>
     /// <param name="model">The model.</param>
     /// <returns>BaseResponseActionResult&lt;ApplicationRoleListViewModel&gt;.</returns>
     [HttpPost]
-    public async Task<BaseResponseActionResult<ApplicationRoleListViewModel>> AddEditApplicationRole(string id, ApplicationRoleListViewModel model)
+    public async Task<BaseResponseActionResult<ApplicationRoleListViewModel>> AddEditApplicationRole(string idNum, ApplicationRoleListViewModel model)
     {
         if (ModelState.IsValid)
         {
-            var isExist = !string.IsNullOrEmpty(id);
-            var applicationRole = isExist ? await _roleManager.FindByIdAsync(id) :
+            var isExist = !string.IsNullOrEmpty(idNum);
+            var applicationRole = isExist ? await _roleManager.FindByIdAsync(idNum) :
                 new ApplicationRole
                 {
                     CreatedDate = DateTime.UtcNow
