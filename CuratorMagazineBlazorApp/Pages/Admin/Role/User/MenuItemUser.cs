@@ -1,10 +1,10 @@
 ﻿using AntDesign;
 using AntDesign.TableModels;
-using CuratorMagazineBlazorApp.Data.Services;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
+using WebClient.Data.Services;
 
-namespace CuratorMagazineBlazorApp.Pages.Admin.Role.User;
+namespace WebClient.Pages.Admin.Role.User;
 
 /// <summary>
 /// Class MenuItemUser.

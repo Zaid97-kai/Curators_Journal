@@ -1,9 +1,9 @@
-﻿using CuratorMagazineBlazorApp.Data.Services;
-using CuratorMagazineWebAPI.Models.Entities.Domains;
-using Microsoft.AspNetCore.Components;
+﻿using WebClient.Data.Services;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Components;
+using CuratorMagazineWebAPI.Models.Entities.Domains;
 
-namespace CuratorMagazineBlazorApp.Shared.VDEW;
+namespace WebClient.Shared.VDEW;
 
 /// <summary>
 /// Class WorkWithCuratorVDEW.
@@ -31,6 +31,10 @@ public partial class WorkWithCuratorVDEW
     /// </summary>
     private List<User>? _curators = new();
 
+    /// <summary>
+    /// Gets or sets a value indicating whether this instance is visible modal add curator window.
+    /// </summary>
+    /// <value><c>true</c> if this instance is visible modal add curator window; otherwise, <c>false</c>.</value>
     private bool IsVisibleModalAddCuratorWindow { get; set; }
 
     /// <summary>
@@ -51,21 +55,21 @@ public partial class WorkWithCuratorVDEW
 
     }
 
+    /// <summary>
+    /// On initialized as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     protected override async Task OnInitializedAsync()
     {
         var users = await UserService?.PostAsync()!;
         _curators = JsonConvert.DeserializeObject<List<User>>(users.Result.Items?.ToString() ?? string.Empty);
     }
 
+    /// <summary>
+    /// Modals the add curator window.
+    /// </summary>
     public void ModalAddCuratorWindow()
     {
-        if (IsVisibleModalAddCuratorWindow)
-        {
-            IsVisibleModalAddCuratorWindow = false;
-        }
-        else
-        {
-            IsVisibleModalAddCuratorWindow = true;
-        }
+        IsVisibleModalAddCuratorWindow = !IsVisibleModalAddCuratorWindow;
     }
 }

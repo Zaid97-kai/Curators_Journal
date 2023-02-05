@@ -1,11 +1,11 @@
-﻿using CuratorMagazineBlazorApp.Data.Services;
-using CuratorMagazineWebAPI.Models.Entities.Domains;
+﻿using CuratorMagazineWebAPI.Models.Entities.Domains;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
 using Newtonsoft.Json;
+using WebClient.Data.Services;
 
-namespace CuratorMagazineBlazorApp.Shared.ModalWindows;
+namespace WebClient.Shared.ModalWindows;
 
 /// <summary>
 /// Class ModalAddVDEWWindow.
@@ -15,9 +15,11 @@ namespace CuratorMagazineBlazorApp.Shared.ModalWindows;
 public partial class AddVDEWModalWindow
 {
     /// <summary>
-    /// The vdew
+    /// Gets or sets a value indicating whether this <see cref="AddVDEWModalWindow"/> is visible.
     /// </summary>
-    private User _vdew = new();
+    /// <value><c>true</c> if visible; otherwise, <c>false</c>.</value>
+    [Parameter]
+    public bool Visible { get; set; }
 
     /// <summary>
     /// Gets or sets the user service.
@@ -40,8 +42,10 @@ public partial class AddVDEWModalWindow
     [Inject]
     public NavigationManager? NavigationManager { get; set; }
 
-    [Parameter]
-    public bool Visible { get; set; }
+    /// <summary>
+    /// The vdew
+    /// </summary>
+    private User _vdew = new();
 
     /// <summary>
     /// The divisions
@@ -82,26 +86,29 @@ public partial class AddVDEWModalWindow
         Console.WriteLine($"Failed: {JsonConvert.SerializeObject(_vdew)}");
     }
 
-
     /// <summary>
     /// Adds the vdew.
     /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     public async void AddVDEWAsync()
     {
         await UserService?.CreateAsync(_vdew)!;
     }
 
+    /// <summary>
+    /// Handles the cancel.
+    /// </summary>
+    /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
     private void HandleCancel(MouseEventArgs e)
     {
         Console.WriteLine("e");
         Visible = false;
     }
 
-
     /// <summary>
     /// on modal OK button is click, submit form manually
     /// </summary>
-    /// <param name="e"></param>
+    /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
     private void HandleOk(MouseEventArgs e)
     {
         Visible = false;

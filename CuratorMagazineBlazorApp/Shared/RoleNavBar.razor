@@ -1,5 +1,4 @@
-﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
-@switch (CurrentUser?.RoleId)
+﻿@switch (CurrentUser?.RoleId)
 {
     case 1:
         <div class="collapse" id="navbarToggleExternalContent">
@@ -42,36 +41,5 @@
 }
 
 @code {
-    [Parameter]
-    public User? CurrentUser { get; set; }
-
-    [Parameter]
-    public StateRoleNavBar? StateRoleNavBar { get; set; } = new();
-
-    [Parameter]
-    public EventCallback<StateRoleNavBar> StateRoleNavBarCallback { get; set; }
-
-    public void ChangeOnWorkWithVDEWStateRoleNavBar()
-    {
-        StateRoleNavBar = new StateRoleNavBar() { RoleName = "WorkWithVDEW" };
-        StateRoleNavBarCallback.InvokeAsync(StateRoleNavBar);
-    }
-
-    public void ChangeOnStatsCollectStateRoleNavBar()
-    {
-        StateRoleNavBar = new StateRoleNavBar() { RoleName = "StatsCollect" };
-        StateRoleNavBarCallback.InvokeAsync(StateRoleNavBar);
-    }
-
-    public void ChangeOnWorkWithGroupVDEWStateRoleNavBar()
-    {
-        StateRoleNavBar = new StateRoleNavBar() { RoleName = "WorkWithGroupVDEW" };
-        StateRoleNavBarCallback.InvokeAsync(StateRoleNavBar);
-    }
-
-    public void ChangeOnWorkWithCuratorVDEWStateRoleNavBar()
-    {
-        StateRoleNavBar = new StateRoleNavBar() { RoleName = "WorkWithCuratorVDEW" };
-        StateRoleNavBarCallback.InvokeAsync(StateRoleNavBar);
-    }
+    
 }

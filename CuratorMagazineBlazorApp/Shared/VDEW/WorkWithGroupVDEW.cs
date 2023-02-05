@@ -1,10 +1,10 @@
-﻿using CuratorMagazineBlazorApp.Data.Services;
-using CuratorMagazineWebAPI.Models.Entities.Domains;
+﻿using CuratorMagazineWebAPI.Models.Entities.Domains;
+using Group = CuratorMagazineWebAPI.Models.Entities.Domains.Group;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
-using Group = CuratorMagazineWebAPI.Models.Entities.Domains.Group;
+using WebClient.Data.Services;
 
-namespace CuratorMagazineBlazorApp.Shared.VDEW;
+namespace WebClient.Shared.VDEW;
 
 /// <summary>
 /// Class WorkWithGroupVDEW.
@@ -40,6 +40,10 @@ public partial class WorkWithGroupVDEW
     /// <value>The groups.</value>
     private List<Group>? _groups { get; set; }
 
+    /// <summary>
+    /// Gets or sets a value indicating whether this instance is visible modal add group window.
+    /// </summary>
+    /// <value><c>true</c> if this instance is visible modal add group window; otherwise, <c>false</c>.</value>
     private bool IsVisibleModalAddGroupWindow { get; set; }
 
     /// <summary>
@@ -52,15 +56,11 @@ public partial class WorkWithGroupVDEW
         _groups = JsonConvert.DeserializeObject<List<Group>>(ret.Result.Items?.ToString() ?? string.Empty);
     }
 
+    /// <summary>
+    /// Modals the add group window.
+    /// </summary>
     public void ModalAddGroupWindow()
     {
-        if (IsVisibleModalAddGroupWindow)
-        {
-            IsVisibleModalAddGroupWindow = false;
-        }
-        else
-        {
-            IsVisibleModalAddGroupWindow = true;
-        }
+        IsVisibleModalAddGroupWindow = !IsVisibleModalAddGroupWindow;
     }
 }

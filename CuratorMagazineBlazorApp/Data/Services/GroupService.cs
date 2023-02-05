@@ -1,9 +1,9 @@
-﻿using CuratorMagazineBlazorApp.Models.Bases;
-using CuratorMagazineWebAPI.Models.Entities.Domains;
-using Shared.Bases.Dtos.BaseHelpers;
+﻿using CuratorMagazineWebAPI.Models.Entities.Domains;
 using Shared.Bases;
+using Shared.Bases.Dtos.BaseHelpers;
+using WebClient.Models.Bases;
 
-namespace CuratorMagazineBlazorApp.Data.Services;
+namespace WebClient.Data.Services;
 
 /// <summary>
 /// Class GroupService.
@@ -33,7 +33,7 @@ public class GroupService : BaseService
 
     public async Task<BaseResponse<User?>> GetGroupCuratorAsync(int id)
     {
-        BaseResponse<User?> dto = await SendAsync<User>($"GetGroupCurator/{id}", HttpMethod.Post);
+        BaseResponse<User?> dto = (await SendAsync<User>($"GetGroupCurator/{id}", HttpMethod.Post))!;
         return dto;
     }
 

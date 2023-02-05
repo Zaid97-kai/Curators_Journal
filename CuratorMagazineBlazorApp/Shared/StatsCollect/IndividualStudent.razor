@@ -1,24 +1,23 @@
-﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
-<button class="row mt-3 mb-2 text-start border-0" data-bs-toggle="modal" data-bs-target="#studInfoModal">
+﻿<button class="row mt-3 mb-2 text-start border-0" data-bs-toggle="modal" data-bs-target="#studInfoModal">
     <div class="col-md-3">
-        @if (student.ProfilePhoto == null)
+        @if (Student?.ProfilePhoto == null)
         {
             <img class="rounded img-fluid" src="../img/no-img.jpg" alt="">
         }
         else
         {
-            @*Пометка надо придумать как фотку поставить*@
+            @*todo: Пометка надо придумать как фотку поставить*@
         }
 
     </div>
     <div class="col-md-8">
-        <h5>@student.Name</h5>
-        <p>@student.BirthDate</p>
+        <h5>@Student?.Name</h5>
+        <p>@Student!.BirthDate</p>
     </div>
 </button>
 <hr class="m-0">
 
 @code {
     [Parameter]
-    public User? student { get; set; }
+    public User? Student { get; set; }
 }

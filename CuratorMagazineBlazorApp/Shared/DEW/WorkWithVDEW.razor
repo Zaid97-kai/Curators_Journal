@@ -1,6 +1,4 @@
-﻿@using CuratorMagazineBlazorApp.Data.Services
-@using CuratorMagazineBlazorApp.Shared.ModalWindows
-@using CuratorMagazineWebAPI.Models.Entities.Domains
+﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
 
 <div class="container my-4 bg-secondary bg-opacity-50">
     <div class="container-fluid">
@@ -15,14 +13,13 @@
                             <p><em>Loading...</em></p>
                         </div>
                     </div>
-                    
                 }
                 else{
                     foreach (var item in _users)
                     {
                         @*if (item.Division?.Name == CurrentUser.Division?.Name && item.Role?.Name == "Deputy Director")
                         {*@
-                            <IndividualVDEW _vdew="@item" DeleteVDEW="@DeleteVDEW"></IndividualVDEW>
+                            <IndividualVDEW VDEW="@item" DeleteVDEW="@DeleteVDEW"></IndividualVDEW>
                         @*}*@
                     }
                 }

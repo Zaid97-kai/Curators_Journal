@@ -2,13 +2,13 @@
 using Shared.Bases.Dtos.BaseHelpers;
 using Shared.Model.Cards.Cards.Dto;
 
-namespace CuratorMagazineBlazorApp.Models.Bases;
+namespace WebClient.Models.Bases;
 
 /// <summary>
 /// Class BaseService.
-/// Implements the <see cref="CuratorMagazineBlazorApp.Models.Bases.BaseHttpService" />
+/// Implements the <see cref="BaseHttpService" />
 /// </summary>
-/// <seealso cref="CuratorMagazineBlazorApp.Models.Bases.BaseHttpService" />
+/// <seealso cref="BaseHttpService" />
 public abstract class BaseService : BaseHttpService
 {
     /// <summary>

@@ -60,24 +60,5 @@
         </div>
 
 @code {
-    private User _student = new User();
-
-    [Parameter]
-    public EventCallback<User> RoleCallback { get; set; }
-
-    public UserService UserService { get; set; }
-
-    private void OnFinish(EditContext editContext)
-    {
-        Console.WriteLine($"Success:{JsonSerializer.Serialize(_student)}");
-    }
-
-    private void OnFinishFailed(EditContext editContext)
-    {
-        Console.WriteLine($"Failed:{JsonSerializer.Serialize(_student)}");
-    }
-
-
-    [Parameter]
-    public EventCallback<User> AddStudent { get; set; }
+    
 }

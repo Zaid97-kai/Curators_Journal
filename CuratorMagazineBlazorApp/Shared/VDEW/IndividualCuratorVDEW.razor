@@ -1,15 +1,11 @@
-﻿@using CuratorMagazineBlazorApp.Data.Services
-@using CuratorMagazineBlazorApp.Shared.ModalWindows
-@using CuratorMagazineWebAPI.Models.Entities.Domains
-
-<div class="row mt-3 group rounded">
+﻿<div class="row mt-3 group rounded">
     <div class="col-md-1">
         <img class="rounded img-fluid mt-1" src="../img/no-img.jpg" alt="">
     </div>
     <div class="col-md-8 mt-1">
-        <h5><a class="text-dark" style="text-decoration: none;">@Curator.Name</a></h5>
-        <p class="text-dark">@Curator.Email</p>
-        @*Пометка придумать как достать куратора*@
+        <h5><a class="text-dark" style="text-decoration: none;">@Curator?.Name</a></h5>
+        <p class="text-dark">@Curator?.Email</p>
+        @*todo: Пометка придумать как достать куратора*@
 
     </div>
     <div class="col-md-3 text-end">

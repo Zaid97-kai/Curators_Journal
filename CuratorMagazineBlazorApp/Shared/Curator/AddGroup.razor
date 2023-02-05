@@ -1,9 +1,4 @@
-﻿@using CuratorMagazineBlazorApp.Shared.ModalWindows
-@using CuratorMagazineBlazorApp.Shared.StatsCollect
-@using CuratorMagazineWebAPI.Models.Entities.Domains
-
-
- <div class="container my-4 bg-secondary bg-opacity-50" style="min-height: 600px;"> 
+﻿<div class="container my-4 bg-secondary bg-opacity-50" style="min-height: 600px;"> 
     <div class="container-fluid" >
         <div class="row ">
             <div class="col-md-1 mt-3">
@@ -14,17 +9,16 @@
                 
             </div>
             <div class="col-md-8 mt-3 text-white">
-                <h5>@group.Name</h5>
+                <h5>@Group?.Name</h5>
                 <p>Куратор</p>
-                @*Пометка придумать как достать куратора*@
+                @*todo: Пометка придумать как достать куратора*@
             </div>
             <div class="col-md-6 mt-3">
                 <h5 class="text-white">Участники группы</h5>
                 <div class="container-fluid bg-white rounded-3 scroll mb-3">
-                    @foreach (var item in group.Users)
+                    @foreach (var item in Group.Users!)
                     {
-                        <IndividualStudent student="item"></IndividualStudent>
-                        
+                        <IndividualStudent Student="item"></IndividualStudent>
                     }
                 </div>
             </div>
@@ -41,7 +35,7 @@
                         </div>
                         <div class="col-md-8">
                             <h5><a>Название</a></h5>  
-                            @*Помтека добавить таблицу с мерроприятиями*@
+                            @*todo: Пометка добавить таблицу с мероприятиями*@
                             <p>Дата проведения</p>
                         </div>
                     </button>
@@ -71,7 +65,7 @@
 
 @code {
     [Parameter]
-    public Group group { get; set; }
+    public Group? Group { get; set; }
 
     [Parameter]
     public User? CurrentUser { get; set; }

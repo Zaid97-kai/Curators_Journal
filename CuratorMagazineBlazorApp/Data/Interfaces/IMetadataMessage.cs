@@ -1,10 +1,10 @@
-﻿namespace CuratorMagazineBlazorApp.Data.Interfaces;
+﻿namespace WebClient.Data.Interfaces;
 
 /// <summary>
 /// Interface IMetadataMessage
-/// Extends the <see cref="CuratorMagazineBlazorApp.Data.Interfaces.IHaveDataObject" />
+/// Extends the <see cref="IHaveDataObject" />
 /// </summary>
-/// <seealso cref="CuratorMagazineBlazorApp.Data.Interfaces.IHaveDataObject" />
+/// <seealso cref="IHaveDataObject" />
 public interface IMetadataMessage : IHaveDataObject
 {
     /// <summary>

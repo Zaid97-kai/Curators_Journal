@@ -1,4 +1,3 @@
-@using CuratorMagazineWebAPI.Models.Entities.Domains
 <Modal Title="@("Изменение")"
        Visible="@Visible"
        OnOk="@HandleOk"
@@ -14,7 +13,6 @@
                             <Button type="image" class="btn btn-outline-secondary mt-3">Обзор</Button>
                         </FormItem>
                     </GridCol>
-
                     <GridCol Span="13">
                         <FormItem Label="ФИО">
                             <Input @bind-Value="@context.Name" />

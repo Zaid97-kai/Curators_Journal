@@ -1,10 +1,10 @@
-﻿using CuratorMagazineBlazorApp.Data.Services;
-using CuratorMagazineWebAPI.Models.Entities.Domains;
-using Microsoft.AspNetCore.Components;
+﻿using CuratorMagazineWebAPI.Models.Entities.Domains;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
+using WebClient.Data.Services;
 
-namespace CuratorMagazineBlazorApp.Shared.ModalWindows;
+namespace WebClient.Shared.ModalWindows;
 
 /// <summary>
 /// Class ModalWindowEnter.
