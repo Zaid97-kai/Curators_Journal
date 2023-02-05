@@ -1,22 +1,9 @@
-// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 11-03-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-25-2022
-// ***********************************************************************
-// <copyright file="Program.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
+using API.DependencyInjection;
+using API.Models.Context;
+using API.Models.Entities.Repositories.Entities;
+using API.Models.Entities.Repositories.Interfaces;
 using Microsoft.AspNetCore.DataProtection;
-using CuratorMagazineWebAPI.DependencyInjection;
-using CuratorMagazineWebAPI.Models.Context;
 using Microsoft.OpenApi.Models;
-using CuratorMagazineWebAPI.Models.Entities.Repositories.Entities;
-using CuratorMagazineWebAPI.Models.Entities.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

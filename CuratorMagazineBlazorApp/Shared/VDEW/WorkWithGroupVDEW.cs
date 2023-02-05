@@ -1,5 +1,5 @@
-﻿using CuratorMagazineWebAPI.Models.Entities.Domains;
-using Group = CuratorMagazineWebAPI.Models.Entities.Domains.Group;
+﻿using API.Models.Entities.Domains;
+using Group = API.Models.Entities.Domains.Group;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
 using WebClient.Data.Services;

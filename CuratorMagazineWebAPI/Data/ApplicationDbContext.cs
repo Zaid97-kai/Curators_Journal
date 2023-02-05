@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace CuratorMagazineWebAPI.Data;
+namespace API.Data;
 
 /// <summary>
 /// Class ApplicationDbContext.
@@ -11,7 +11,7 @@ namespace CuratorMagazineWebAPI.Data;
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="ApplicationDbContext"/> class.
+    /// Initializes a new instance of the <see cref="ApplicationDbContext" /> class.
     /// </summary>
     /// <param name="options">The options.</param>
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

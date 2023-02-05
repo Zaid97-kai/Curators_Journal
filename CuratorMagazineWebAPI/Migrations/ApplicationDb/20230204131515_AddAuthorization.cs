@@ -1,10 +1,9 @@
-﻿using System;
+﻿#nullable disable
+
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-#nullable disable
-
-namespace CuratorMagazineWebAPI.Migrations.ApplicationDb
+namespace API.Migrations.ApplicationDb
 {
     public partial class AddAuthorization : Migration
     {

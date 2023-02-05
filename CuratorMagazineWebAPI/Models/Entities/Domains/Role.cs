@@ -1,19 +1,6 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 12-19-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-22-2022
-// ***********************************************************************
-// <copyright file="Role.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace CuratorMagazineWebAPI.Models.Entities.Domains;
+namespace API.Models.Entities.Domains;
 
 /// <summary>
 /// Class Role.

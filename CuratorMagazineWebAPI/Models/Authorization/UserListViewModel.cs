@@ -1,4 +1,4 @@
-﻿namespace CuratorMagazineWebAPI.Models.Authorization;
+﻿namespace API.Models.Authorization;
 
 /// <summary>
 /// Class UserListViewModel.

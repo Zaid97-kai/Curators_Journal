@@ -1,23 +1,9 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 11-03-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-25-2022
-// ***********************************************************************
-// <copyright file="PersistenceServiceCollectionExtensions.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-
-using CuratorMagazineWebAPI.Data;
-using CuratorMagazineWebAPI.Models.Context;
+﻿using API.Data;
+using API.Models.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace CuratorMagazineWebAPI.DependencyInjection;
+namespace API.DependencyInjection;
 
 /// <summary>
 /// Class PersistenceServiceCollectionExtensions.
@@ -34,9 +20,9 @@ public static class PersistenceServiceCollectionExtensions
     {
         var firstConnectionString = configuration["ConnectionStrings:DbConnection"];
         var secondConnectionString = configuration["ConnectionStrings:AuthDbConnection"];
+
         services.AddDbContext<CuratorMagazineContext>(options =>
         {
-            //options.UseSqlServer(connectionString);
             options.UseNpgsql(firstConnectionString);
         });
         
@@ -49,7 +35,7 @@ public static class PersistenceServiceCollectionExtensions
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-        services.AddScoped<ICuratorMagazineContext>(provider => provider.GetService<CuratorMagazineContext>());
+        services.AddScoped<ICuratorMagazineContext>(provider => provider.GetService<CuratorMagazineContext>()!);
         return services;
     }
 }

@@ -1,27 +1,14 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 11-03-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-22-2022
-// ***********************************************************************
-// <copyright file="UserConfiguration.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using CuratorMagazineWebAPI.Models.Entities.Domains;
+﻿using API.Models.Entities.Domains;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CuratorMagazineWebAPI.Models.EntityTypeConfigurations;
+namespace API.Models.EntityTypeConfigurations;
 
 /// <summary>
 /// Class UserConfiguration.
-/// Implements the <see cref="Microsoft.EntityFrameworkCore.IEntityTypeConfiguration{CuratorMagazineWebAPI.Models.Entities.User}" />
+/// Implements the <see cref="Microsoft.EntityFrameworkCore.IEntityTypeConfiguration{API.Models.Entities.Domains.User}" />
 /// </summary>
-/// <seealso cref="Microsoft.EntityFrameworkCore.IEntityTypeConfiguration{CuratorMagazineWebAPI.Models.Entities.User}" />
+/// <seealso cref="Microsoft.EntityFrameworkCore.IEntityTypeConfiguration{API.Models.Entities.Domains.User}" />
 public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     /// <summary>

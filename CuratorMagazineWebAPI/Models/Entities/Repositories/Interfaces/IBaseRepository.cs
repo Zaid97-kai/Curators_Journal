@@ -1,24 +1,11 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 12-21-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-25-2022
-// ***********************************************************************
-// <copyright file="IBaseRepository.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
+﻿using System.Linq.Expressions;
+using API.Models.Bases.Filters;
 using Shared.Bases.Dtos.BaseHelpers;
-using System.Linq.Expressions;
-using CuratorMagazineWebAPI.Models.Bases.Filters;
 
-namespace CuratorMagazineWebAPI.Models.Entities.Repositories.Interfaces;
+namespace API.Models.Entities.Repositories.Interfaces;
 
 /// <summary>
-/// Interface IGenericRepository
+/// Interface IBaseRepository
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public interface IBaseRepository<T> where T : class

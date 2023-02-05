@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace CuratorMagazineWebAPI.Data;
+namespace API.Data;
 
 /// <summary>
 /// Class ApplicationRole.

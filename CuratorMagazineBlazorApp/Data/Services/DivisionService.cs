@@ -1,4 +1,4 @@
-﻿using CuratorMagazineWebAPI.Models.Entities.Domains;
+﻿using API.Models.Entities.Domains;
 using Shared.Bases;
 using Shared.Bases.Dtos.BaseHelpers;
 using WebClient.Models.Bases;

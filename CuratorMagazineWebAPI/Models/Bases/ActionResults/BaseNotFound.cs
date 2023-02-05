@@ -1,31 +1,19 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 12-21-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-21-2022
-// ***********************************************************************
-// <copyright file="BaseNotFound.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using System.Net;
+﻿using System.Net;
 
-namespace CuratorMagazineWebAPI.Models.Bases.ActionResults;
+namespace API.Models.Bases.ActionResults;
 
 /// <summary>
 /// Class BaseNotFound.
-/// Implements the <see cref="CuratorMagazineWebAPI.Models.Bases.ActionResults.BaseActionResult" />
+/// Implements the <see cref="BaseActionResult" />
 /// </summary>
-/// <seealso cref="CuratorMagazineWebAPI.Models.Bases.ActionResults.BaseActionResult" />
+/// <seealso cref="BaseActionResult" />
 public class BaseNotFound : BaseActionResult
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseNotFound" /> class.
     /// </summary>
     public BaseNotFound() { }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseNotFound" /> class.
     /// </summary>
@@ -53,6 +41,7 @@ public class BaseNotFound : BaseActionResult
     /// </summary>
     /// <value>The return status code.</value>
     protected override HttpStatusCode ReturnStatusCode => HttpStatusCode.NotFound;
+
     /// <summary>
     /// Gets the error message.
     /// </summary>

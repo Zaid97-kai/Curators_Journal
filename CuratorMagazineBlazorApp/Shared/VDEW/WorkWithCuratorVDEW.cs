@@ -1,7 +1,7 @@
-﻿using WebClient.Data.Services;
+﻿using API.Models.Entities.Domains;
+using WebClient.Data.Services;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Components;
-using CuratorMagazineWebAPI.Models.Entities.Domains;
 
 namespace WebClient.Shared.VDEW;
 

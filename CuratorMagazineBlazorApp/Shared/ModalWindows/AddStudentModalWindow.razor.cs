@@ -1,7 +1,7 @@
-﻿using CuratorMagazineWebAPI.Models.Entities.Domains;
-using Microsoft.AspNetCore.Components.Forms;
+﻿using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components;
 using System.Text.Json;
+using API.Models.Entities.Domains;
 using WebClient.Data.Services;
 
 namespace WebClient.Shared.ModalWindows;

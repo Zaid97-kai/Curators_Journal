@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
-
-namespace CuratorMagazineWebAPI.Models.Authorization;
+﻿namespace API.Models.Authorization;
 
 /// <summary>
 /// Class ApplicationRoleListViewModel.

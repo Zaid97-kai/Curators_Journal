@@ -1,21 +1,8 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 12-21-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-25-2022
-// ***********************************************************************
-// <copyright file="BaseResponseActionResult.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
 using Shared.Bases;
 
-namespace CuratorMagazineWebAPI.Models.Bases.ActionResults;
+namespace API.Models.Bases.ActionResults;
 
 /// <summary>
 /// Class BaseResponseActionResult. This class cannot be inherited.

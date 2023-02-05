@@ -1,4 +1,5 @@
-﻿@switch (@StateRoleNavBar?.RoleName)
+﻿@using API.Models.Entities.Domains
+@switch (@StateRoleNavBar?.RoleName)
 {
     case "WorkWithVDEW":
         <WorkWithVDEW CurrentUser="CurrentUser"></WorkWithVDEW>

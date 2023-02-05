@@ -23,12 +23,12 @@ public partial class MenuItemDivision
     /// <summary>
     /// The divisions
     /// </summary>
-    private List<CuratorMagazineWebAPI.Models.Entities.Domains.Division>? _divisions;
+    private List<API.Models.Entities.Domains.Division>? _divisions;
 
     /// <summary>
     /// The selected rows
     /// </summary>
-    private IEnumerable<CuratorMagazineWebAPI.Models.Entities.Domains.Division>? _selectedRows;
+    private IEnumerable<API.Models.Entities.Domains.Division>? _selectedRows;
     /// <summary>
     /// The table
     /// </summary>
@@ -37,7 +37,7 @@ public partial class MenuItemDivision
     /// <summary>
     /// The edit cache
     /// </summary>
-    private IDictionary<string, (bool edit, CuratorMagazineWebAPI.Models.Entities.Domains.Division data)> _editCache = new Dictionary<string, (bool edit, CuratorMagazineWebAPI.Models.Entities.Domains.Division data)>();
+    private IDictionary<string, (bool edit, API.Models.Entities.Domains.Division data)> _editCache = new Dictionary<string, (bool edit, API.Models.Entities.Domains.Division data)>();
 
     /// <summary>
     /// The page index
@@ -62,7 +62,7 @@ public partial class MenuItemDivision
     {
         var ret = await DivisionService?.PostAsync()!;
         
-        _divisions = JsonConvert.DeserializeObject<List<CuratorMagazineWebAPI.Models.Entities.Domains.Division>>(ret.Result.Items?.ToString() ?? string.Empty);
+        _divisions = JsonConvert.DeserializeObject<List<API.Models.Entities.Domains.Division>>(ret.Result.Items?.ToString() ?? string.Empty);
 
         _divisions?.ForEach(item =>
         {
@@ -117,7 +117,7 @@ public partial class MenuItemDivision
     /// Called when [change].
     /// </summary>
     /// <param name="queryModel">The query model.</param>
-    public async Task OnChange(QueryModel<CuratorMagazineWebAPI.Models.Entities.Domains.Division> queryModel)
+    public async Task OnChange(QueryModel<API.Models.Entities.Domains.Division> queryModel)
     {
         Console.WriteLine(JsonConvert.SerializeObject(queryModel));
     }

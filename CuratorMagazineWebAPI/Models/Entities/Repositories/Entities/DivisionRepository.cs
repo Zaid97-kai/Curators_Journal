@@ -1,32 +1,19 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 12-19-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-25-2022
-// ***********************************************************************
-// <copyright file="DivisionRepository.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using CuratorMagazineWebAPI.Models.Bases.Filters;
-using CuratorMagazineWebAPI.Models.Context;
-using CuratorMagazineWebAPI.Models.Entities.Domains;
-using CuratorMagazineWebAPI.Models.Entities.Repositories.Interfaces;
+﻿using API.Models.Bases.Filters;
+using API.Models.Context;
+using API.Models.Entities.Domains;
+using API.Models.Entities.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Shared.Bases.Dtos.BaseHelpers;
 using X.PagedList;
 
-namespace CuratorMagazineWebAPI.Models.Entities.Repositories.Entities;
+namespace API.Models.Entities.Repositories.Entities;
 
 /// <summary>
 /// Class DivisionRepository.
-/// Implements the <see cref="Division" />
+/// Implements the <see cref="API.Models.Entities.Repositories.Entities.BaseRepository{API.Models.Entities.Domains.Division}" />
 /// Implements the <see cref="IDivisionRepository" />
 /// </summary>
-/// <seealso cref="Division" />
+/// <seealso cref="API.Models.Entities.Repositories.Entities.BaseRepository{API.Models.Entities.Domains.Division}" />
 /// <seealso cref="IDivisionRepository" />
 public class DivisionRepository : BaseRepository<Division>, IDivisionRepository
 {

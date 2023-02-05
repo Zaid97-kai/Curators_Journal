@@ -1,4 +1,4 @@
-﻿using CuratorMagazineWebAPI.Models.Entities.Domains;
+﻿using API.Models.Entities.Domains;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;

@@ -1,25 +1,12 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 11-04-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-26-2022
-// ***********************************************************************
-// <copyright file="DivisionController.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using Shared.Bases.Dtos.BaseHelpers;
+﻿using API.Controllers.Bases;
+using API.Models.Bases.ActionResults;
+using API.Models.Bases.Filters;
+using API.Models.Entities.Domains;
+using API.Models.Entities.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using CuratorMagazineWebAPI.Models.Entities.Repositories.Interfaces;
-using CuratorMagazineWebAPI.Models.Entities.Domains;
-using CuratorMagazineWebAPI.Models.Bases.Filters;
-using CuratorMagazineWebAPI.Models.Bases.ActionResults;
-using CuratorMagazineWebAPI.Controllers.Bases;
+using Shared.Bases.Dtos.BaseHelpers;
 
-namespace CuratorMagazineWebAPI.Controllers;
+namespace API.Controllers;
 
 /// <summary>
 /// Class DivisionController.
@@ -54,8 +41,6 @@ public class DivisionController : BaseController
 
         if (division == null)
             return NotFound();
-
-        //_mqService.SendMessage(division);
 
         return division;
     }
