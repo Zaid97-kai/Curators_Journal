@@ -3,6 +3,7 @@ using WebClient.Models.States;
 using WebClient.Data.Services;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Components;
+using AntDesign;
 
 namespace WebClient.Shared.DEW;
 
@@ -91,5 +92,15 @@ public partial class WorkWithVDEW
         {
             IsVisibleModalAddVdewWindow = true;
         }
+    }
+
+    /// <summary>
+    /// Modals the add vdew window.
+    /// </summary>
+    public void ModalAddVdewWindowParam(bool value)
+    {
+        
+        IsVisibleModalAddVdewWindow = value;
+        
     }
 }

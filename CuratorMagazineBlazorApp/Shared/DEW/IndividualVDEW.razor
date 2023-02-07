@@ -22,7 +22,7 @@
 </div>
 @if (IsVisibleModalChangeVdewWindow)
 {
-    <ChangeVDEWModalWindow Visible="IsVisibleModalChangeVdewWindow" VDEW="@VDEW"></ChangeVDEWModalWindow>
+    <ChangeVDEWModalWindow ChangeVisible="ModalChangeVdewWindowParam" Visible="IsVisibleModalChangeVdewWindow" VDEW="@VDEW"></ChangeVDEWModalWindow>
 }
 
 
@@ -41,6 +41,12 @@
         IsVisibleModalChangeVdewWindow = !IsVisibleModalChangeVdewWindow;
     }
 
+    public void ModalChangeVdewWindowParam(bool value)
+    {
+
+        IsVisibleModalChangeVdewWindow = value;
+
+    }
     void SaveVDEW(User user)
     {
 

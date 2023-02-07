@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
+using NetTopologySuite.GeometriesGraph;
 using Newtonsoft.Json;
 using WebClient.Data.Services;
 
@@ -21,6 +22,9 @@ public partial class AddVDEWModalWindow
     [Parameter]
     public bool Visible { get; set; }
 
+    [Parameter]
+    public EventCallback<bool> ChangeVisible { get; set; }
+
     /// <summary>
     /// Gets or sets the user service.
     /// </summary>
@@ -34,6 +38,13 @@ public partial class AddVDEWModalWindow
     /// <value>The division service.</value>
     [Inject]
     public DivisionService? DivisionService { get; set; }
+
+    /// <summary>
+    /// Gets or sets the division service.
+    /// </summary>
+    /// <value>The division service.</value>
+    [Inject]
+    public RoleService? RoleService { get; set; }
 
     /// <summary>
     /// Gets or sets the navigation manager.
@@ -53,10 +64,21 @@ public partial class AddVDEWModalWindow
     private List<Division>? _divisions = new();
 
     /// <summary>
+    /// The divisions
+    /// </summary>
+    private List<Role>? _roles = new();
+
+    /// <summary>
     /// Gets or sets the selected division.
     /// </summary>
     /// <value>The selected division.</value>
-    private string? SelectedDivision { get; set; }
+    private string? SelectedDivisionItem { get; set; }
+
+    /// <summary>
+    /// Gets or sets the selected division.
+    /// </summary>
+    /// <value>The selected division.</value>
+    private Division? SelectedDivision { get; set; }
 
     /// <summary>
     /// On initialized as an asynchronous operation.
@@ -66,6 +88,9 @@ public partial class AddVDEWModalWindow
     {
         var ret = await DivisionService?.PostAsync()!;
         _divisions = JsonConvert.DeserializeObject<List<Division>>(ret.Result.Items?.ToString() ?? string.Empty);
+
+        var vret = await RoleService?.PostAsync()!;
+        _roles = JsonConvert.DeserializeObject<List<Role>>(vret.Result.Items?.ToString() ?? string.Empty);
     }
 
     /// <summary>
@@ -102,15 +127,38 @@ public partial class AddVDEWModalWindow
     private void HandleCancel(MouseEventArgs e)
     {
         Console.WriteLine("e");
-        Visible = false;
+        ChangeVisible.InvokeAsync(false);
     }
 
     /// <summary>
     /// on modal OK button is click, submit form manually
     /// </summary>
     /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
-    private void HandleOk(MouseEventArgs e)
+    private async Task HandleOkAsync(MouseEventArgs e)
     {
-        Visible = false;
+        if (_vdew != null)
+        {
+            //todo: понять почему не добавляет 
+            _vdew.Division = SelectedDivision;
+            _vdew.DivisionId = SelectedDivision.Id;
+
+            _vdew.Role = _roles.FirstOrDefault(i => i.Name == "Deputy Director");
+            _vdew.RoleId = _vdew.Role.Id;
+
+            _vdew.Id = 4;
+
+            await UserService?.CreateAsync(_vdew)!;
+        }
+        
+        ChangeVisible.InvokeAsync(false);
+    }
+
+    /// <summary>
+    /// Called when [selected item changed handler].
+    /// </summary>
+    /// <param name="value">The value.</param>
+    private void OnSelectedItemChangedHandler(Division value)
+    {
+        SelectedDivision = value;
     }
 }
