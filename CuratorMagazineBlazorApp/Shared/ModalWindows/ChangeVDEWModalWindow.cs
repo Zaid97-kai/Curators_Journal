@@ -1,8 +1,11 @@
-﻿using API.Models.Entities.Domains;
+﻿using AntDesign;
+using API.Models.Entities.Domains;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
 using Newtonsoft.Json;
+using OneOf.Types;
+using System;
 using WebClient.Data.Services;
 
 namespace WebClient.Shared.ModalWindows;
@@ -27,6 +30,9 @@ public partial class ChangeVDEWModalWindow
     /// <value><c>true</c> if visible; otherwise, <c>false</c>.</value>
     [Parameter]
     public bool Visible { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ChangeVisible { get; set; }
 
     /// <summary>
     /// Gets or sets the division service.
@@ -99,7 +105,7 @@ public partial class ChangeVDEWModalWindow
     private void HandleCancel(MouseEventArgs e)
     {
         Console.WriteLine("e");
-        Visible = false;
+        ChangeVisible.InvokeAsync(false);
     }
 
     /// <summary>
@@ -116,7 +122,8 @@ public partial class ChangeVDEWModalWindow
             await UserService?.PutAsync(VDEW)!;
         }
 
-        Visible = false;
+        ChangeVisible.InvokeAsync(false);
+        
     }
 
     /// <summary>
@@ -127,4 +134,6 @@ public partial class ChangeVDEWModalWindow
     {
         SelectedDivision = value;
     }
+
+    
 }
