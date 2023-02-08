@@ -16,12 +16,16 @@ namespace WebClient.Shared.ModalWindows;
 public partial class AddVDEWModalWindow
 {
     /// <summary>
-    /// Gets or sets a value indicating whether this <see cref="AddVDEWModalWindow"/> is visible.
+    /// Gets or sets a value indicating whether this <see cref="AddVDEWModalWindow" /> is visible.
     /// </summary>
     /// <value><c>true</c> if visible; otherwise, <c>false</c>.</value>
     [Parameter]
     public bool Visible { get; set; }
 
+    /// <summary>
+    /// Gets or sets the change visible.
+    /// </summary>
+    /// <value>The change visible.</value>
     [Parameter]
     public EventCallback<bool> ChangeVisible { get; set; }
 
@@ -123,7 +127,7 @@ public partial class AddVDEWModalWindow
     /// <summary>
     /// Handles the cancel.
     /// </summary>
-    /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
+    /// <param name="e">The <see cref="MouseEventArgs" /> instance containing the event data.</param>
     private void HandleCancel(MouseEventArgs e)
     {
         Console.WriteLine("e");
@@ -133,24 +137,25 @@ public partial class AddVDEWModalWindow
     /// <summary>
     /// on modal OK button is click, submit form manually
     /// </summary>
-    /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
+    /// <param name="e">The <see cref="MouseEventArgs" /> instance containing the event data.</param>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task HandleOkAsync(MouseEventArgs e)
     {
         if (_vdew != null)
         {
-            //todo: понять почему не добавляет 
-            _vdew.Division = SelectedDivision;
-            _vdew.DivisionId = SelectedDivision.Id;
+            _vdew.DivisionId = SelectedDivision?.Id;
 
-            _vdew.Role = _roles.FirstOrDefault(i => i.Name == "Deputy Director");
-            _vdew.RoleId = _vdew.Role.Id;
+            if (_roles != null)
+            {
+                var selectedRole = _roles.FirstOrDefault(i => i.Name == "Deputy Director");
 
-            _vdew.Id = 4;
+                _vdew.RoleId = selectedRole?.Id;
+            }
 
             await UserService?.CreateAsync(_vdew)!;
         }
         
-        ChangeVisible.InvokeAsync(false);
+        await ChangeVisible.InvokeAsync(false);
     }
 
     /// <summary>
