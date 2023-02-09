@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-3 text-end">
         <button type="button" class="btn btn-secondary me-2" @onclick="ShowModalChangeGroupWindow">Изменить</button>
-        <button type="button" class="btn btn-secondary">Удалить</button>
+        <button type="button" class="btn btn-secondary" @onclick="ShowDeleteModalWindow">Удалить</button>
     </div>
     <hr class="mb-0 mt-0">
 </div>
@@ -19,6 +19,10 @@
 {
 
     <ChangeGroupModalWindow Visible="IsVisibleModalChangeGroupWindow" Group="Group"></ChangeGroupModalWindow>
+}
+@if (IsVisibleDeleteModalWindow)
+{
+    <DeleteModalWindow Visible="IsVisibleDeleteModalWindow" Object="Group" ChangeVisible="DeleteModalWindowParam"></DeleteModalWindow>
 }
 
 @code {
@@ -32,8 +36,22 @@
 
     private bool IsVisibleModalChangeGroupWindow { get; set; }
 
+    private bool IsVisibleDeleteModalWindow { get; set; }
+
     public void ShowModalChangeGroupWindow()
     {
         IsVisibleModalChangeGroupWindow = !IsVisibleModalChangeGroupWindow;
+    }
+
+    public void ShowDeleteModalWindow()
+    {
+        IsVisibleDeleteModalWindow = !IsVisibleDeleteModalWindow;
+    }
+
+    public void DeleteModalWindowParam(bool value)
+    {
+
+        IsVisibleDeleteModalWindow = value;
+
     }
 }
