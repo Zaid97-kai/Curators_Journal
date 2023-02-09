@@ -1,7 +1,7 @@
 ﻿@using API.Models.Entities.Domains
 <Modal Title="@("Добавление")"
        Visible="@Visible"
-       OnOk="@HandleOk"
+       OnOk="@HandleOkAsync"
        OnCancel="@HandleCancel">
     <div class="container-fluid">
         <Form Model="@_curator"
@@ -23,9 +23,11 @@
                                 DataSource="@_divisions"
                                 TItem="Division"
                                 TItemValue="string"
-                                @bind-Value="@SelectedDivision"
+                                @bind-Value="@SelectedDivisionItem"
                                 LabelName="@nameof(Division.Name)"
-                                ValueName="@nameof(Division.Name)">
+                                ValueName="@nameof(Division.Name)"
+                                IgnoreItemChanges="false"
+                                OnSelectedItemChanged="OnSelectedDivisionItemChangedHandler">
                         </Select>
                     </FormItem>
                     <FormItem Label="Группы">
@@ -33,9 +35,11 @@
                                 DataSource="@_groups"
                                 TItem="Group"
                                 TItemValue="string"
-                                @bind-Value="@SelectedGroup"
+                                @bind-Value="@SelectedGroupItem"
                                 LabelName="@nameof(Group.Name)"
-                                ValueName="@nameof(Group.Name)">
+                                ValueName="@nameof(Group.Name)"
+                                IgnoreItemChanges="false"
+                                OnSelectedItemChanged="OnSelectedGroupItemChangedHandler">
                         </Select>
                     </FormItem>
                     <FormItem Label="Телефон">

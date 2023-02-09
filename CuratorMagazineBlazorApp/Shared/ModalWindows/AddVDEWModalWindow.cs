@@ -116,15 +116,6 @@ public partial class AddVDEWModalWindow
     }
 
     /// <summary>
-    /// Adds the vdew.
-    /// </summary>
-    /// <returns>A Task representing the asynchronous operation.</returns>
-    public async void AddVDEWAsync()
-    {
-        await UserService?.CreateAsync(_vdew)!;
-    }
-
-    /// <summary>
     /// Handles the cancel.
     /// </summary>
     /// <param name="e">The <see cref="MouseEventArgs" /> instance containing the event data.</param>

@@ -20,11 +20,11 @@ public partial class AddCuratorModalWindow
     private User _curator = new();
 
     /// <summary>
-    /// Gets or sets the role callback.
+    /// Gets or sets the change visible.
     /// </summary>
-    /// <value>The role callback.</value>
+    /// <value>The change visible.</value>
     [Parameter]
-    public EventCallback<User> RoleCallback { get; set; }
+    public EventCallback<bool> ChangeVisible { get; set; }
 
     [Parameter]
     public bool Visible { get; set; }
@@ -33,13 +33,25 @@ public partial class AddCuratorModalWindow
     /// Gets or sets the selected division.
     /// </summary>
     /// <value>The selected division.</value>
-    private string? SelectedDivision { get; set; }
+    private string? SelectedDivisionItem { get; set; }
 
     /// <summary>
     /// Gets or sets the selected division.
     /// </summary>
     /// <value>The selected division.</value>
-    private string? SelectedGroup { get; set; }
+    private Division? SelectedDivision { get; set; }
+
+    /// <summary>
+    /// Gets or sets the selected division.
+    /// </summary>
+    /// <value>The selected division.</value>
+    private string? SelectedGroupItem { get; set; }
+
+    /// <summary>
+    /// Gets or sets the selected division.
+    /// </summary>
+    /// <value>The selected division.</value>
+    private Group? SelectedGroup { get; set; }
 
     /// <summary>
     /// Gets or sets the division service.
@@ -54,6 +66,20 @@ public partial class AddCuratorModalWindow
     /// <value>The user service.</value>
     [Inject]
     public GroupService? GroupService { get; set; }
+
+    /// <summary>
+    /// Gets or sets the role service.
+    /// </summary>
+    /// <value>The user service.</value>
+    [Inject]
+    public RoleService? RoleService { get; set; }
+
+    /// <summary>
+    /// Gets or sets the role service.
+    /// </summary>
+    /// <value>The user service.</value>
+    [Inject]
+    public UserService? UserService { get; set; }
 
     /// <summary>
     /// Gets or sets the navigation manager.
@@ -71,6 +97,11 @@ public partial class AddCuratorModalWindow
     /// The divisions
     /// </summary>
     private List<Group>? _groups;
+
+    /// <summary>
+    /// The roles
+    /// </summary>
+    private List<Role>? _roles;
 
     /// <summary>
     /// Called when [finish].
@@ -101,13 +132,16 @@ public partial class AddCuratorModalWindow
         _divisions = JsonConvert.DeserializeObject<List<Division>>(ret.Result.Items?.ToString() ?? string.Empty);
 
         var gret = await GroupService?.PostAsync()!;
-        _groups = JsonConvert.DeserializeObject<List<Group>>(ret.Result.Items?.ToString() ?? string.Empty);
+        _groups = JsonConvert.DeserializeObject<List<Group>>(gret.Result.Items?.ToString() ?? string.Empty);
+
+        var vret = await RoleService?.PostAsync()!;
+        _roles = JsonConvert.DeserializeObject<List<Role>>(vret.Result.Items?.ToString() ?? string.Empty);
     }
 
     private void HandleCancel(MouseEventArgs e)
     {
         Console.WriteLine("e");
-        Visible = false;
+        ChangeVisible.InvokeAsync(false);
     }
 
 
@@ -115,8 +149,41 @@ public partial class AddCuratorModalWindow
     /// on modal OK button is click, submit form manually
     /// </summary>
     /// <param name="e"></param>
-    private void HandleOk(MouseEventArgs e)
+    private async void HandleOkAsync(MouseEventArgs e)
     {
-        Visible = false;
+        if (_curator != null)
+        {
+            _curator.DivisionId = SelectedDivision?.Id;
+            _curator.GroupId = SelectedGroup?.Id;
+
+            if (_roles != null)
+            {
+                var selectedRole = _roles.FirstOrDefault(i => i.Name == "Curator");
+
+                _curator.RoleId = selectedRole?.Id;
+            }
+
+            await UserService?.CreateAsync(_curator)!;
+        }
+
+        await ChangeVisible.InvokeAsync(false);
+    }
+
+    /// <summary>
+    /// Called when [selected item changed handler].
+    /// </summary>
+    /// <param name="value">The value.</param>
+    private void OnSelectedDivisionItemChangedHandler(Division value)
+    {
+        SelectedDivision = value;
+    }
+
+    /// <summary>
+    /// Called when [selected item changed handler].
+    /// </summary>
+    /// <param name="value">The value.</param>
+    private void OnSelectedGroupItemChangedHandler(Group value)
+    {
+        SelectedGroup = value;
     }
 }

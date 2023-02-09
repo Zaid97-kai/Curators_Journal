@@ -63,4 +63,9 @@ public partial class WorkWithGroupVDEW
     {
         IsVisibleModalAddGroupWindow = !IsVisibleModalAddGroupWindow;
     }
+
+    public void ShowModalAddGroupWindowParam(bool value)
+    {
+        IsVisibleModalAddGroupWindow = value;
+    }
 }

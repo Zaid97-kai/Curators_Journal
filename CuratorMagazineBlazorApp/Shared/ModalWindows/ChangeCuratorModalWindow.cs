@@ -22,11 +22,11 @@ public partial class ChangeCuratorModalWindow
     public User? Curator { get; set; }
 
     /// <summary>
-    /// Gets or sets the role callback.
+    /// Gets or sets the change visible.
     /// </summary>
-    /// <value>The role callback.</value>
+    /// <value>The change visible.</value>
     [Parameter]
-    public EventCallback<User> RoleCallback { get; set; }
+    public EventCallback<bool> ChangeVisible { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this <see cref="ChangeCuratorModalWindow"/> is visible.
@@ -141,7 +141,7 @@ public partial class ChangeCuratorModalWindow
     private void HandleCancel(MouseEventArgs e)
     {
         Console.WriteLine("e");
-        Visible = false;
+        ChangeVisible.InvokeAsync(false);
     }
     
     /// <summary>
@@ -161,7 +161,7 @@ public partial class ChangeCuratorModalWindow
             await UserService?.PutAsync(Curator)!;
         }
 
-        Visible = false;
+        await ChangeVisible.InvokeAsync(false);
     }
 
     /// <summary>

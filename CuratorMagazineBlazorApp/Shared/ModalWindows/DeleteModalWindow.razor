@@ -1,0 +1,89 @@
+﻿@using API.Models.Entities.Domains
+
+<Modal Title="Удаление"
+       Visible="@Visible"
+       OnOk="@HandleOk"
+       OnCancel="@HandleCancel">
+    <p>Вы уверены что хотите удалить объект @ObjectName?</p>
+</Modal>
+
+@code {
+    [Parameter]
+    public bool Visible { get; set; }
+
+    public int ObjectId { get; set; }
+
+    public string ObjectName { get; set; }
+
+    @typeparam T
+    [Parameter]
+    public T? Object { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ChangeVisible { get; set; }
+
+    [Inject]
+    private UserService? UserService { get; set; }
+
+    [Inject]
+    private DivisionService? DivisionService { get; set; }
+
+    [Inject]
+    private GroupService? GroupService { get; set; }
+
+    [Inject]
+    private ParentService? ParentService { get; set; }
+
+    private async void HandleOk(MouseEventArgs e)
+    {
+        if (Object.GetType() == typeof(User))
+        {
+            await UserService?.DeleteAsync(ObjectId);
+
+        }
+        else if (Object.GetType() == typeof(Division))
+        {
+            await DivisionService?.DeleteAsync(ObjectId);
+        }
+        else if (Object.GetType() == typeof(Group))
+        {
+            await GroupService?.DeleteAsync(ObjectId);
+        }
+        else
+        {
+            await ParentService?.DeleteAsync(ObjectId);
+        }
+        
+        ChangeVisible.InvokeAsync(false);
+    }
+
+    private void HandleCancel(MouseEventArgs e)
+    {
+        ChangeVisible.InvokeAsync(false);
+    }
+
+    protected override void OnInitialized()
+    {
+        if (Object.GetType() == typeof(User))
+        {
+            ObjectName = (Object as User).Name;
+            ObjectId = (Object as User).Id;
+
+        }
+        else if (Object.GetType() == typeof(Division))
+        {
+            ObjectName = (Object as Division).Name;
+            ObjectId = (Object as Division).Id;
+        }
+        else if (Object.GetType() == typeof(Group))
+        {
+            ObjectName = (Object as Group).Name;
+            ObjectId = (Object as Group).Id;
+        }
+        else
+        {
+            ObjectName = (Object as Parent).Name;
+            ObjectId = (Object as Parent).Id;
+        }
+    }
+}

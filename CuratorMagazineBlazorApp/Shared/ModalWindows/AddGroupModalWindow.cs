@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
 using WebClient.Data.Services;
+using System.Text.RegularExpressions;
+using Group = API.Models.Entities.Domains.Group;
 
 namespace WebClient.Shared.ModalWindows;
 
@@ -34,11 +36,11 @@ public partial class AddGroupModalWindow
     public User? CurrentUser { get; set; }
 
     /// <summary>
-    /// Gets or sets the role callback.
+    /// Gets or sets the change visible.
     /// </summary>
-    /// <value>The role callback.</value>
+    /// <value>The change visible.</value>
     [Parameter]
-    public EventCallback<User> RoleCallback { get; set; }
+    public EventCallback<bool> ChangeVisible { get; set; }
 
     /// <summary>
     /// Gets or sets the user service.
@@ -46,6 +48,13 @@ public partial class AddGroupModalWindow
     /// <value>The user service.</value>
     [Inject]
     public UserService? UserService { get; set; }
+
+    /// <summary>
+    /// Gets or sets the user service.
+    /// </summary>
+    /// <value>The user service.</value>
+    [Inject]
+    public GroupService? GroupService { get; set; }
 
     /// <summary>
     /// Gets or sets the navigation manager.
@@ -58,7 +67,13 @@ public partial class AddGroupModalWindow
     /// Gets or sets the selected curator.
     /// </summary>
     /// <value>The selected division.</value>
-    private string? SelectedCurator { get; set; }
+    private string? SelectedCuratorItem { get; set; }
+
+    /// <summary>
+    /// Gets or sets the selected curator.
+    /// </summary>
+    /// <value>The selected division.</value>
+    private User? SelectedCurator { get; set; }
 
     /// <summary>
     /// The divisions
@@ -102,15 +117,34 @@ public partial class AddGroupModalWindow
     private void HandleCancel(MouseEventArgs e)
     {
         Console.WriteLine("e");
-        Visible = false;
+        ChangeVisible.InvokeAsync(false);
     }
 
     /// <summary>
     /// on modal OK button is click, submit form manually
     /// </summary>
     /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
-    private void HandleOk(MouseEventArgs e)
+    private async void HandleOkAsync(MouseEventArgs e)
     {
-        Visible = false;
+        await GroupService?.CreateAsync(_group);
+        var gret = await GroupService?.PostAsync()!;
+        var groups = JsonConvert.DeserializeObject<List<Group>>(gret.Result.Items?.ToString() ?? string.Empty);
+        var group = groups.FirstOrDefault(i => i.Name == _group.Name);
+        if (group != null)
+        {
+            SelectedCurator.GroupId = group.Id;
+            await UserService.PutAsync(SelectedCurator);
+        }
+
+        await ChangeVisible.InvokeAsync(false);
+    }
+
+    /// <summary>
+    /// Called when [selected item changed handler].
+    /// </summary>
+    /// <param name="value">The value.</param>
+    private void OnSelectedCuratorItemChangedHandler(User value)
+    {
+        SelectedCurator = value;
     }
 }
