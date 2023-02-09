@@ -17,7 +17,7 @@
 </div>
 @if (IsVisibleModalChangeCuratorWindow)
 {
-    <ChangeCuratorModalWindow Visible="IsVisibleModalChangeCuratorWindow" Curator="@Curator"></ChangeCuratorModalWindow>
+    <ChangeCuratorModalWindow Visible="IsVisibleModalChangeCuratorWindow" Curator="@Curator" ChangeVisible="ShowModalChangeCuratorWindowParam"></ChangeCuratorModalWindow>
 }
 @if (IsVisibleDeleteModalWindow)
 {
@@ -39,6 +39,10 @@
     {
         IsVisibleModalChangeCuratorWindow = !IsVisibleModalChangeCuratorWindow;
     }
+    public void ShowModalChangeCuratorWindowParam(bool value)
+    {
+        IsVisibleModalChangeCuratorWindow = value;
+    }
 
     public void ShowDeleteModalWindow()
     {
@@ -47,8 +51,6 @@
 
     public void DeleteModalWindowParam(bool value)
     {
-
         IsVisibleDeleteModalWindow = value;
-
     }
 }

@@ -1,7 +1,7 @@
 ﻿@using API.Models.Entities.Domains
 <Modal Title="@("Добавление")"
        Visible="@Visible"
-       OnOk="@HandleOk"
+       OnOk="@HandleOkAsync"
        OnCancel="@HandleCancel">
     <div class="container-fluid">
         <Form Model="@_group"
@@ -23,9 +23,11 @@
                                 DataSource="@_curators"
                                 TItem="User"
                                 TItemValue="string"
-                                @bind-Value="@SelectedCurator"
+                                @bind-Value="@SelectedCuratorItem"
                                 LabelName="@nameof(User.Name)"
-                                ValueName="@nameof(User.Name)">
+                                ValueName="@nameof(User.Name)"
+                                IgnoreItemChanges="false"
+                                OnSelectedItemChanged="OnSelectedCuratorItemChangedHandler">
                         </Select>
                     </FormItem>
                 </GridCol>

@@ -72,4 +72,9 @@ public partial class WorkWithCuratorVDEW
     {
         IsVisibleModalAddCuratorWindow = !IsVisibleModalAddCuratorWindow;
     }
+
+    public void ShowModalAddCuratorWindowParam(bool value)
+    {
+        IsVisibleModalAddCuratorWindow = value;
+    }
 }

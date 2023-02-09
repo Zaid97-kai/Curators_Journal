@@ -29,11 +29,11 @@ public partial class ChangeGroupModalWindow
     public User? CurrentUser { get; set; }
 
     /// <summary>
-    /// Gets or sets the role callback.
+    /// Gets or sets the change visible.
     /// </summary>
-    /// <value>The role callback.</value>
+    /// <value>The change visible.</value>
     [Parameter]
-    public EventCallback<User> RoleCallback { get; set; }
+    public EventCallback<bool> ChangeVisible { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this <see cref="ChangeGroupModalWindow"/> is visible.
@@ -119,7 +119,7 @@ public partial class ChangeGroupModalWindow
     private void HandleCancel(MouseEventArgs e)
     {
         Console.WriteLine("e");
-        Visible = false;
+        ChangeVisible.InvokeAsync(false);
     }
 
     /// <summary>
@@ -136,7 +136,7 @@ public partial class ChangeGroupModalWindow
             await UserService?.PutAsync(SelectedCurator)!;
         }
 
-        Visible = false;
+        await ChangeVisible.InvokeAsync(false);
     }
 
     /// <summary>

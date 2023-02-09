@@ -7,18 +7,18 @@
     </div>
     <div class="col-md-8 mt-1">
         <h5><a class="text-dark" style="text-decoration: none;">@Group.Name</a></h5>
-        <p>@User.Name</p>
+        <p></p>
+        
     </div>
     <div class="col-md-3 text-end">
         <button type="button" class="btn btn-secondary me-2" @onclick="ShowModalChangeGroupWindow">Изменить</button>
         <button type="button" class="btn btn-secondary" @onclick="ShowDeleteModalWindow">Удалить</button>
     </div>
-    <hr class="mb-0 mt-0">
 </div>
 @if (IsVisibleModalChangeGroupWindow)
 {
 
-    <ChangeGroupModalWindow Visible="IsVisibleModalChangeGroupWindow" Group="Group"></ChangeGroupModalWindow>
+    <ChangeGroupModalWindow Visible="IsVisibleModalChangeGroupWindow" Group="Group" ChangeVisible="ShowModalChangeGroupWindoParam"></ChangeGroupModalWindow>
 }
 @if (IsVisibleDeleteModalWindow)
 {
@@ -32,7 +32,7 @@
     [Inject]
     public GroupService? GroupService { get; set; }
 
-    public User? User => GroupService?.GetGroupCuratorAsync(Group!.Id).Result.Result;
+    public User? user => GroupService?.GetGroupCuratorAsync(Group!.Id).Result.Result;
 
     private bool IsVisibleModalChangeGroupWindow { get; set; }
 
@@ -43,6 +43,11 @@
         IsVisibleModalChangeGroupWindow = !IsVisibleModalChangeGroupWindow;
     }
 
+    public void ShowModalChangeGroupWindoParam(bool value)
+    {
+        IsVisibleModalChangeGroupWindow = value;
+    }
+
     public void ShowDeleteModalWindow()
     {
         IsVisibleDeleteModalWindow = !IsVisibleDeleteModalWindow;
@@ -50,8 +55,6 @@
 
     public void DeleteModalWindowParam(bool value)
     {
-
         IsVisibleDeleteModalWindow = value;
-
     }
 }

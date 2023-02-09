@@ -29,7 +29,7 @@
                 <button type="button" class="btn btn-secondary" @onclick="ModalAddVdewWindow">Добавить</button>
                 @if (IsVisibleModalAddVdewWindow)
                 {
-                    <AddVDEWModalWindow Visible="IsVisibleModalAddVdewWindow"></AddVDEWModalWindow>
+                    <AddVDEWModalWindow Visible="IsVisibleModalAddVdewWindow" ChangeVisible="ModalAddVdewWindowParam"></AddVDEWModalWindow>
                 }
             </div>
         </div>

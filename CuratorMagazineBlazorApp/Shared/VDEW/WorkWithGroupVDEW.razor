@@ -30,7 +30,7 @@
                 <button type="button" class="btn btn-secondary" @onclick="ModalAddGroupWindow">Добавить</button>
                 @if (IsVisibleModalAddGroupWindow)
                 {
-                    <AddGroupModalWindow Visible="IsVisibleModalAddGroupWindow"></AddGroupModalWindow>
+                    <AddGroupModalWindow Visible="IsVisibleModalAddGroupWindow" ChangeVisible="ShowModalAddGroupWindowParam"></AddGroupModalWindow>
                 }
                 
             </div>
