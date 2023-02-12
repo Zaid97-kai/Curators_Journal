@@ -1,0 +1,12 @@
+﻿<AuthorizeView>
+    <Authorized>
+        Welcome, @context.User.Identity.Name
+    </Authorized>
+    <NotAuthorized>
+        Go to <a href="/login">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    
+}

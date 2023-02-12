@@ -1,21 +1,27 @@
+using Microsoft.AspNetCore.Components.Authorization;
 using WebClient.Data.Services;
+using WebClient.Shared.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddOptions();
+builder.Services.AddAuthenticationCore();
+builder.Services.AddAuthorizationCore();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddAntDesign();
 builder.Services.AddCors();
 
 #region Services
+builder.Services.AddScoped<AuthenticationStateProvider, TokenAuthenticationStateProvider>();
+builder.Services.AddScoped<ILocalStorageService, LocalStorageService>();
 builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<DivisionService>();
 builder.Services.AddSingleton<GroupService>();
 builder.Services.AddSingleton<ParentService>();
 builder.Services.AddSingleton<RoleService>();
 #endregion
-
 
 builder.Services.AddHttpClient("CuratorMagazineWebAPI", client =>
 {

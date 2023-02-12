@@ -1,6 +1,7 @@
 ﻿<header  class="container">
     <MainHeader CurrentUser="@CurrentUser"></MainHeader>
-    <EnterModalWindow RoleCallback="@SetUser"></EnterModalWindow>
+    <WebClient.Shared.Authorization.AuthorizationComponent />
+    @*<EnterModalWindow RoleCallback="@SetUser"></EnterModalWindow>*@
     <ExitModalWindow UserNullCallback="@SetUserNull"></ExitModalWindow>
     <NavBar></NavBar>
     <RoleNavBar CurrentUser="@CurrentUser" StateRoleNavBar="@StateRoleNavBar"  StateRoleNavBarCallback="@SetStateRoleNavBar"></RoleNavBar>

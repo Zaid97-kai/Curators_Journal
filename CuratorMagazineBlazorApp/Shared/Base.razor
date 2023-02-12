@@ -1,6 +1,7 @@
-﻿@using API.Models.Entities.Domains
-<HeaderComponent RoleCallback="@SetUser"></HeaderComponent>
-<FooterComponent></FooterComponent>
+﻿<CascadingAuthenticationState>
+    <HeaderComponent RoleCallback="@SetUser"></HeaderComponent>
+    <FooterComponent></FooterComponent>
+</CascadingAuthenticationState>
 
 @code {
     [Parameter] public User? CurrentUser { get; set; }
