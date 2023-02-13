@@ -130,7 +130,7 @@ public partial class AddGroupModalWindow
         var gret = await GroupService?.PostAsync()!;
         var groups = JsonConvert.DeserializeObject<List<Group>>(gret.Result.Items?.ToString() ?? string.Empty);
         var group = groups.FirstOrDefault(i => i.Name == _group.Name);
-        if (group != null)
+        if (group != null && SelectedCurator != null)
         {
             SelectedCurator.GroupId = group.Id;
             await UserService.PutAsync(SelectedCurator);

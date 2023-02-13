@@ -83,8 +83,8 @@ public class GroupController : BaseController
     /// </summary>
     /// <param name="group">The group.</param>
     /// <returns>BaseResponseActionResult&lt;Group&gt;.</returns>
-    [HttpPost]
-    public async Task<BaseResponseActionResult<Group>> Post(Group? group)
+    [HttpPost("Create")]
+    public async Task<BaseResponseActionResult<Group>> Post([FromBody]Group? group)
     {
         if (group == null)
         {
@@ -101,7 +101,7 @@ public class GroupController : BaseController
     /// <param name="group">The group.</param>
     /// <returns>BaseResponseActionResult&lt;Group&gt;.</returns>
     [HttpPut]
-    public async Task<BaseResponseActionResult<Group>> Put(Group? group)
+    public async Task<BaseResponseActionResult<Group>> Put([FromBody] Group? group)
     {
         if (group == null)
         {
