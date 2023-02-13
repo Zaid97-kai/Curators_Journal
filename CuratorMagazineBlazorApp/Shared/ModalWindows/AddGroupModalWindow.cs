@@ -17,12 +17,7 @@ namespace WebClient.Shared.ModalWindows;
 public partial class AddGroupModalWindow
 {
     /// <summary>
-    /// The group
-    /// </summary>
-    private Group _group = new();
-
-    /// <summary>
-    /// Gets or sets a value indicating whether this <see cref="AddGroupModalWindow"/> is visible.
+    /// Gets or sets a value indicating whether this <see cref="AddGroupModalWindow" /> is visible.
     /// </summary>
     /// <value><c>true</c> if visible; otherwise, <c>false</c>.</value>
     [Parameter]
@@ -61,7 +56,7 @@ public partial class AddGroupModalWindow
     /// </summary>
     /// <value>The navigation manager.</value>
     [Inject]
-    public NavigationManager NavigationManager { get; set; } = null!;
+    public NavigationManager? NavigationManager { get; set; }
 
     /// <summary>
     /// Gets or sets the selected curator.
@@ -78,7 +73,14 @@ public partial class AddGroupModalWindow
     /// <summary>
     /// The divisions
     /// </summary>
-    private List<User>? _curators;
+    /// <value>The curators.</value>
+    private List<User>? Curators { get; set; }
+
+    /// <summary>
+    /// The group
+    /// </summary>
+    /// <value>The group.</value>
+    private Group? Group { get; set; } = new Group();
 
     /// <summary>
     /// Called when [finish].
@@ -86,7 +88,7 @@ public partial class AddGroupModalWindow
     /// <param name="editContext">The edit context.</param>
     private void OnFinish(EditContext editContext)
     {
-        Console.WriteLine($"Success: {JsonConvert.SerializeObject(_group)}");
+        Console.WriteLine($"Success: {JsonConvert.SerializeObject(Group)}");
     }
 
     /// <summary>
@@ -95,7 +97,7 @@ public partial class AddGroupModalWindow
     /// <param name="editContext">The edit context.</param>
     private void OnFinishFailed(EditContext editContext)
     {
-        Console.WriteLine($"Failed: {JsonConvert.SerializeObject(_group)}");
+        Console.WriteLine($"Failed: {JsonConvert.SerializeObject(Group)}");
 
     }
 
@@ -106,34 +108,35 @@ public partial class AddGroupModalWindow
     protected override async Task OnInitializedAsync()
     {
         var ret = await UserService?.PostAsync()!;
-        var curators = JsonConvert.DeserializeObject<List<User>>(ret.Result.Items?.ToString() ?? string.Empty);
-        if (curators != null) _curators = curators.Where(i => i.Role?.Name == "Curator").ToList();
+        Curators = JsonConvert.DeserializeObject<List<User>>(ret.Result.Items?.ToString() ?? string.Empty);
+        Curators = Curators?.Where(i => i.Role?.Name == "Curator").ToList();
     }
 
     /// <summary>
     /// Handles the cancel.
     /// </summary>
-    /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
+    /// <param name="e">The <see cref="MouseEventArgs" /> instance containing the event data.</param>
     private void HandleCancel(MouseEventArgs e)
     {
-        Console.WriteLine("e");
+        Console.WriteLine(e);
         ChangeVisible.InvokeAsync(false);
     }
 
     /// <summary>
     /// on modal OK button is click, submit form manually
     /// </summary>
-    /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
+    /// <param name="e">The <see cref="MouseEventArgs" /> instance containing the event data.</param>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async void HandleOkAsync(MouseEventArgs e)
     {
-        await GroupService?.CreateAsync(_group);
+        await GroupService?.CreateAsync(Group)!;
         var gret = await GroupService?.PostAsync()!;
         var groups = JsonConvert.DeserializeObject<List<Group>>(gret.Result.Items?.ToString() ?? string.Empty);
-        var group = groups.FirstOrDefault(i => i.Name == _group.Name);
+        var group = groups?.FirstOrDefault(i => i.Name == Group?.Name);
         if (group != null && SelectedCurator != null)
         {
             SelectedCurator.GroupId = group.Id;
-            await UserService.PutAsync(SelectedCurator);
+            await UserService?.PutAsync(SelectedCurator)!;
         }
 
         await ChangeVisible.InvokeAsync(false);

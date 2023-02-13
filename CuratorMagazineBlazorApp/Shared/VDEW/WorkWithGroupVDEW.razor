@@ -1,16 +1,18 @@
-﻿<div class="container my-4 bg-secondary bg-opacity-50">
+﻿@page "/groups"
+
+<div class="container my-4 bg-secondary bg-opacity-50">
     <div class="container-fluid">
         <BodySearchBar></BodySearchBar>
         <div class="overflow-auto container scroll">
-            @if (_groups != null)
+            @if (Groups != null)
             {
-                @if (_groups == null || _groups.Count == 0)
+                @if (Groups == null || Groups.Count == 0)
                 {
                     <Skeleton Active=true></Skeleton>
                 }
                 else
                 {
-                    foreach (var item in _groups)
+                    foreach (var item in Groups)
                     {
                         @*if (item.Division?.Name == CurrentUser.Division?.Name)
                         {*@
@@ -30,9 +32,8 @@
                 <button type="button" class="btn btn-secondary" @onclick="ModalAddGroupWindow">Добавить</button>
                 @if (IsVisibleModalAddGroupWindow)
                 {
-                    <AddGroupModalWindow Visible="IsVisibleModalAddGroupWindow" ChangeVisible="ShowModalAddGroupWindowParam"></AddGroupModalWindow>
+                    <AddGroupModalWindow Visible="IsVisibleModalAddGroupWindow" ChangeVisible="ShowModalAddGroupWindowParam" CurrentUser="CurrentUser"></AddGroupModalWindow>
                 }
-                
             </div>
         </div>
     </div>

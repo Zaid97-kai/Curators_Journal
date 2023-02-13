@@ -36,7 +36,7 @@ public class ParentService : BaseService
     /// </summary>
     /// <param name="parent">The Parent.</param>
     /// <returns>A Task&lt;BaseResponse`1&gt; representing the asynchronous operation.</returns>
-    public async Task<BaseResponse<Parent>> CreateAsync(Parent parent)
+    public async Task<BaseResponse<Parent>> CreateAsync(Parent? parent)
     {
         var ret = await SendAsync<Parent>($"Create", HttpMethod.Post, parent);
         return ret;
@@ -47,7 +47,7 @@ public class ParentService : BaseService
     /// </summary>
     /// <param name="parent">The Parent.</param>
     /// <returns>A Task&lt;BaseResponse`1&gt; representing the asynchronous operation.</returns>
-    public async Task<BaseResponse<Parent>> PutAsync(Parent parent)
+    public async Task<BaseResponse<Parent>> PutAsync(Parent? parent)
     {
         var ret = await SendAsync<Parent>("", HttpMethod.Put, parent);
         return ret;
