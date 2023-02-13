@@ -35,6 +35,13 @@ public partial class WorkWithGroupVDEW
     public GroupService? GroupService { get; set; }
 
     /// <summary>
+    /// Gets or sets the navigation manager.
+    /// </summary>
+    /// <value>The navigation manager.</value>
+    [Inject]
+    public NavigationManager? NavigationManager { get; set; }
+
+    /// <summary>
     /// Gets or sets the groups.
     /// </summary>
     /// <value>The groups.</value>
