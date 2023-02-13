@@ -36,7 +36,7 @@ public class UserService : BaseService
     /// </summary>
     /// <param name="user">The user.</param>
     /// <returns>A Task&lt;BaseResponse`1&gt; representing the asynchronous operation.</returns>
-    public async Task<BaseResponse<User>> CreateAsync(User user)
+    public async Task<BaseResponse<User>> CreateAsync(User? user)
     {
         var ret = await SendAsync<User>($"Create", HttpMethod.Post, user);
         return ret;
@@ -47,7 +47,7 @@ public class UserService : BaseService
     /// </summary>
     /// <param name="user">The user.</param>
     /// <returns>A Task&lt;BaseResponse`1&gt; representing the asynchronous operation.</returns>
-    public async Task<BaseResponse<User>> PutAsync(User user)
+    public async Task<BaseResponse<User>> PutAsync(User? user)
     {
         var ret = await SendAsync<User>("", HttpMethod.Put, user);
         return ret;

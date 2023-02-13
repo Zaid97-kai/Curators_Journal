@@ -42,7 +42,7 @@ public class GroupService : BaseService
     /// </summary>
     /// <param name="group">The group.</param>
     /// <returns>A Task&lt;BaseResponse`1&gt; representing the asynchronous operation.</returns>
-    public async Task<BaseResponse<Group>> CreateAsync(Group group)
+    public async Task<BaseResponse<Group>> CreateAsync(Group? group)
     {
         var ret = await SendAsync<Group>($"Create", HttpMethod.Post, group);
         return ret;
@@ -53,7 +53,7 @@ public class GroupService : BaseService
     /// </summary>
     /// <param name="group">The group.</param>
     /// <returns>A Task&lt;BaseResponse`1&gt; representing the asynchronous operation.</returns>
-    public async Task<BaseResponse<Group>> PutAsync(Group group)
+    public async Task<BaseResponse<Group>> PutAsync(Group? group)
     {
         var ret = await SendAsync<Group>("", HttpMethod.Put, group);
         return ret;

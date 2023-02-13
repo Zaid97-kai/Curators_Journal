@@ -37,7 +37,7 @@ public abstract class BaseHttpService
     /// </summary>
     /// <param name="model">The model.</param>
     /// <returns>HttpContent.</returns>
-    private static HttpContent CreateContent(object model)
+    private static HttpContent CreateContent(object? model)
     {
         if (model is HttpContent cont)
             return cont;
@@ -57,7 +57,7 @@ public abstract class BaseHttpService
     /// <param name="method">The method.</param>
     /// <param name="model">The model.</param>
     /// <returns>HttpRequestMessage.</returns>
-    private static HttpRequestMessage CreateMessage(string uri, HttpMethod method, object model)
+    private static HttpRequestMessage CreateMessage(string uri, HttpMethod method, object? model)
     {
         var message = new HttpRequestMessage(method, uri);
         if (method != HttpMethod.Post && method != HttpMethod.Put)
@@ -75,7 +75,7 @@ public abstract class BaseHttpService
     /// <param name="method">The method.</param>
     /// <param name="model">The model.</param>
     /// <returns>A Task&lt;OperationResult`1&gt; representing the asynchronous operation.</returns>
-    protected async Task<BaseResponse<T>> SendAsync<T>(string action, HttpMethod method, object model = null)
+    protected async Task<BaseResponse<T>> SendAsync<T>(string action, HttpMethod method, object? model = null)
         where T : class, new()
     {
         try

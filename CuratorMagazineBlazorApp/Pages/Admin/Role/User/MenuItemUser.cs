@@ -38,7 +38,7 @@ public partial class MenuItemUser
     /// <summary>
     /// The edit cache
     /// </summary>
-    private IDictionary<string, (bool edit, API.Models.Entities.Domains.User data)> _editCache = new Dictionary<string, (bool edit, API.Models.Entities.Domains.User data)>();
+    private IDictionary<string, (bool edit, API.Models.Entities.Domains.User? data)> _editCache = new Dictionary<string, (bool edit, API.Models.Entities.Domains.User? data)>();
 
     /// <summary>
     /// The page index

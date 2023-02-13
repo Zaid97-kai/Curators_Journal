@@ -36,7 +36,7 @@ public class DivisionService : BaseService
     /// </summary>
     /// <param name="division">The Division.</param>
     /// <returns>A Task&lt;BaseResponse`1&gt; representing the asynchronous operation.</returns>
-    public async Task<BaseResponse<Division>> CreateAsync(Division division)
+    public async Task<BaseResponse<Division>> CreateAsync(Division? division)
     {
         var ret = await SendAsync<Division>($"Create", HttpMethod.Post, division);
         return ret;
@@ -47,7 +47,7 @@ public class DivisionService : BaseService
     /// </summary>
     /// <param name="division">The Division.</param>
     /// <returns>A Task&lt;BaseResponse`1&gt; representing the asynchronous operation.</returns>
-    public async Task<BaseResponse<Division>> PutAsync(Division division)
+    public async Task<BaseResponse<Division>> PutAsync(Division? division)
     {
         var ret = await SendAsync<Division>("", HttpMethod.Put, division);
         return ret;
