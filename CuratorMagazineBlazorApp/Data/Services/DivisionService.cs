@@ -38,7 +38,7 @@ public class DivisionService : BaseService
     /// <returns>A Task&lt;BaseResponse`1&gt; representing the asynchronous operation.</returns>
     public async Task<BaseResponse<Division>> CreateAsync(Division? division)
     {
-        var ret = await SendAsync<Division>($"Create", HttpMethod.Post, division);
+        var ret = await SendAsync<Division>($"CreateDivision", HttpMethod.Post, division);
         return ret;
     }
 
@@ -76,7 +76,7 @@ public class DivisionService : BaseService
             { "query", query },
             { "page", "1" }
         };
-        var ret = await SendAsync<BaseDtoListResult>("GetList", HttpMethod.Post, parameters);
+        var ret = await SendAsync<BaseDtoListResult>("GetDivisions", HttpMethod.Post, parameters);
         return ret;
     }
 
