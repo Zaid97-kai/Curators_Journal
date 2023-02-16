@@ -63,7 +63,7 @@ public class DivisionController : BaseController
     /// <param name="division">The division.</param>
     /// <returns>BaseResponseActionResult&lt;Division&gt;.</returns>
     [HttpPost("CreateDivision")]
-    public async Task<BaseResponseActionResult<Division>> Post(Division? division)
+    public async Task<BaseResponseActionResult<Division>> Create(Division? division)
     {
         if (division == null)
         {
