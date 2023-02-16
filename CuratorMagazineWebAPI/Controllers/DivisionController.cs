@@ -34,7 +34,7 @@ public class DivisionController : BaseController
     /// </summary>
     /// <param name="id">The identifier.</param>
     /// <returns>BaseResponseActionResult&lt;Division&gt;.</returns>
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public async Task<BaseResponseActionResult<Division>> Get(int id)
     {
         var division = await _repository.GetById(id);
@@ -50,7 +50,7 @@ public class DivisionController : BaseController
     /// </summary>
     /// <param name="data">The data.</param>
     /// <returns>BaseResponseActionResult&lt;BaseDtoListResult&gt;.</returns>
-    [HttpPost("GetList")]
+    [HttpPost("GetDivisions")]
     public async Task<BaseResponseActionResult<BaseDtoListResult>> GetList([FromBody] BaseFilterGetList data)
     {
         var ret = await _repository.GetList(data);
@@ -62,7 +62,7 @@ public class DivisionController : BaseController
     /// </summary>
     /// <param name="division">The division.</param>
     /// <returns>BaseResponseActionResult&lt;Division&gt;.</returns>
-    [HttpPost]
+    [HttpPost("CreateDivision")]
     public async Task<BaseResponseActionResult<Division>> Post(Division? division)
     {
         if (division == null)
@@ -79,7 +79,7 @@ public class DivisionController : BaseController
     /// </summary>
     /// <param name="division">The division.</param>
     /// <returns>BaseResponseActionResult&lt;Division&gt;.</returns>
-    [HttpPut]
+    [HttpPut("UpdateDivision")]
     public async Task<BaseResponseActionResult<Division>> Put([FromBody] Division? division)
     {
         if (division == null)
