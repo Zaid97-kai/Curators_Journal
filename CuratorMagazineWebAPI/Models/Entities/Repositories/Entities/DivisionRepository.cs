@@ -18,7 +18,7 @@ namespace API.Models.Entities.Repositories.Entities;
 public class DivisionRepository : BaseRepository<Division>, IDivisionRepository
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="DivisionRepository" /> class.
+    /// Initializes a new instance of the <see cref="DivisionRepository"/> class.
     /// </summary>
     /// <param name="context">The context.</param>
     public DivisionRepository(CuratorMagazineContext context) : base(context)
