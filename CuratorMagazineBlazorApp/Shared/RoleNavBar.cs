@@ -51,6 +51,15 @@ public partial class RoleNavBar
     }
 
     /// <summary>
+    /// Changes the on stats collect state role nav bar.
+    /// </summary>
+    public void ChangeOnStatsCollectionPageStateRoleNavBar()
+    {
+        StateRoleNavBar = new StateRoleNavBar() { RoleName = "StatsCollectionPage" };
+        StateRoleNavBarCallback.InvokeAsync(StateRoleNavBar);
+    }
+
+    /// <summary>
     /// Changes the on work with group vdew state role nav bar.
     /// </summary>
     public void ChangeOnWorkWithGroupVDEWStateRoleNavBar()

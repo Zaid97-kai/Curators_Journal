@@ -1,6 +1,7 @@
 ﻿@using API.Models.Entities.Domains
-<button class="row mt-3 mb-2 text-start border-0" data-bs-toggle="modal" data-bs-target="#studInfoModal">
-    <div class="col-md-3">
+
+<GridRow Gutter="16" Align="middle" Justify="start" Style="padding: 10px" >
+    <GridCol Span="5">
         @if (Student?.ProfilePhoto == null)
         {
             <img class="rounded img-fluid" src="../img/no-img.jpg" alt="">
@@ -9,16 +10,74 @@
         {
             @*todo: Пометка надо придумать как фотку поставить*@
         }
+    </GridCol>
+    <GridCol Span="10">
+        <div @onclick="ShowModalStudentInfoWindow">
+            <p><b>@Student?.Name</b></p>
+            <p>@Student!.BirthDate</p>
+        </div>
+    </GridCol>
+    <GridCol Span="9" Style="text-align: right">
+        <button class="btn btn-secondary" style="margin-right: 5px; font-size: 0.8em" @onclick="@ShowModalChangeStudentWindow">Изменить</button>
+        <button class="btn btn-secondary" style="font-size: 0.8em" @onclick="@ShowModalDeleteStudentWindow">Удалить</button>
+    </GridCol>
 
-    </div>
-    <div class="col-md-8">
-        <h5>@Student?.Name</h5>
-        <p>@Student!.BirthDate</p>
-    </div>
-</button>
-<hr class="m-0">
+</GridRow>
+<GridRow Style="padding: 0px" Justify="center">
+    <GridCol Span="24">
+        <hr class="m-0">
+    </GridCol>
+</GridRow>
+@if (IsVisibleStudentInfoModalWindow)
+{
+    <ShowStudentModalWindow Student="Student" Visible="IsVisibleStudentInfoModalWindow" ChangeVisible="ModalStudentInfoWindowParam"></ShowStudentModalWindow>
+}
+@if (IsVisibleChangeStudentModalWindow)
+{
+    <ChangeStudentModalWindow Student="Student" Visible="IsVisibleChangeStudentModalWindow" ChangeVisible="ModalChangeStudentWindowParam"></ChangeStudentModalWindow>
+}
+@if (IsVisibleDeleteStudentModalWindow)
+{
+    <DeleteModalWindow Object="Student" Visible="IsVisibleDeleteStudentModalWindow" ChangeVisible="ModalDeleteStudentWindowParam"></DeleteModalWindow>
+}
 
 @code {
     [Parameter]
     public User? Student { get; set; }
+
+    private bool IsVisibleStudentInfoModalWindow { get; set; }
+
+    private bool IsVisibleChangeStudentModalWindow { get; set; }
+
+    private bool IsVisibleDeleteStudentModalWindow { get; set; }
+
+    public void ShowModalStudentInfoWindow()
+    {
+        IsVisibleStudentInfoModalWindow = !IsVisibleStudentInfoModalWindow;
+    }
+
+    public void ModalStudentInfoWindowParam(bool value)
+    {
+        IsVisibleStudentInfoModalWindow = value;
+    }
+
+    public void ShowModalChangeStudentWindow()
+    {
+        IsVisibleChangeStudentModalWindow = !IsVisibleChangeStudentModalWindow;
+    }
+
+    public void ModalChangeStudentWindowParam(bool value)
+    {
+        IsVisibleChangeStudentModalWindow = value;
+    }
+
+    public void ShowModalDeleteStudentWindow()
+    {
+        IsVisibleDeleteStudentModalWindow = !IsVisibleDeleteStudentModalWindow;
+    }
+
+    public void ModalDeleteStudentWindowParam(bool value)
+    {
+        IsVisibleDeleteStudentModalWindow = value;
+    }
 }
