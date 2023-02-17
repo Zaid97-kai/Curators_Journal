@@ -7,8 +7,14 @@
     </div>
     <div class="col-md-8 mt-1">
         <h5><a class="text-dark" style="text-decoration: none;">@Group.Name</a></h5>
-        <p></p>
-        
+        @*@if (user == null)
+        {
+            <Skeleton Active=true></Skeleton>
+        }
+        else
+        {
+            <p>@user.Name</p>
+        }*@
     </div>
     <div class="col-md-3 text-end">
         <button type="button" class="btn btn-secondary me-2" @onclick="ShowModalChangeGroupWindow">Изменить</button>
@@ -26,35 +32,5 @@
 }
 
 @code {
-    [Parameter]
-    public Group? Group { get; set; }
-
-    [Inject]
-    public GroupService? GroupService { get; set; }
-
-    public User? user => GroupService?.GetGroupCuratorAsync(Group!.Id).Result.Result;
-
-    private bool IsVisibleModalChangeGroupWindow { get; set; }
-
-    private bool IsVisibleDeleteModalWindow { get; set; }
-
-    public void ShowModalChangeGroupWindow()
-    {
-        IsVisibleModalChangeGroupWindow = !IsVisibleModalChangeGroupWindow;
-    }
-
-    public void ShowModalChangeGroupWindoParam(bool value)
-    {
-        IsVisibleModalChangeGroupWindow = value;
-    }
-
-    public void ShowDeleteModalWindow()
-    {
-        IsVisibleDeleteModalWindow = !IsVisibleDeleteModalWindow;
-    }
-
-    public void DeleteModalWindowParam(bool value)
-    {
-        IsVisibleDeleteModalWindow = value;
-    }
+    
 }

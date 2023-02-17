@@ -4,12 +4,12 @@
        OnOk="HandleOkAsync"
        OnCancel="@HandleCancel">
     <div class="container-fluid">
-        <Form Model="@_student"
+        <Form Model="@Student"
               OnFinish="OnFinish"
               OnFinishFailed="OnFinishFailed">
             <Row Gutter="16">
                 <GridCol Span="11">
-                    @if (context.ProfilePhoto == null)
+                    @if(context.ProfilePhoto == null)
                     {
                         <img class="img-thumbnail" height="400px" width="400px" src="../img/no-img.jpg" alt="">
                     }
@@ -21,10 +21,10 @@
                     <FormItem Label="ФИО">
                         <Input @bind-Value="@context.Name">
                     </FormItem>
-                    <FormItem Label="Дата рождения"  >
+                    <FormItem Label="Дата рождения">
                         <Input @bind-Value="@context.BirthDate">
                     </FormItem>
-                    <FormItem Label="Подразделение"  >
+                    <FormItem Label="Подразделение">
                         <Select Mode="default"
                                 DataSource="@_divisions"
                                 TItem="Division"
@@ -36,7 +36,7 @@
                                 OnSelectedItemChanged="OnSelectedDivisionItemChangedHandler">
                         </Select>
                     </FormItem>
-                    <FormItem Label="Группа"  >
+                    <FormItem Label="Группа">
                         <Select Mode="default"
                                 DataSource="@_groups"
                                 TItem="Group"
@@ -48,10 +48,10 @@
                                 OnSelectedItemChanged="OnSelectedGroupItemChangedHandler">
                         </Select>
                     </FormItem>
-                    <FormItem Label="Телефон"  >
+                    <FormItem Label="Телефон">
                         <Input @bind-Value="@context.Phone">
                     </FormItem>
-                    <FormItem Label="Адрес"  >
+                    <FormItem Label="Адрес">
                         <Input @bind-Value="@context.Address">
                     </FormItem>
                     <FormItem Label="Email">
