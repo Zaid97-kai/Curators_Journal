@@ -23,7 +23,7 @@ namespace WebClient.Shared.ModalWindows
         public bool Visible { get; set; }
 
         [Inject]
-        private ParentService ParentService { get; set; }
+        private ParentService? ParentService { get; set; }
 
         /// <summary>
         /// Gets or sets the division service.

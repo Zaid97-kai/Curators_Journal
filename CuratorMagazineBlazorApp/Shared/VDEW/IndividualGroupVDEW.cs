@@ -41,11 +41,5 @@ namespace WebClient.Shared.VDEW
         {
             IsVisibleDeleteModalWindow = value;
         }
-
-        protected override async Task OnInitializedAsync()
-        {
-            var user1 = GroupService?.GetGroupCuratorAsync(Group!.Id).Result.Result;
-            user = user1;
-        }
     }
 }
