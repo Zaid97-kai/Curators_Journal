@@ -1,56 +1,97 @@
 ﻿@using API.Models.Entities.Domains
-<div class="container my-4 bg-secondary bg-opacity-50" style="min-height: 600px;"> 
-    <div class="container-fluid" >
-        <div class="row ">
-            <div class="col-md-1 mt-3">
-                @if(true)
+
+<div class="container bg-secondary bg-opacity-50 my-4" style="min-height: 600px; max-height: 800px">
+    <div class="container-fluid">
+        <GridRow Gutter="16" Align="middle" Style="padding-top: 10px; padding-bottom: 10px">
+            <GridCol Span="2">
+                @if (true)
                 {
                     <img class="img-fluid rounded" src="../img/no-img.jpg" alt="">
                 }
-            </div>
-            <div class="col-md-8 mt-3 text-white">
-                <h5>@Group.Name</h5>
-                <p>Куратор</p>
-                @*todo: Пометка придумать как достать куратора*@
-            </div>
-            <div class="col-md-6 mt-3">
-                <h5 class="text-white">Участники группы</h5>
-                <div class="container-fluid bg-white rounded-3 scroll mb-3">
-                    @foreach (var item in Group.Users)
+            </GridCol>
+            <GridCol Span="21">
+                @if (Group == null || CurrentUser == null)
+                {
+                    <Skeleton Active=true></Skeleton>
+                }
+                else
+                {
+                    <h5 class="text-white" style="margin-bottom: 0px; padding-left: 0px">@Group.Name</h5>
+                    <p class="text-white" style="margin-bottom: 7px; padding-left: 0px">@CurrentUser.Name</p>
+                }
+            </GridCol>
+        </GridRow>
+        <GridRow Gutter="16" Align="bottom" Justify="start">
+            <GridCol Span="12">
+                <h5 class="text-white" style="margin-top: 10px">Участники группы</h5>
+            </GridCol>
+            <GridCol Span="12">
+                <h5 class="text-white">Список мероприятий</h5>
+            </GridCol>
+        </GridRow>
+        <GridRow Gutter="16" Align="middle" Justify="start">
+            <GridCol Span="12">
+                <div class="container-fluid bg-white rounded-3 overflow-auto" style="max-height: 400px">
+                    @if (Group == null || CurrentUser == null)
                     {
-                        <IndividualStudent Student="item"></IndividualStudent>
+                        <Skeleton Active=true></Skeleton>
+                    }
+                    else
+                    {
+                        @foreach (var item in Group.Users)
+                        {
+                            <IndividualStudent Student="item"></IndividualStudent>
+                        }
                     }
                 </div>
-            </div>
-            <div class="col-md-6 mt-3">
-                <h5 class="text-white">Список проведенных мероприятий</h5>
-                <div class="container-fluid bg-white rounded-3 scroll mb-3">
-                    <button class="row mt-3 mb-2 text-start border-0" data-bs-toggle="modal" data-bs-target="#eventsInfoModal" >
-                        <div class="col-md-3">
-                            @if (true)
-                            {
-                                <img class="img-fluid rounded" src="../img/no-img.jpg" alt="">
-                            }
-                        </div>
-                        <div class="col-md-8">
-                            <h5><a>Название</a></h5>  
-                            @*todo: Помтека добавить таблицу с мерроприятиями*@
-                            <p>Дата проведения</p>
-                        </div>
-                    </button>
-                    <hr class="m-0">
+            </GridCol>
+            <GridCol Span="12">
+                <div class="container-fluid bg-white rounded-3 overflow-auto" style="max-height: 400px">
+                    @if (Group == null || CurrentUser == null)
+                    {
+                        <Skeleton Active=true></Skeleton>
+                    }
+                    else
+                    {
+                        @foreach (var item in Group.Users)
+                        {
+                            <IndividualStudent Student="item"></IndividualStudent>
+                        }
+                    }
                 </div>
-            </div>
-            <div class="col-md-6 text-center">
-                <button class="btn btn-secondary">Экспорт</button>
-            </div>
-            <div class="col-md-6 text-center">
-                <button class="btn btn-secondary">Экспорт</button>
-            </div>
-        </div>
+            </GridCol>
+        </GridRow>
+        <GridRow Gutter="16" Style="margin-top: 10px" Align="middle" Justify="center">
+            <GridCol Span="12" Style="text-align: center">
+                <button class="btn btn-secondary" style="margin-right: 5px">Экспорт</button>
+                @if (_role != null)
+                {
+                    @if (CurrentUser.RoleId == _role.Id)
+                    {
+                        <button class="btn btn-secondary" style="margin-right: 5px; margin-left: 5px">Импорт</button>
+                        <button class="btn btn-secondary" style="margin-right: 2px; margin-left: 2px" @onclick="@ShowModalAddStudentWindow">Добавить</button>
+                    }
+                }
+            </GridCol>
+            <GridCol Span="12" Style="text-align: center">
+                <button class="btn btn-secondary" style="margin-right: 5px">Экспорт</button>
+                @if (_role != null)
+                {
+                    @if (CurrentUser.RoleId == _role.Id)
+                    {
+                        <button class="btn btn-secondary" style="margin-right: 5px; margin-left: 5px">Импорт</button>
+                        <button class="btn btn-secondary" style="margin-right: 2px; margin-left: 2px">Добавить</button>
+                    }
+                }
+            </GridCol>
+        </GridRow>
     </div>
 </div>
 
+@if (IsVisibleAddStudentModalWindow)
+{
+    <AddStudentModalWindow Visible="IsVisibleAddStudentModalWindow" ChangeVisible="ModalAddStudentWindowParam"></AddStudentModalWindow>
+}
 
 @code {
     [Parameter]
@@ -58,4 +99,67 @@
 
     [Parameter]
     public User? CurrentUser { get; set; }
+
+    [Inject]
+    public RoleService? RoleService { get; set; }
+
+    [Inject]
+    public GroupService? GroupService { get; set; }
+
+    [Inject]
+    public UserService? UserService { get; set; }
+
+    private bool IsVisibleAddStudentModalWindow { get; set; }
+
+    private List<Group>? _groups = new();
+
+    private List<Role>? _roles = new();
+
+    private List<User>? _users = new();
+
+    private Role _role;
+
+    public void ShowModalAddStudentWindow()
+    {
+        IsVisibleAddStudentModalWindow = !IsVisibleAddStudentModalWindow;
+    }
+
+    public void ModalAddStudentWindowParam(bool value)
+    {
+        IsVisibleAddStudentModalWindow = value;
+    }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        var group = await GroupService?.PostAsync()!;
+        _groups = JsonConvert.DeserializeObject<List<Group>>(group.Result.Items?.ToString() ?? string.Empty);
+
+        var users = await UserService?.PostAsync()!;
+        _users = JsonConvert.DeserializeObject<List<User>>(users.Result.Items?.ToString() ?? string.Empty);
+
+        var roles = await RoleService?.PostAsync()!;
+        _roles = JsonConvert.DeserializeObject<List<Role>>(roles.Result.Items?.ToString() ?? string.Empty);
+        _role = _roles.FirstOrDefault(i => i.Name == "Curator");
+
+        Group = _groups.FirstOrDefault(i => i.Id == 2);
+        CurrentUser = _users.FirstOrDefault(i => i.GroupId == 2);
+
+        if (Group.Users == null)
+        {
+            Group.Users = new();
+        }
+
+        if (Group.Users.Count == 0)
+        {
+            foreach (var item in _users)
+            {
+                Group.Users.Add(item);
+            }
+        }
+
+
+    }
 }

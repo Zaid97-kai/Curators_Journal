@@ -6,11 +6,7 @@
             {
                 @if (_curators == null || _curators.Count == 0)
                 {
-                    <div class="row">
-                        <div class="col-12">
-                            <p><em>Loading...</em></p>
-                        </div>
-                    </div>
+                    <Skeleton Active=true></Skeleton>
                 }
                 else
                 {

@@ -44,7 +44,14 @@ public partial class StatsCollect
     /// <summary>
     /// The groups
     /// </summary>
-    private List<Group>? _groups;
+    private List<Group>? _groups = new();
+
+    /// <summary>
+    /// The groups
+    /// </summary>
+    private List<Role> _roles;
+
+    private Role _role;
 
     /// <summary>
     /// On initialized as an asynchronous operation.
@@ -52,9 +59,17 @@ public partial class StatsCollect
     /// <returns>A Task representing the asynchronous operation.</returns>
     protected override async Task OnInitializedAsync()
     {
-        _groups = new List<Group>();
         var groups = await GroupService?.PostAsync()!;
         _groups = JsonConvert.DeserializeObject<List<Group>>(groups.Result.Items?.ToString() ?? string.Empty);
+
+        var roles = await GroupService?.PostAsync()!;
+        _roles = JsonConvert.DeserializeObject<List<Role>>(roles.Result.Items?.ToString() ?? string.Empty);
+        
+        if(_roles != null)
+        {
+            _role = _roles.FirstOrDefault(i => i.Id == CurrentUser.Role.Id);
+        }
+
     }
 
     /// <summary>
