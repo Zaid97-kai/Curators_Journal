@@ -4,7 +4,7 @@
        OnOk="@HandleOkAsync"
        OnCancel="@HandleCancel">
     <div class="container-fluid">
-        <Form Model="@_group"
+        <Form Model="@Group"
               OnFinish="OnFinish"
               OnFinishFailed="OnFinishFailed">
             <Row Gutter="24">
@@ -15,12 +15,12 @@
                     </FormItem>
                 </GridCol>
                 <GridCol Span="13">
-                    <FormItem Label="ФИО">
+                    <FormItem Label="Номер группы">
                         <Input @bind-Value="@context.Name" />
                     </FormItem>
                     <FormItem Label="Куратор">
                         <Select Mode="default"
-                                DataSource="@_curators"
+                                DataSource="@Curators"
                                 TItem="User"
                                 TItemValue="string"
                                 @bind-Value="@SelectedCuratorItem"

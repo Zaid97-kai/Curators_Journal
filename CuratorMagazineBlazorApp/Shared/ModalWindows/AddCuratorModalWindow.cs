@@ -17,7 +17,7 @@ public partial class AddCuratorModalWindow
     /// <summary>
     /// The curator
     /// </summary>
-    private User _curator = new();
+    private User? _curator = new();
 
     /// <summary>
     /// Gets or sets the change visible.

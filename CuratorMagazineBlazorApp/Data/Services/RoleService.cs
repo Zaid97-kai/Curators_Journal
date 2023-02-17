@@ -36,7 +36,7 @@ public class RoleService : BaseService
     /// </summary>
     /// <param name="role">The Role.</param>
     /// <returns>A Task&lt;BaseResponse`1&gt; representing the asynchronous operation.</returns>
-    public async Task<BaseResponse<Role>> CreateAsync(Role role)
+    public async Task<BaseResponse<Role>> CreateAsync(Role? role)
     {
         var ret = await SendAsync<Role>($"Create", HttpMethod.Post, role);
         return ret;
@@ -47,7 +47,7 @@ public class RoleService : BaseService
     /// </summary>
     /// <param name="role">The Role.</param>
     /// <returns>A Task&lt;BaseResponse`1&gt; representing the asynchronous operation.</returns>
-    public async Task<BaseResponse<Role>> PutAsync(Role role)
+    public async Task<BaseResponse<Role>> PutAsync(Role? role)
     {
         var ret = await SendAsync<Role>("", HttpMethod.Put, role);
         return ret;

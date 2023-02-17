@@ -38,7 +38,7 @@ public partial class MenuItemRole
     /// <summary>
     /// The edit cache
     /// </summary>
-    private IDictionary<string, (bool edit, API.Models.Entities.Domains.Role data)> _editCache = new Dictionary<string, (bool edit, API.Models.Entities.Domains.Role data)>();
+    private IDictionary<string, (bool edit, API.Models.Entities.Domains.Role? data)> _editCache = new Dictionary<string, (bool edit, API.Models.Entities.Domains.Role? data)>();
 
     /// <summary>
     /// The page index

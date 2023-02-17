@@ -60,7 +60,7 @@ public partial class AddVDEWModalWindow
     /// <summary>
     /// The vdew
     /// </summary>
-    private User _vdew = new();
+    private User? _vdew = new();
 
     /// <summary>
     /// The divisions

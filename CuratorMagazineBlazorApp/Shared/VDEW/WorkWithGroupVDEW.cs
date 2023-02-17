@@ -1,4 +1,4 @@
-﻿       using API.Models.Entities.Domains;
+﻿using API.Models.Entities.Domains;
 using Group = API.Models.Entities.Domains.Group;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
@@ -38,7 +38,7 @@ public partial class WorkWithGroupVDEW
     /// Gets or sets the groups.
     /// </summary>
     /// <value>The groups.</value>
-    private List<Group>? _groups { get; set; }
+    private List<Group>? Groups { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this instance is visible modal add group window.
@@ -53,7 +53,7 @@ public partial class WorkWithGroupVDEW
     protected override async Task OnInitializedAsync()
     {
         var ret = await GroupService?.PostAsync()!;
-        _groups = JsonConvert.DeserializeObject<List<Group>>(ret.Result.Items?.ToString() ?? string.Empty);
+        Groups = JsonConvert.DeserializeObject<List<Group>>(ret.Result.Items?.ToString() ?? string.Empty);
     }
 
     /// <summary>
@@ -64,6 +64,10 @@ public partial class WorkWithGroupVDEW
         IsVisibleModalAddGroupWindow = !IsVisibleModalAddGroupWindow;
     }
 
+    /// <summary>
+    /// Shows the modal add group window parameter.
+    /// </summary>
+    /// <param name="value">if set to <c>true</c> [value].</param>
     public void ShowModalAddGroupWindowParam(bool value)
     {
         IsVisibleModalAddGroupWindow = value;
