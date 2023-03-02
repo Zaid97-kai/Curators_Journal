@@ -9,22 +9,22 @@ using Shared.Bases.Dtos.BaseHelpers;
 namespace API.Controllers;
 
 /// <summary>
-/// Class DivisionController.
+/// Class EventController.
 /// Implements the <see cref="BaseController" />
 /// </summary>
 /// <seealso cref="BaseController" />
-public class DivisionController : BaseController
+public class EventController : ControllerBase
 {
     /// <summary>
     /// The repository
     /// </summary>
-    private readonly IDivisionRepository _repository;
+    private readonly IEventRepository _repository;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="DivisionController" /> class.
+    /// Initializes a new instance of the <see cref="EventController" /> class.
     /// </summary>
     /// <param name="repository">The repository.</param>
-    public DivisionController(IDivisionRepository repository)
+    public EventController(IEventRepository repository)
     {
         _repository = repository;
     }
@@ -35,14 +35,14 @@ public class DivisionController : BaseController
     /// <param name="id">The identifier.</param>
     /// <returns>BaseResponseActionResult&lt;Division&gt;.</returns>
     [HttpGet("{id:int}")]
-    public async Task<BaseResponseActionResult<Division>> Get(int id)
+    public async Task<BaseResponseActionResult<Event>> Get(int id)
     {
-        var division = await _repository.GetById(id);
+        var @event = await _repository.GetById(id);
 
-        if (division == null)
+        if (@event == null)
             return NotFound();
 
-        return division;
+        return @event;
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public class DivisionController : BaseController
     /// </summary>
     /// <param name="data">The data.</param>
     /// <returns>BaseResponseActionResult&lt;BaseDtoListResult&gt;.</returns>
-    [HttpPost("GetDivisions")]
+    [HttpPost("GetList")]
     public async Task<BaseResponseActionResult<BaseDtoListResult>> GetList([FromBody] BaseFilterGetList data)
     {
         var ret = await _repository.GetList(data);
@@ -58,37 +58,37 @@ public class DivisionController : BaseController
     }
 
     /// <summary>
-    /// Posts the specified division.
+    /// Posts the specified group events.
     /// </summary>
-    /// <param name="division">The division.</param>
+    /// <param name="groupEvent">The group events.</param>
     /// <returns>BaseResponseActionResult&lt;Division&gt;.</returns>
-    [HttpPost("CreateDivision")]
-    public async Task<BaseResponseActionResult<Division>> Create([FromBody] Division? division)
+    [HttpPost("CreateEvent")]
+    public async Task<BaseResponseActionResult<Event>> Create([FromBody] Event? @event)
     {
-        if (division == null)
+        if (@event == null)
         {
             return BadRequest();
         }
 
-        await _repository.Add(division);
-        return division;
+        await _repository.Add(@event);
+        return @event;
     }
 
     /// <summary>
-    /// Puts the specified division.
+    /// Puts the specified group events.
     /// </summary>
-    /// <param name="division">The division.</param>
+    /// <param name="groupEvent">The group events.</param>
     /// <returns>BaseResponseActionResult&lt;Division&gt;.</returns>
-    [HttpPut("UpdateDivision")]
-    public async Task<BaseResponseActionResult<Division>> Put([FromBody] Division? division)
+    [HttpPut("UpdateEvent")]
+    public async Task<BaseResponseActionResult<Event>> Put([FromBody] Event? @event)
     {
-        if (division == null)
+        if (@event == null)
         {
             return BadRequest();
         }
-        
-        await _repository.Update(division);
-        return Ok(division);
+
+        await _repository.Update(@event);
+        return Ok(@event);
     }
 
     /// <summary>
@@ -97,14 +97,14 @@ public class DivisionController : BaseController
     /// <param name="id">The identifier.</param>
     /// <returns>BaseResponseActionResult&lt;Division&gt;.</returns>
     [HttpDelete("{id}")]
-    public async Task<BaseResponseActionResult<Division>> Delete(int id)
+    public async Task<BaseResponseActionResult<Event>> Delete(int id)
     {
-        var division = _repository.Find(x => x.Id == id).Result.FirstOrDefault();
+        var @event = _repository.Find(x => x.Id == id).Result.FirstOrDefault();
 
-        if (division == null) 
+        if (@event == null)
             return NotFound();
 
-        await _repository.Remove(division);
-        return division;
+        await _repository.Remove(@event);
+        return @event;
     }
 }

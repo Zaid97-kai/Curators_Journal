@@ -1,4 +1,6 @@
-﻿@using API.Models.Entities.Domains
+﻿@using WebClient.Data.Services
+@using API.Models.Entities.Domains
+
 <div class="row mt-3 group rounded">
     <div class="col-md-1">
         <img class="rounded img-fluid mt-1" src="../img/no-img.jpg" alt="">
@@ -7,13 +9,11 @@
         <h5><a class="text-dark" style="text-decoration: none;">@Curator?.Name</a></h5>
         <p class="text-dark">@Curator?.Email</p>
         @*todo: Пометка придумать как достать куратора*@
-
     </div>
     <div class="col-md-3 text-end">
         <button type="button" class="btn btn-secondary me-2" @onclick="ShowModalChangeCuratorWindow">Изменить</button>
         <button type="button" class="btn btn-secondary" @onclick="ShowDeleteModalWindow">Удалить</button>
     </div>
-    <hr class="mb-0 mt-0">
 </div>
 @if (IsVisibleModalChangeCuratorWindow)
 {

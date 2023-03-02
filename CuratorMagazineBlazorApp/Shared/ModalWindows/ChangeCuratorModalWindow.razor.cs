@@ -127,11 +127,17 @@ public partial class ChangeCuratorModalWindow
         var gret = await GroupService?.PostAsync()!;
         _groups = JsonConvert.DeserializeObject<List<Group>>(gret.Result.Items?.ToString() ?? string.Empty);
 
-        SelectedDivisionValue = Curator?.Division?.Name;
-        SelectedDivision = Curator?.Division;
+        if(Curator != null && Curator.DivisionId != null )
+        {
+            SelectedDivisionValue = Curator?.Division?.Name;
+            SelectedDivision = Curator?.Division;
+        }
 
-        SelectedGroupValue = Curator?.Group?.Name;
-        SelectedGroup = Curator?.Group;
+        if(Curator != null && Curator.GroupId != null )
+        {
+            SelectedGroupValue = Curator?.Group?.Name;
+            SelectedGroup = Curator?.Group;
+        }
     }
 
     /// <summary>

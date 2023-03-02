@@ -14,6 +14,8 @@ builder.Services.AddSingleton<DivisionService>();
 builder.Services.AddSingleton<GroupService>();
 builder.Services.AddSingleton<ParentService>();
 builder.Services.AddSingleton<RoleService>();
+builder.Services.AddSingleton<GroupEventService>();
+builder.Services.AddSingleton<EventService>();
 #endregion
 
 

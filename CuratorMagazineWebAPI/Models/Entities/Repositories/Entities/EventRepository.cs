@@ -6,22 +6,16 @@ using Microsoft.EntityFrameworkCore;
 using Shared.Bases.Dtos.BaseHelpers;
 using X.PagedList;
 
+
 namespace API.Models.Entities.Repositories.Entities;
 
-/// <summary>
-/// Class DivisionRepository.
-/// Implements the <see cref="API.Models.Entities.Repositories.Entities.BaseRepository{API.Models.Entities.Domains.Division}" />
-/// Implements the <see cref="IDivisionRepository" />
-/// </summary>
-/// <seealso cref="API.Models.Entities.Repositories.Entities.BaseRepository{API.Models.Entities.Domains.Division}" />
-/// <seealso cref="IDivisionRepository" />
-public class DivisionRepository : BaseRepository<Division>, IDivisionRepository
+public class EventRepository : BaseRepository<Event>, IEventRepository
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="DivisionRepository"/> class.
+    /// Initializes a new instance of the <see cref="EventRepository"/> class.
     /// </summary>
     /// <param name="context">The context.</param>
-    public DivisionRepository(CuratorMagazineContext context) : base(context)
+    public EventRepository(CuratorMagazineContext context) : base(context)
     {
     }
 
@@ -50,9 +44,9 @@ public class DivisionRepository : BaseRepository<Division>, IDivisionRepository
     /// </summary>
     /// <param name="filter">The filter.</param>
     /// <returns>IQueryable&lt;User&gt;.</returns>
-    protected override IQueryable<Division> GetQueue(BaseFilterGetList filter)
+    protected override IQueryable<Event> GetQueue(BaseFilterGetList filter)
     {
-        var queue = Context.Divisions.AsQueryable();
+        var queue = Context.Events.AsQueryable();
 
         var queries = (filter.query ?? "").Split(' ', StringSplitOptions.RemoveEmptyEntries);
         queue = queries.Aggregate(queue, (current, q) => current.Where(w => EF.Functions.ILike(w.Name, $"%{q}%")));

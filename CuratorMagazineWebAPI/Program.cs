@@ -29,6 +29,8 @@ builder.Services.AddTransient<IGroupRepository, GroupRepository>();
 builder.Services.AddTransient<IParentRepository, ParentRepository>();
 builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IEventRepository, EventRepository>();
+builder.Services.AddTransient<IGroupEventRepository, GroupEventRepository>();
 #endregion
 
 builder.Services.AddDataProtection().PersistKeysToDbContext<CuratorMagazineContext>();

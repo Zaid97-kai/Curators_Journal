@@ -4,11 +4,7 @@
         <div class="overflow-auto container scroll text-white">
             @if (_groups == null || _groups.Count == 0)
             {
-                <div class="row">
-                    <div class="col-12">
-                        <p><em>Loading...</em></p>
-                    </div>
-                </div>
+                <Skeleton Active=true></Skeleton>
             }
             else
             {
@@ -21,8 +17,11 @@
         <div class="row">
             <div class="row-md text-center mb-2">
                 <hr>
+                @if(CurrentUser.Role.Id == _role.Id)
+                {
+                    <a href="../Curator/cur3.html" type="button" class="btn btn-secondary">Добавить</a>
+                }
             </div>
         </div>
     </div>
 </div>
-

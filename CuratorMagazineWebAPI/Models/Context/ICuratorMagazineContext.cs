@@ -26,6 +26,16 @@ public interface ICuratorMagazineContext
     /// <value>The groups.</value>
     public DbSet<Group> Groups { get; set; }
     /// <summary>
+    /// Gets or sets the groups.
+    /// </summary>
+    /// <value>The groups.</value>
+    public DbSet<GroupEvent> GroupEvents { get; set; }
+    /// <summary>
+    /// Gets or sets the events.
+    /// </summary>
+    /// <value>The events.</value>
+    public DbSet<Event> Events { get; set; }
+    /// <summary>
     /// Gets or sets the parents.
     /// </summary>
     /// <value>The parents.</value>

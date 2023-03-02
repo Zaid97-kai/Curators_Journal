@@ -116,4 +116,16 @@ public class User
     /// </summary>
     /// <value>The division.</value>
     public virtual Division? Division { get; set; }
+
+    /// <summary>
+    /// Gets or sets the event identifier.
+    /// </summary>
+    /// <value>The event identifier.</value>
+    public int? EventId { get; set; }
+
+    /// <summary>
+    /// Gets or sets the division.
+    /// </summary>
+    /// <value>The event.</value>
+    public virtual Event? Event { get; set; }
 }
