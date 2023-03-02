@@ -1,7 +1,7 @@
 ﻿<div class="container my-4 bg-secondary bg-opacity-50">
     <div class="container-fluid">
         <BodySearchBar></BodySearchBar>
-        <div class="overflow-auto container">
+        <div class="overflow-auto container" style="max-height: 700px">
             @if(CurrentUser != null)
             {
                 @if (_users == null || _users.Count == 0)

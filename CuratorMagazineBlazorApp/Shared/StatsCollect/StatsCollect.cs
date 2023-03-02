@@ -67,7 +67,7 @@ public partial class StatsCollect
         
         if(_roles != null)
         {
-            _role = _roles.FirstOrDefault(i => i.Id == CurrentUser.Role.Id);
+            _role = _roles.FirstOrDefault(i => i.Name == "Curator"); ;
         }
 
     }

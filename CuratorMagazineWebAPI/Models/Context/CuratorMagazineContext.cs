@@ -1,5 +1,6 @@
 ﻿using API.Models.Entities.Domains;
 using API.Models.EntityTypeConfigurations;
+using Castle.Components.DictionaryAdapter;
 using Microsoft.EntityFrameworkCore;
 using DataProtectionKey = Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey;
 
@@ -64,6 +65,12 @@ public sealed class CuratorMagazineContext : DbContext, ICuratorMagazineContext,
             Name = "Curator"
         };
 
+        var studentRole = new Role()
+        {
+            Id = 3,
+            Name = "Student"
+        };
+
         #endregion
 
         #region Divisions
@@ -110,6 +117,77 @@ public sealed class CuratorMagazineContext : DbContext, ICuratorMagazineContext,
             Name = "ТК"
         };
 
+        #endregion
+
+        #region GroupEvents
+
+        var firstGroupEvent = new GroupEvent()
+        {   
+            Id = 1,
+            GroupId = 2,
+            EventId = 1
+        };
+
+        var secondGroupEvent = new GroupEvent()
+        {
+            Id = 2,
+            GroupId = 2,
+            EventId = 2
+        };
+
+        var thirdGroupEvent = new GroupEvent()
+        {
+            Id = 3,
+            GroupId = 2,
+            EventId = 2
+        };
+
+        var fourthGroupEvent = new GroupEvent()
+        {
+            Id = 4,
+            GroupId = 2,
+            EventId = 2
+        };
+
+        var fifthGroupEvent = new GroupEvent()
+        {
+            Id = 5,
+            GroupId = 2,
+            EventId = 2
+        };
+        #endregion
+
+        #region Events
+
+        var firstEvent = new Event()
+        {
+            Id = 1,
+            Name = "Студвесна"
+        };
+
+        var secondEvent = new Event()
+        {
+            Id = 2,
+            Name = "Первый код"
+        };
+
+        var thirdEvent = new Event()
+        {
+            Id = 3,
+            Name = "Мистер КИТ"
+        };
+
+        var fourthEvent = new Event()
+        {
+            Id = 4,
+            Name = "Мисс КИТ"
+        };
+
+        var fifthEvent = new Event()
+        {
+            Id = 5,
+            Name = "Квартирник"
+        };
         #endregion
 
         #region Groups
@@ -224,6 +302,23 @@ public sealed class CuratorMagazineContext : DbContext, ICuratorMagazineContext,
             FatherId = firstParent.Id,
             MotherId = secondParent.Id
         };
+            
+        var fourthUser = new User()
+        {
+            Id = 4,
+            Name = "Мингалиев Заид Зульфатович",
+            Phone = "9(421)001-31-15",
+            Address = "342340, Волгоградская область, город Москва, пл. Ленина, 80",
+            //BirthDate = new DateTime(2003, 11, 20),
+            //Division = sixthDivision,
+            DivisionId = sixthDivision.Id,
+            Email = "treledoddoiseu-5434@yopmail.com",
+            Password = "Рахимов Ранис Рамилевич",
+            RoleId = studentRole.Id,
+            GroupId = fourthGroup.Id,
+            FatherId = firstParent.Id,
+            MotherId = secondParent.Id
+        };
 
         #endregion
 
@@ -232,6 +327,8 @@ public sealed class CuratorMagazineContext : DbContext, ICuratorMagazineContext,
         modelBuilder.Entity<Group>().HasData(firstGroup, secondGroup, thirdGroup, fourthGroup, fifthGroup, sixthGroup, seventhGroup);
         modelBuilder.Entity<Parent>().HasData(firstParent, secondParent);
         modelBuilder.Entity<User>().HasData(firstUser, secondUser, thirdUser);
+        modelBuilder.Entity<Event>().HasData(firstEvent, secondEvent, thirdEvent, fourthEvent, fifthEvent);
+        modelBuilder.Entity<GroupEvent>().HasData(firstGroupEvent, secondGroupEvent, thirdGroupEvent, fourthGroupEvent, fifthGroupEvent);
 
         base.OnModelCreating(modelBuilder);
     }
@@ -277,6 +374,18 @@ public sealed class CuratorMagazineContext : DbContext, ICuratorMagazineContext,
     /// </summary>
     /// <value>The groups.</value>
     public DbSet<Group> Groups { get; set; }
+
+    /// <summary>
+    /// Gets or sets the group events.
+    /// </summary>
+    /// <value>The group events.</value>
+    public DbSet<GroupEvent> GroupEvents { get; set; }
+
+    /// <summary>
+    /// Gets or sets the events.
+    /// </summary>
+    /// <value>The events.</value>
+    public DbSet<Event> Events { get; set; }
 
     /// <summary>
     /// Gets or sets the parents.

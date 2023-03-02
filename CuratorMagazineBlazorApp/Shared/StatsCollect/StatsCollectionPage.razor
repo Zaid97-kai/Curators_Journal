@@ -53,10 +53,18 @@
                     }
                     else
                     {
-                        @foreach (var item in Group.Users)
+                        if(_events != null)
                         {
-                            <IndividualStudent Student="item"></IndividualStudent>
+                            @foreach (var item in _events)
+                            {
+                                <IndividualEvent Event="item"></IndividualEvent>
+                            }
                         }
+                        else
+                        {
+                            <p>Pusto</p>
+                        }
+                        
                     }
                 </div>
             </GridCol>
@@ -109,6 +117,12 @@
     [Inject]
     public UserService? UserService { get; set; }
 
+    [Inject]
+    public GroupEventService? GroupEventService { get; set; }
+
+    [Inject]
+    public EventService? EventService { get; set; }
+
     private bool IsVisibleAddStudentModalWindow { get; set; }
 
     private List<Group>? _groups = new();
@@ -116,6 +130,10 @@
     private List<Role>? _roles = new();
 
     private List<User>? _users = new();
+
+    private List<Event>? _events = new();
+
+    private List<GroupEvent>? _groupEvents = new();
 
     private Role _role;
 
@@ -142,10 +160,36 @@
 
         var roles = await RoleService?.PostAsync()!;
         _roles = JsonConvert.DeserializeObject<List<Role>>(roles.Result.Items?.ToString() ?? string.Empty);
+
+        var events = await EventService?.PostAsync()!;
+        _events = JsonConvert.DeserializeObject<List<Event>>(events.Result.Items?.ToString() ?? string.Empty);
+
+        var groupEvents = await GroupEventService?.PostAsync()!;
+        _groupEvents = JsonConvert.DeserializeObject<List<GroupEvent>>(groupEvents.Result.Items?.ToString() ?? string.Empty);
+
         _role = _roles.FirstOrDefault(i => i.Name == "Curator");
 
         Group = _groups.FirstOrDefault(i => i.Id == 2);
         CurrentUser = _users.FirstOrDefault(i => i.GroupId == 2);
+
+        _groupEvents = _groupEvents.Where(i => i.GroupId == Group.Id).ToList();
+
+        var displayEvents = new List<Event>();
+        foreach(var groupEvent in _groupEvents)
+        {
+            foreach(var @event in _events)
+            {
+                if (groupEvent.Id == @event.Id)
+                {
+                    displayEvents.Add(@event);
+                }
+            }
+        }
+
+        if(displayEvents != null)
+        {
+            _events = displayEvents;
+        }
 
         if (Group.Users == null)
         {
