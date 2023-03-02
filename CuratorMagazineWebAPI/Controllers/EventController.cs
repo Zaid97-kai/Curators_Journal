@@ -13,7 +13,7 @@ namespace API.Controllers;
 /// Implements the <see cref="BaseController" />
 /// </summary>
 /// <seealso cref="BaseController" />
-public class EventController : ControllerBase
+public class EventController : BaseController
 {
     /// <summary>
     /// The repository

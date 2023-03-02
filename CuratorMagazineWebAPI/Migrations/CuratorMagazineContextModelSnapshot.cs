@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace CuratorMagazineWebAPI.Migrations
+namespace API.Migrations
 {
     [DbContext(typeof(CuratorMagazineContext))]
     partial class CuratorMagazineContextModelSnapshot : ModelSnapshot

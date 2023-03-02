@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace CuratorMagazineWebAPI.Migrations
+namespace API.Migrations
 {
     public partial class InitialCreate : Migration
     {
@@ -35,6 +35,22 @@ namespace CuratorMagazineWebAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Divisions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Comment = table.Column<string>(type: "text", nullable: true),
+                    DateEvent = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    EventPhoto = table.Column<byte[]>(type: "bytea", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,6 +95,30 @@ namespace CuratorMagazineWebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GroupEvents",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    GroupId = table.Column<int>(type: "integer", nullable: true),
+                    EventId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GroupEvents", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GroupEvents_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_GroupEvents_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -95,7 +135,8 @@ namespace CuratorMagazineWebAPI.Migrations
                     FatherId = table.Column<int>(type: "integer", nullable: true),
                     GroupId = table.Column<int>(type: "integer", nullable: true),
                     RoleId = table.Column<int>(type: "integer", nullable: true),
-                    DivisionId = table.Column<int>(type: "integer", nullable: true)
+                    DivisionId = table.Column<int>(type: "integer", nullable: true),
+                    EventId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -106,6 +147,11 @@ namespace CuratorMagazineWebAPI.Migrations
                         principalTable: "Divisions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Users_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Users_Groups_GroupId",
                         column: x => x.GroupId,
@@ -147,6 +193,18 @@ namespace CuratorMagazineWebAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Events",
+                columns: new[] { "Id", "Comment", "DateEvent", "EventPhoto", "Name" },
+                values: new object[,]
+                {
+                    { 1, null, null, null, "Студвесна" },
+                    { 2, null, null, null, "Первый код" },
+                    { 3, null, null, null, "Мистер КИТ" },
+                    { 4, null, null, null, "Мисс КИТ" },
+                    { 5, null, null, null, "Квартирник" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Groups",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
@@ -180,19 +238,46 @@ namespace CuratorMagazineWebAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Address", "BirthDate", "DivisionId", "Email", "FatherId", "GroupId", "MotherId", "Name", "Password", "Phone", "ProfilePhoto", "RoleId" },
+                table: "GroupEvents",
+                columns: new[] { "Id", "EventId", "GroupId" },
                 values: new object[,]
                 {
-                    { 1, "342340, Волгоградская область, город Москва, пл. Ленина, 80", null, 1, "ripogroyippe-2863@yopmail.com", null, null, null, "Administrator", "Administrator", "9(421)001-31-15", null, 1 },
-                    { 2, "383478, Брянская область, город Люберцы, ул. Ломоносова, 72", null, 6, "croummauroicegeu-1550@yopmail.com", null, null, null, "Associate Director", "Associate Director", "608(51)713-94-41", null, 2 },
-                    { 3, "342340, Волгоградская область, город Москва, пл. Ленина, 80", null, 6, "treledoddoiseu-5434@yopmail.com", 1, 4, 2, "Рахимов Ранис Рамилевич", "Рахимов Ранис Рамилевич", "9(421)001-31-15", null, 3 }
+                    { 1, 1, 2 },
+                    { 2, 2, 2 },
+                    { 3, 2, 2 },
+                    { 4, 2, 2 },
+                    { 5, 2, 2 }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Address", "BirthDate", "DivisionId", "Email", "EventId", "FatherId", "GroupId", "MotherId", "Name", "Password", "Phone", "ProfilePhoto", "RoleId" },
+                values: new object[,]
+                {
+                    { 1, "342340, Волгоградская область, город Москва, пл. Ленина, 80", null, 1, "ripogroyippe-2863@yopmail.com", null, null, null, null, "Administrator", "Administrator", "9(421)001-31-15", null, 1 },
+                    { 2, "383478, Брянская область, город Люберцы, ул. Ломоносова, 72", null, 6, "croummauroicegeu-1550@yopmail.com", null, null, null, null, "Associate Director", "Associate Director", "608(51)713-94-41", null, 2 },
+                    { 3, "342340, Волгоградская область, город Москва, пл. Ленина, 80", null, 6, "treledoddoiseu-5434@yopmail.com", null, 1, 4, 2, "Рахимов Ранис Рамилевич", "Рахимов Ранис Рамилевич", "9(421)001-31-15", null, 3 }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GroupEvents_EventId",
+                table: "GroupEvents",
+                column: "EventId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GroupEvents_GroupId",
+                table: "GroupEvents",
+                column: "GroupId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_DivisionId",
                 table: "Users",
                 column: "DivisionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_EventId",
+                table: "Users",
+                column: "EventId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_FatherId",
@@ -221,10 +306,16 @@ namespace CuratorMagazineWebAPI.Migrations
                 name: "DataProtectionKeys");
 
             migrationBuilder.DropTable(
+                name: "GroupEvents");
+
+            migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Divisions");
+
+            migrationBuilder.DropTable(
+                name: "Events");
 
             migrationBuilder.DropTable(
                 name: "Groups");

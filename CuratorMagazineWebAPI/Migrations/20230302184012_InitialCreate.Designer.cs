@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace CuratorMagazineWebAPI.Migrations
+namespace API.Migrations
 {
     [DbContext(typeof(CuratorMagazineContext))]
-    [Migration("20230221134744_Add_Event_GroupEvent")]
-    partial class Add_Event_GroupEvent
+    [Migration("20230302184012_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
