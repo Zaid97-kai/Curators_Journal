@@ -1,5 +1,4 @@
-﻿using API.Data;
-using API.Models.Context;
+﻿using API.Models.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,22 +17,12 @@ public static class PersistenceServiceCollectionExtensions
     /// <returns>IServiceCollection.</returns>
     public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
-        var firstConnectionString = configuration["ConnectionStrings:DbConnection"];
-        var secondConnectionString = configuration["ConnectionStrings:AuthDbConnection"];
+        var connectionString = configuration["ConnectionStrings:DbConnection"];
 
         services.AddDbContext<CuratorMagazineContext>(options =>
         {
-            options.UseNpgsql(firstConnectionString);
+            options.UseNpgsql(connectionString);
         });
-        
-        services.AddDbContext<ApplicationDbContext>(options =>
-        {
-            options.UseNpgsql(secondConnectionString);
-        });
-
-        services.AddIdentity<ApplicationUser, ApplicationRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddDefaultTokenProviders();
 
         services.AddScoped<ICuratorMagazineContext>(provider => provider.GetService<CuratorMagazineContext>()!);
         return services;
