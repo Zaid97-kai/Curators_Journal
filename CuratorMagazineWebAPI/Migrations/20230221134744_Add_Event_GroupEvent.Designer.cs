@@ -3,6 +3,7 @@ using System;
 using API.Models.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CuratorMagazineWebAPI.Migrations
 {
     [DbContext(typeof(CuratorMagazineContext))]
-    partial class CuratorMagazineContextModelSnapshot : ModelSnapshot
+    [Migration("20230221134744_Add_Event_GroupEvent")]
+    partial class Add_Event_GroupEvent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

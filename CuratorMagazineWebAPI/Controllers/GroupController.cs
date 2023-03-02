@@ -41,7 +41,7 @@ public class GroupController : BaseController
     /// </summary>
     /// <param name="id">The identifier.</param>
     /// <returns>BaseResponseActionResult&lt;Group&gt;.</returns>
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public async Task<BaseResponseActionResult<Group>> Get(int id)
     {
         var group = await _repository.GetById(id);
