@@ -9,6 +9,7 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Copyright>Zaid97-kai</Copyright>
 		<RepositoryUrl>https://github.com/Zaid97-kai/CuratorMagazine</RepositoryUrl>
+		<DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
 	</PropertyGroup>
 
   <ItemGroup>

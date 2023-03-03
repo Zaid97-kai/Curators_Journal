@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  api:
+    image: ${DOCKER_REGISTRY-}api
+    build:
+      context: .
+      dockerfile: CuratorMagazineWebAPI/Dockerfile
+
+  webclient:
+    image: ${DOCKER_REGISTRY-}webclient
+    build:
+      context: .
+      dockerfile: CuratorMagazineBlazorApp/Dockerfile
+

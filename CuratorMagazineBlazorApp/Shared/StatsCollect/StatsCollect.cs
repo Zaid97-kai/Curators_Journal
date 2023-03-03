@@ -49,9 +49,12 @@ public partial class StatsCollect
     /// <summary>
     /// The groups
     /// </summary>
-    private List<Role> _roles;
+    private List<Role>? _roles;
 
-    private Role _role;
+    /// <summary>
+    /// The role
+    /// </summary>
+    private Role? _role;
 
     /// <summary>
     /// On initialized as an asynchronous operation.
@@ -69,7 +72,6 @@ public partial class StatsCollect
         {
             _role = _roles.FirstOrDefault(i => i.Name == "Curator"); ;
         }
-
     }
 
     /// <summary>
