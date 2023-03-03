@@ -17,7 +17,7 @@
         <div class="row">
             <div class="row-md text-center mb-2">
                 <hr>
-                @if(CurrentUser.Role.Id == _role.Id)
+                @if(CurrentUser!.Role!.Id == _role!.Id)
                 {
                     <a href="../Curator/cur3.html" type="button" class="btn btn-secondary">Добавить</a>
                 }

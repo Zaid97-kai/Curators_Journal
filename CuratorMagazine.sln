@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedUITests", "Automat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{6AB590E7-A7CB-43E8-8B6F-A60A8D4DFD6C}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8A580D9A-0DA0-4AD6-924A-016778F7FE9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6AB590E7-A7CB-43E8-8B6F-A60A8D4DFD6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AB590E7-A7CB-43E8-8B6F-A60A8D4DFD6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AB590E7-A7CB-43E8-8B6F-A60A8D4DFD6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A580D9A-0DA0-4AD6-924A-016778F7FE9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A580D9A-0DA0-4AD6-924A-016778F7FE9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A580D9A-0DA0-4AD6-924A-016778F7FE9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A580D9A-0DA0-4AD6-924A-016778F7FE9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
