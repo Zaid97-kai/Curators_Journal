@@ -1,10 +1,10 @@
 ﻿@using API.Models.Entities.Domains
-<Modal Title="@("Добавление")"
+<Modal Title="@("Изменение")"
        Visible="@Visible"
        OnOk="@HandleOk"
        OnCancel="@HandleCancel">
     <div class="container-fluid">
-        <Form Model="@_event"
+        <Form Model="@Event"
               OnFinish="OnFinish"
               OnFinishFailed="OnFinishFailed">
             <Row Gutter="24">

@@ -31,7 +31,7 @@
         </GridRow>
         <GridRow Gutter="16" Align="middle" Justify="start">
             <GridCol Span="12">
-                <div class="container-fluid bg-white rounded-3 overflow-auto" style="max-height: 400px">
+                <div class="container-fluid bg-white rounded-3 overflow-auto" style="max-height: 400px; min-height: 400px">
                     @if (Group == null || CurrentUser == null)
                     {
                         <Skeleton Active=true></Skeleton>
@@ -46,7 +46,7 @@
                 </div>
             </GridCol>
             <GridCol Span="12">
-                <div class="container-fluid bg-white rounded-3 overflow-auto" style="max-height: 400px">
+                <div class="container-fluid bg-white rounded-3 overflow-auto" style="max-height: 400px; min-height: 400px">
                     @if (Group == null || CurrentUser == null)
                     {
                         <Skeleton Active=true></Skeleton>
@@ -88,7 +88,7 @@
                     @if (CurrentUser.RoleId == _role.Id)
                     {
                         <button class="btn btn-secondary" style="margin-right: 5px; margin-left: 5px">Импорт</button>
-                        <button class="btn btn-secondary" style="margin-right: 2px; margin-left: 2px">Добавить</button>
+                        <button class="btn btn-secondary" style="margin-right: 2px; margin-left: 2px" @onclick="@ShowModalAddEventWindow">Добавить</button>
                     }
                 }
             </GridCol>
@@ -96,114 +96,16 @@
     </div>
 </div>
 
+
 @if (IsVisibleAddStudentModalWindow)
 {
     <AddStudentModalWindow Visible="IsVisibleAddStudentModalWindow" ChangeVisible="ModalAddStudentWindowParam"></AddStudentModalWindow>
 }
+@if (IsVisibleAddEventModalWindow)
+{
+    <AddEventModalWindow Visible="IsVisibleAddEventModalWindow" ChangeVisible="ModalAddEventWindowParam"></AddEventModalWindow>
+}
 
 @code {
-    [Parameter]
-    public Group? Group { get; set; }
-
-    [Parameter]
-    public User? CurrentUser { get; set; }
-
-    [Inject]
-    public RoleService? RoleService { get; set; }
-
-    [Inject]
-    public GroupService? GroupService { get; set; }
-
-    [Inject]
-    public UserService? UserService { get; set; }
-
-    [Inject]
-    public GroupEventService? GroupEventService { get; set; }
-
-    [Inject]
-    public EventService? EventService { get; set; }
-
-    private bool IsVisibleAddStudentModalWindow { get; set; }
-
-    private List<Group>? _groups = new();
-
-    private List<Role>? _roles = new();
-
-    private List<User>? _users = new();
-
-    private List<Event>? _events = new();
-
-    private List<GroupEvent>? _groupEvents = new();
-
-    private Role _role;
-
-    public void ShowModalAddStudentWindow()
-    {
-        IsVisibleAddStudentModalWindow = !IsVisibleAddStudentModalWindow;
-    }
-
-    public void ModalAddStudentWindowParam(bool value)
-    {
-        IsVisibleAddStudentModalWindow = value;
-    }
-
-
-
-    protected override async Task OnInitializedAsync()
-    {
-
-        var group = await GroupService?.PostAsync()!;
-        _groups = JsonConvert.DeserializeObject<List<Group>>(group.Result.Items?.ToString() ?? string.Empty);
-
-        var users = await UserService?.PostAsync()!;
-        _users = JsonConvert.DeserializeObject<List<User>>(users.Result.Items?.ToString() ?? string.Empty);
-
-        var roles = await RoleService?.PostAsync()!;
-        _roles = JsonConvert.DeserializeObject<List<Role>>(roles.Result.Items?.ToString() ?? string.Empty);
-
-        var events = await EventService?.PostAsync()!;
-        _events = JsonConvert.DeserializeObject<List<Event>>(events.Result.Items?.ToString() ?? string.Empty);
-
-        var groupEvents = await GroupEventService?.PostAsync()!;
-        _groupEvents = JsonConvert.DeserializeObject<List<GroupEvent>>(groupEvents.Result.Items?.ToString() ?? string.Empty);
-
-        _role = _roles.FirstOrDefault(i => i.Name == "Curator");
-
-        Group = _groups.FirstOrDefault(i => i.Id == 2);
-        CurrentUser = _users.FirstOrDefault(i => i.GroupId == 2);
-
-        _groupEvents = _groupEvents.Where(i => i.GroupId == Group.Id).ToList();
-
-        var displayEvents = new List<Event>();
-        foreach(var groupEvent in _groupEvents)
-        {
-            foreach(var @event in _events)
-            {
-                if (groupEvent.Id == @event.Id)
-                {
-                    displayEvents.Add(@event);
-                }
-            }
-        }
-
-        if(displayEvents != null)
-        {
-            _events = displayEvents;
-        }
-
-        if (Group.Users == null)
-        {
-            Group.Users = new();
-        }
-
-        if (Group.Users.Count == 0)
-        {
-            foreach (var item in _users)
-            {
-                Group.Users.Add(item);
-            }
-        }
-
-
-    }
+    
 }
