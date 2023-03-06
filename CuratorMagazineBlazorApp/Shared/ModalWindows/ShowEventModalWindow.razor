@@ -1,15 +1,15 @@
 ﻿@using API.Models.Entities.Domains
-<Modal Title="@("Добавление")"
+<Modal Title="@("Просмотр")"
        Visible="@Visible"
-       OnOk="@HandleOk"
-       OnCancel="@HandleCancel">
+       OnCancel="@HandleCancel"
+       OkButtonProps="new AntDesign.ButtonProps(){ Disabled = true, Ghost = true}">
     <div class="container-fluid">
-        <Form Model="@_event"
+        <Form Model="@Event"
               OnFinish="OnFinish"
               OnFinishFailed="OnFinishFailed">
             <Row Gutter="24">
                 <GridCol Span="11">
-                    @if (context.EventPhoto == null)
+                    @if(context.EventPhoto == null)
                     {
                         <img class="img-thumbnail" height="400px" width="400px" src="../img/no-img.jpg" alt="">
                     }
@@ -19,20 +19,21 @@
                 </GridCol>
                 <GridCol Span="13">
                     <FormItem Label="Название" Style="margin-bottom: 0.3em">
-                        <Input @bind-Value="@context.Name" />
+                        <Text>@context.Name</Text>
                     </FormItem>
                     <FormItem Label="Дата проведения" Style="margin-bottom: 0.3em">
-                        <Input @bind-Value="@context.DateEvent" />
+                        <Text>@context.DateEvent</Text>
                     </FormItem>
                     <FormItem Label="Комментарий" Style="margin-bottom: 0.3em">
-                        <Input @bind-Value="@context.Comment" />
+                        <Text>@context.Comment</Text>
                     </FormItem>
-                    <FormItem Label="Участников" Style="margin-bottom: 0.3em">
+                    <FormItem Label="Кол-во участников" Style="margin-bottom: 0.3em">
                         @if (context.Users != null)
                         {
-                            <Input @bind-Value="@context.Name" />
+                            <Text>@context.Users.Count</Text>
                         }
                     </FormItem>
+                    
                 </GridCol>
             </Row>
         </Form>

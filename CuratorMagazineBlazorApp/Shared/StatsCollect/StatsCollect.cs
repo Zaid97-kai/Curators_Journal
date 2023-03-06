@@ -40,6 +40,13 @@ public partial class StatsCollect
     /// <value>The group service.</value>
     [Inject]
     public GroupService? GroupService { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the group service.
+    /// </summary>
+    /// <value>The group service.</value>
+    [Inject]
+    public RoleService? RoleService { get; set; }
 
     /// <summary>
     /// The groups
@@ -65,7 +72,7 @@ public partial class StatsCollect
         var groups = await GroupService?.PostAsync()!;
         _groups = JsonConvert.DeserializeObject<List<Group>>(groups.Result.Items?.ToString() ?? string.Empty);
 
-        var roles = await GroupService?.PostAsync()!;
+        var roles = await RoleService?.PostAsync()!;
         _roles = JsonConvert.DeserializeObject<List<Role>>(roles.Result.Items?.ToString() ?? string.Empty);
         
         if(_roles != null)

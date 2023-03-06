@@ -49,6 +49,10 @@
         {
             await GroupService?.DeleteAsync(ObjectId);
         }
+        else if (Object.GetType() == typeof(Event))
+        {
+            await GroupService?.DeleteAsync(ObjectId);
+        }
         else
         {
             await ParentService?.DeleteAsync(ObjectId);
@@ -79,6 +83,11 @@
         {
             ObjectName = (Object as Group).Name;
             ObjectId = (Object as Group).Id;
+        }
+        else if (Object.GetType() == typeof(Event))
+        {
+            ObjectName = (Object as Event).Name;
+            ObjectId = (Object as Event).Id;
         }
         else
         {

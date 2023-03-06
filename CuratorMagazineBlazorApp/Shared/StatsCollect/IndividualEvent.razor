@@ -28,18 +28,18 @@
         <hr class="m-0">
     </GridCol>
 </GridRow>
-@*@if (IsVisibleEventInfoModalWindow)
+@if (IsVisibleEventInfoModalWindow)
 {
-    <ShowStudentModalWindow Student="Event" Visible="IsVisibleEventInfoModalWindow" ChangeVisible="ModalEventInfoWindowParam"></ShowStudentModalWindow>
+    <ShowEventModalWindow Event="Event" Visible="IsVisibleEventInfoModalWindow" ChangeVisible="ModalEventInfoWindowParam"></ShowEventModalWindow>
 }
 @if (IsVisibleChangeEventModalWindow)
 {
-    <ChangeStudentModalWindow Student="Event" Visible="IsVisibleChangeEventModalWindow" ChangeVisible="ModalChangeEventWindowParam"></ChangeStudentModalWindow>
+    <ChangeEventModalWindow Event="Event" Visible="IsVisibleChangeEventModalWindow" ChangeVisible="ModalChangeEventWindowParam"></ChangeEventModalWindow>
 }
 @if (IsVisibleDeleteEventModalWindow)
 {
     <DeleteModalWindow Object="Event" Visible="IsVisibleDeleteEventModalWindow" ChangeVisible="ModalDeleteEventWindowParam"></DeleteModalWindow>
-}*@
+}
 
 @code {
     [Parameter]

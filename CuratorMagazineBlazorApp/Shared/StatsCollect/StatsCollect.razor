@@ -17,10 +17,15 @@
         <div class="row">
             <div class="row-md text-center mb-2">
                 <hr>
-                @if(CurrentUser!.Role!.Id == _role!.Id)
+                @if(_role == null)
+                {
+                    <Skeleton Active=true></Skeleton>
+                }
+                else if (CurrentUser!.Role!.Id == _role!.Id)
                 {
                     <a href="../Curator/cur3.html" type="button" class="btn btn-secondary">Добавить</a>
                 }
+                
             </div>
         </div>
     </div>
