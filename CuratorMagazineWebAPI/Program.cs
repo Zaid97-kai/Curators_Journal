@@ -1,9 +1,9 @@
 using API.DependencyInjection;
-using API.Models.Context;
 using API.Models.Entities.Repositories.Entities;
 using API.Models.Entities.Repositories.Interfaces;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.OpenApi.Models;
+using Persistence.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,8 +32,6 @@ builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IEventRepository, EventRepository>();
 builder.Services.AddTransient<IGroupEventRepository, GroupEventRepository>();
 #endregion
-
-builder.Services.AddDataProtection().PersistKeysToDbContext<CuratorMagazineContext>();
 
 var app = builder.Build();
 

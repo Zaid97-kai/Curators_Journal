@@ -1,6 +1,6 @@
-﻿using API.Models.Context;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Persistence.Context;
 
 namespace API.DependencyInjection;
 
