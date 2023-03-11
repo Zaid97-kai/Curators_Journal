@@ -1,5 +1,5 @@
-﻿using API.Models.Entities.Domains;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using Shared.Entities.Domains;
 using WebClient.Models.States;
 
 namespace WebClient.Components;

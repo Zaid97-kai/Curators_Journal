@@ -1,10 +1,10 @@
 ﻿using API.Controllers.Bases;
 using API.Models.Bases.ActionResults;
 using API.Models.Bases.Filters;
-using API.Models.Entities.Domains;
 using API.Models.Entities.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Bases.Dtos.BaseHelpers;
+using Shared.Entities.Domains;
 
 namespace API.Controllers;
 

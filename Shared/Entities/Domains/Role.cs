@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace API.Models.Entities.Domains;
+namespace Shared.Entities.Domains;
 
 /// <summary>
-/// Class Division.
+/// Class Role.
 /// </summary>
-public class Division
+public class Role
 {
     /// <summary>
     /// Gets or sets the identifier.
@@ -17,7 +17,7 @@ public class Division
     /// Gets or sets the name.
     /// </summary>
     /// <value>The name.</value>
-    public string? Name { get; set; }
+    public string Name { get; set; }
 
     /// <summary>
     /// Gets or sets the users.

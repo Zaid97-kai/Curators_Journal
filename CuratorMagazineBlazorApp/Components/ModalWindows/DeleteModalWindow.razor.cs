@@ -1,7 +1,7 @@
-﻿using API.Models.Entities.Domains;
-using Microsoft.AspNetCore.Components.Web;
+﻿using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components;
 using WebClient.Data.Services;
+using Shared.Entities.Domains;
 
 namespace WebClient.Components.ModalWindows;
 
