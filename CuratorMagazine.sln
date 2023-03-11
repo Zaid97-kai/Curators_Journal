@@ -13,6 +13,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csp
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8A580D9A-0DA0-4AD6-924A-016778F7FE9C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{321A2E0A-BAB3-426F-9CA4-C61301ACEA17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{23CC6C71-011B-4FFC-935F-9567EE88847E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DDEE53B3-460A-4D44-864A-468053071657}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{03839B08-1C73-45E1-836A-9738DDA91B85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +50,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D3CEF659-FF7D-4BDF-BC72-30FF5972A361} = {23CC6C71-011B-4FFC-935F-9567EE88847E}
+		{187367AD-9EAB-422D-9B07-A508F45E0CB9} = {23CC6C71-011B-4FFC-935F-9567EE88847E}
+		{D906F966-335D-40C8-B3FE-ECC2341F119B} = {DDEE53B3-460A-4D44-864A-468053071657}
+		{6AB590E7-A7CB-43E8-8B6F-A60A8D4DFD6C} = {321A2E0A-BAB3-426F-9CA4-C61301ACEA17}
+		{8A580D9A-0DA0-4AD6-924A-016778F7FE9C} = {03839B08-1C73-45E1-836A-9738DDA91B85}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {20F44810-81E0-4D2B-A370-69BF22DB406E}
