@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace API.Models.Entities.Domains;
+﻿namespace Shared.Entities.Domains;
 
 public class GroupEvent
 {

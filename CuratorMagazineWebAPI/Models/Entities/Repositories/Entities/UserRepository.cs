@@ -1,9 +1,9 @@
 ﻿using API.Models.Bases.Filters;
-using API.Models.Context;
-using API.Models.Entities.Domains;
 using API.Models.Entities.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Persistence.Context;
 using Shared.Bases.Dtos.BaseHelpers;
+using Shared.Entities.Domains;
 using X.PagedList;
 
 namespace API.Models.Entities.Repositories.Entities;

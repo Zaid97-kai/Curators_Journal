@@ -23,12 +23,12 @@ public partial class MenuItemRole
     /// <summary>
     /// The divisions
     /// </summary>
-    private List<API.Models.Entities.Domains.Role>? _roles;
+    private List<Shared.Entities.Domains.Role>? _roles;
 
     /// <summary>
     /// The selected rows
     /// </summary>
-    private IEnumerable<API.Models.Entities.Domains.Role>? _selectedRows;
+    private IEnumerable<Shared.Entities.Domains.Role>? _selectedRows;
 
     /// <summary>
     /// The table
@@ -38,7 +38,7 @@ public partial class MenuItemRole
     /// <summary>
     /// The edit cache
     /// </summary>
-    private IDictionary<string, (bool edit, API.Models.Entities.Domains.Role? data)> _editCache = new Dictionary<string, (bool edit, API.Models.Entities.Domains.Role? data)>();
+    private IDictionary<string, (bool edit, Shared.Entities.Domains.Role? data)> _editCache = new Dictionary<string, (bool edit, Shared.Entities.Domains.Role? data)>();
 
     /// <summary>
     /// The page index
@@ -72,7 +72,7 @@ public partial class MenuItemRole
     protected override async Task OnInitializedAsync()
     {
         var ret = await RoleService?.PostAsync()!;
-        _roles = JsonConvert.DeserializeObject<List<API.Models.Entities.Domains.Role>>(ret.Result.Items?.ToString() ?? string.Empty);
+        _roles = JsonConvert.DeserializeObject<List<Shared.Entities.Domains.Role>>(ret.Result.Items?.ToString() ?? string.Empty);
 
         _roles?.ForEach(item =>
         {
@@ -127,7 +127,7 @@ public partial class MenuItemRole
     /// Called when [change].
     /// </summary>
     /// <param name="queryModel">The query model.</param>
-    public async Task OnChange(QueryModel<API.Models.Entities.Domains.Role> queryModel)
+    public async Task OnChange(QueryModel<Shared.Entities.Domains.Role> queryModel)
     {
         Console.WriteLine(JsonConvert.SerializeObject(queryModel));
     }

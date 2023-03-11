@@ -1,4 +1,4 @@
-﻿using API.Models.Entities.Domains;
+﻿using Shared.Entities.Domains;
 
 namespace API.Models.Entities.Repositories.Interfaces;
 

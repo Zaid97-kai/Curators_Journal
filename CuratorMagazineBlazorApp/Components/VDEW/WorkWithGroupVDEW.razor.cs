@@ -1,8 +1,8 @@
-﻿using API.Models.Entities.Domains;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
+using Shared.Entities.Domains;
 using WebClient.Data.Services;
-using Group = API.Models.Entities.Domains.Group;
+using Group = Shared.Entities.Domains.Group;
 
 namespace WebClient.Components.VDEW;
 

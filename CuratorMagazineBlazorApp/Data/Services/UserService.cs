@@ -1,6 +1,6 @@
-﻿using API.Models.Entities.Domains;
-using Shared.Bases;
+﻿using Shared.Bases;
 using Shared.Bases.Dtos.BaseHelpers;
+using Shared.Entities.Domains;
 using WebClient.Models.Bases;
 
 namespace WebClient.Data.Services;

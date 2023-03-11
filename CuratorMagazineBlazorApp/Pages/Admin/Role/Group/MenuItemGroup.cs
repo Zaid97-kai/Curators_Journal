@@ -23,12 +23,12 @@ public partial class MenuItemGroup
     /// <summary>
     /// The groups
     /// </summary>
-    private List<API.Models.Entities.Domains.Group>? _groups;
+    private List<Shared.Entities.Domains.Group>? _groups;
 
     /// <summary>
     /// The selected rows
     /// </summary>
-    private IEnumerable<API.Models.Entities.Domains.Group>? _selectedRows;
+    private IEnumerable<Shared.Entities.Domains.Group>? _selectedRows;
 
     /// <summary>
     /// The table
@@ -38,7 +38,7 @@ public partial class MenuItemGroup
     /// <summary>
     /// The edit cache
     /// </summary>
-    private IDictionary<string, (bool edit, API.Models.Entities.Domains.Group? data)> _editCache = new Dictionary<string, (bool edit, API.Models.Entities.Domains.Group? data)>();
+    private IDictionary<string, (bool edit, Shared.Entities.Domains.Group? data)> _editCache = new Dictionary<string, (bool edit, Shared.Entities.Domains.Group? data)>();
 
     /// <summary>
     /// The page index
@@ -72,7 +72,7 @@ public partial class MenuItemGroup
     protected override async Task OnInitializedAsync()
     {
         var ret = await GroupService?.PostAsync()!;
-        _groups = JsonConvert.DeserializeObject<List<API.Models.Entities.Domains.Group>>(ret.Result.Items?.ToString() ?? string.Empty);
+        _groups = JsonConvert.DeserializeObject<List<Shared.Entities.Domains.Group>>(ret.Result.Items?.ToString() ?? string.Empty);
 
         _groups?.ForEach(item =>
         {
@@ -127,7 +127,7 @@ public partial class MenuItemGroup
     /// Called when [change].
     /// </summary>
     /// <param name="queryModel">The query model.</param>
-    public async Task OnChange(QueryModel<API.Models.Entities.Domains.Group> queryModel)
+    public async Task OnChange(QueryModel<Shared.Entities.Domains.Group> queryModel)
     {
         Console.WriteLine(JsonConvert.SerializeObject(queryModel));
     }

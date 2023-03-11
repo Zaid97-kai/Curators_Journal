@@ -23,12 +23,12 @@ public partial class MenuItemParent
     /// <summary>
     /// The parents
     /// </summary>
-    private List<API.Models.Entities.Domains.Parent>? _parents;
+    private List<Shared.Entities.Domains.Parent>? _parents;
 
     /// <summary>
     /// The selected rows
     /// </summary>
-    private IEnumerable<API.Models.Entities.Domains.Parent>? _selectedRows;
+    private IEnumerable<Shared.Entities.Domains.Parent>? _selectedRows;
 
     /// <summary>
     /// The table
@@ -38,7 +38,7 @@ public partial class MenuItemParent
     /// <summary>
     /// The edit cache
     /// </summary>
-    private IDictionary<string, (bool edit, API.Models.Entities.Domains.Parent? data)> _editCache = new Dictionary<string, (bool edit, API.Models.Entities.Domains.Parent? data)>();
+    private IDictionary<string, (bool edit, Shared.Entities.Domains.Parent? data)> _editCache = new Dictionary<string, (bool edit, Shared.Entities.Domains.Parent? data)>();
 
     /// <summary>
     /// The page index
@@ -72,7 +72,7 @@ public partial class MenuItemParent
     protected override async Task OnInitializedAsync()
     {
         var ret = await ParentService?.PostAsync()!;
-        _parents = JsonConvert.DeserializeObject<List<API.Models.Entities.Domains.Parent>>(ret.Result.Items?.ToString() ?? string.Empty);
+        _parents = JsonConvert.DeserializeObject<List<Shared.Entities.Domains.Parent>>(ret.Result.Items?.ToString() ?? string.Empty);
 
         _parents?.ForEach(item =>
         {
@@ -127,7 +127,7 @@ public partial class MenuItemParent
     /// Called when [change].
     /// </summary>
     /// <param name="queryModel">The query model.</param>
-    public async Task OnChange(QueryModel<API.Models.Entities.Domains.Parent> queryModel)
+    public async Task OnChange(QueryModel<Shared.Entities.Domains.Parent> queryModel)
     {
         Console.WriteLine(JsonConvert.SerializeObject(queryModel));
     }
