@@ -1,0 +1,108 @@
+﻿<div class="container bg-secondary bg-opacity-50 my-4" style="min-height: 600px; max-height: 800px">
+    <div class="container-fluid">
+        <GridRow Gutter="16" Align="middle" Style="padding-top: 10px; padding-bottom: 10px">
+            <GridCol Span="2">
+                @if (true)
+                {
+                    <img class="img-fluid rounded" src="../img/no-img.jpg" alt="">
+                }
+            </GridCol>
+            <GridCol Span="21">
+                @if (Group == null || CurrentUser == null)
+                {
+                    <Skeleton Active=true></Skeleton>
+                }
+                else
+                {
+                    <h5 class="text-white" style="margin-bottom: 0px; padding-left: 0px">@Group.Name</h5>
+                    <p class="text-white" style="margin-bottom: 7px; padding-left: 0px">@CurrentUser.Name</p>
+                }
+            </GridCol>
+        </GridRow>
+        <GridRow Gutter="16" Align="bottom" Justify="start">
+            <GridCol Span="12">
+                <h5 class="text-white" style="margin-top: 10px">Участники группы</h5>
+            </GridCol>
+            <GridCol Span="12">
+                <h5 class="text-white">Список мероприятий</h5>
+            </GridCol>
+        </GridRow>
+        <GridRow Gutter="16" Align="middle" Justify="start">
+            <GridCol Span="12">
+                <div class="container-fluid bg-white rounded-3 overflow-auto" style="max-height: 400px; min-height: 400px">
+                    @if (Group == null || CurrentUser == null)
+                    {
+                        <Skeleton Active=true></Skeleton>
+                    }
+                    else
+                    {
+                        @foreach (var item in Group.Users)
+                        {
+                            <IndividualStudent Student="item"></IndividualStudent>
+                        }
+                    }
+                </div>
+            </GridCol>
+            <GridCol Span="12">
+                <div class="container-fluid bg-white rounded-3 overflow-auto" style="max-height: 400px; min-height: 400px">
+                    @if (Group == null || CurrentUser == null)
+                    {
+                        <Skeleton Active=true></Skeleton>
+                    }
+                    else
+                    {
+                        if(_events != null)
+                        {
+                            @foreach (var item in _events)
+                            {
+                                <IndividualEvent Event="item"></IndividualEvent>
+                            }
+                        }
+                        else
+                        {
+                            <p>Pusto</p>
+                        }
+                    }
+                </div>
+            </GridCol>
+        </GridRow>
+        <GridRow Gutter="16" Style="margin-top: 10px" Align="middle" Justify="center">
+            <GridCol Span="12" Style="text-align: center">
+                <button class="btn btn-secondary" style="margin-right: 5px">Экспорт</button>
+                @if (_role != null)
+                {
+                    @if (CurrentUser?.RoleId == _role.Id)
+                    {
+                        <button class="btn btn-secondary" style="margin-right: 5px; margin-left: 5px">Импорт</button>
+                        <button class="btn btn-secondary" style="margin-right: 2px; margin-left: 2px" @onclick="@ShowModalAddStudentWindow">Добавить</button>
+                    }
+                }
+            </GridCol>
+            <GridCol Span="12" Style="text-align: center">
+                <button class="btn btn-secondary" style="margin-right: 5px">Экспорт</button>
+                @if (_role != null)
+                {
+                    @if (CurrentUser?.RoleId == _role.Id)
+                    {
+                        <button class="btn btn-secondary" style="margin-right: 5px; margin-left: 5px">Импорт</button>
+                        <button class="btn btn-secondary" style="margin-right: 2px; margin-left: 2px" @onclick="@ShowModalAddEventWindow">Добавить</button>
+                    }
+                }
+            </GridCol>
+        </GridRow>
+    </div>
+</div>
+
+
+@if (IsVisibleAddStudentModalWindow)
+{
+    <WebClient.Components.ModalWindows.AddStudentModalWindow Visible="IsVisibleAddStudentModalWindow" ChangeVisible="ModalAddStudentWindowParam"></WebClient.Components.ModalWindows.AddStudentModalWindow>
+}
+@if (IsVisibleAddEventModalWindow)
+{
+    <WebClient.Components.ModalWindows.AddEventModalWindow Visible="IsVisibleAddEventModalWindow" ChangeVisible="ModalAddEventWindowParam"></WebClient.Components.ModalWindows.AddEventModalWindow>
+}
+
+@code {
+    
+}

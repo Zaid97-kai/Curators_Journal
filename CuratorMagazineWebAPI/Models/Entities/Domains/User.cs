@@ -18,7 +18,7 @@ public class User
     /// </summary>
     /// <value>The name.</value>
     [Display(Name = "Имя")]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// Gets or sets the password.

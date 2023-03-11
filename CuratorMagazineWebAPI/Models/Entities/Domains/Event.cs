@@ -14,7 +14,7 @@ namespace API.Models.Entities.Domains
         /// Gets or sets the name.
         /// </summary>
         /// <value>The name.</value>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Gets or sets the comment.

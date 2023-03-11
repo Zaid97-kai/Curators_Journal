@@ -1,0 +1,81 @@
+﻿<GridRow Gutter="16" Align="middle" Justify="start" Style="padding: 10px">
+    <GridCol Span="5">
+        @if (Event?.EventPhoto == null)
+        {
+            <img class="rounded img-fluid" src="../img/no-img.jpg" alt="">
+        }
+        else
+        {
+            @*todo: Пометка надо придумать как фотку поставить*@
+        }
+    </GridCol>
+    <GridCol Span="10">
+        <div @onclick="ShowModalEventInfoWindow">
+            <p><b>@Event?.Name</b></p>
+            <p>@Event!.DateEvent</p>
+        </div>
+    </GridCol>
+    <GridCol Span="9" Style="text-align: right">
+        <button class="btn btn-secondary" style="margin-right: 5px; font-size: 0.8em" @onclick="@ShowModalChangeEventWindow">Изменить</button>
+        <button class="btn btn-secondary" style="font-size: 0.8em" @onclick="@ShowModalDeleteEventWindow">Удалить</button>
+    </GridCol>
+
+</GridRow>
+<GridRow Style="padding: 0px" Justify="center">
+    <GridCol Span="24">
+        <hr class="m-0">
+    </GridCol>
+</GridRow>
+@if (IsVisibleEventInfoModalWindow)
+{
+    <ShowEventModalWindow Event="Event" Visible="IsVisibleEventInfoModalWindow" ChangeVisible="ModalEventInfoWindowParam"></ShowEventModalWindow>
+}
+@if (IsVisibleChangeEventModalWindow)
+{
+    <ChangeEventModalWindow Event="Event" Visible="IsVisibleChangeEventModalWindow" ChangeVisible="ModalChangeEventWindowParam"></ChangeEventModalWindow>
+}
+@if (IsVisibleDeleteEventModalWindow)
+{
+    <DeleteModalWindow Object="Event" Visible="IsVisibleDeleteEventModalWindow" ChangeVisible="ModalDeleteEventWindowParam"></DeleteModalWindow>
+}
+
+@code {
+    [Parameter]
+    public Event? Event { get; set; }
+
+    private bool IsVisibleEventInfoModalWindow { get; set; }
+
+    private bool IsVisibleChangeEventModalWindow { get; set; }
+
+    private bool IsVisibleDeleteEventModalWindow { get; set; }
+
+    public void ShowModalEventInfoWindow()
+    {
+        IsVisibleEventInfoModalWindow = !IsVisibleEventInfoModalWindow;
+    }
+
+    public void ModalEventInfoWindowParam(bool value)
+    {
+        IsVisibleEventInfoModalWindow = value;
+    }
+
+    public void ShowModalChangeEventWindow()
+    {
+        IsVisibleChangeEventModalWindow = !IsVisibleChangeEventModalWindow;
+    }
+
+    public void ModalChangeEventWindowParam(bool value)
+    {
+        IsVisibleChangeEventModalWindow = value;
+    }
+
+    public void ShowModalDeleteEventWindow()
+    {
+        IsVisibleDeleteEventModalWindow = !IsVisibleDeleteEventModalWindow;
+    }
+
+    public void ModalDeleteEventWindowParam(bool value)
+    {
+        IsVisibleDeleteEventModalWindow = value;
+    }
+}
