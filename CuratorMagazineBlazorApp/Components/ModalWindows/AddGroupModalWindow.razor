@@ -1,0 +1,36 @@
+﻿<Modal Title="@("Добавление")"
+       Visible="@Visible"
+       OnOk="@HandleOkAsync"
+       OnCancel="@HandleCancel">
+    <div class="container-fluid">
+        <Form Model="@Group"
+              OnFinish="OnFinish"
+              OnFinishFailed="OnFinishFailed">
+            <Row Gutter="24">
+                <GridCol Span="11">
+                    <img class="img-thumbnail" height="400px" width="400px" src="../img/no-img.jpg" alt="">
+                    <FormItem>
+                        <Button type="image" class="btn btn-outline-secondary mt-3">Обзор</Button>
+                    </FormItem>
+                </GridCol>
+                <GridCol Span="13">
+                    <FormItem Label="Номер группы">
+                        <Input @bind-Value="@context.Name" />
+                    </FormItem>
+                    <FormItem Label="Куратор">
+                        <Select Mode="default"
+                                DataSource="@Curators"
+                                TItem="User"
+                                TItemValue="string"
+                                @bind-Value="@SelectedCuratorItem"
+                                LabelName="@nameof(User.Name)"
+                                ValueName="@nameof(User.Name)"
+                                IgnoreItemChanges="false"
+                                OnSelectedItemChanged="OnSelectedCuratorItemChangedHandler">
+                        </Select>
+                    </FormItem>
+                </GridCol>
+            </Row>
+        </Form>
+    </div>
+</Modal>

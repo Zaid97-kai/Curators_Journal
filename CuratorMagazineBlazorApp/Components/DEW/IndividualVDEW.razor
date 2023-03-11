@@ -1,0 +1,29 @@
+﻿<div class="row">
+    <div class="col-1">
+        @if (VDEW?.ProfilePhoto == null)
+        {
+            <img class="rounded img-fluid" src="../img/no-img.jpg" alt="">
+        }
+    </div>
+    <div class="col-8">
+        <h5>@VDEW?.Name</h5>
+        
+        <p>@VDEW?.Email</p>
+    </div>
+    <div class="col-3 text-end">
+        <button type="button" class="btn btn-secondary me-2" @onclick="ShowModalChangeVdewWindow">Изменить</button>
+        <button type="button" class="btn btn-secondary" @onclick="ShowDeleteModalWindow">Удалить</button>
+    </div>
+</div>
+@if (IsVisibleModalChangeVdewWindow)
+{
+    <WebClient.Components.ModalWindows.ChangeVDEWModalWindow ChangeVisible="ModalChangeVdewWindowParam" Visible="IsVisibleModalChangeVdewWindow" VDEW="@VDEW"></WebClient.Components.ModalWindows.ChangeVDEWModalWindow>
+}
+@if (IsVisibleDeleteModalWindow)
+{
+    <WebClient.Components.ModalWindows.DeleteModalWindow Visible="IsVisibleDeleteModalWindow" Object="VDEW" ChangeVisible="DeleteModalWindowParam"></WebClient.Components.ModalWindows.DeleteModalWindow>
+}
+
+@code {
+
+}

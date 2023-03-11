@@ -1,0 +1,46 @@
+﻿<Modal Title="@("Добавление")"
+       Visible="@Visible"
+       OnOk="@HandleOkAsync"
+       OnCancel="@HandleCancel">
+    <div class="container-fluid">
+        <Form Model="@_vdew"
+              OnFinish="OnFinish"
+              OnFinishFailed="OnFinishFailed">
+            <Row Gutter="24">
+                <GridCol Span="11">
+                    <img class="img-thumbnail" height="400px" width="400px" src="../img/no-img.jpg" alt="">
+                    <FormItem>
+                        <Button type="image" class="btn btn-outline-secondary mt-3">Обзор</Button>
+                    </FormItem>
+                </GridCol>
+                <GridCol Span="13">
+                    <FormItem Label="ФИО">
+                        <Input @bind-Value="@context.Name" />
+                    </FormItem>
+                    <FormItem Label="Подразделение">
+                        <Select Mode="default"
+                                DataSource="@_divisions"
+                                TItem="Division"
+                                TItemValue="string"
+                                @bind-Value="@SelectedDivisionItem"
+                                LabelName="@nameof(Division.Name)"
+                                ValueName="@nameof(Division.Name)"
+                                IgnoreItemChanges="false"
+                                OnSelectedItemChanged="OnSelectedItemChangedHandler">
+                        </Select>
+                    </FormItem>
+                    <FormItem Label="Телефон">
+                        <Input @bind-Value="@context.Phone" />
+                    </FormItem>
+                    <FormItem Label="Email">
+                        <Input @bind-Value="@context.Email" />
+                    </FormItem>
+                    <FormItem Label="Пароль">
+                        <Input @bind-Value="@context.Password" />
+                    </FormItem>
+                </GridCol>
+            </Row>
+        </Form>
+    </div>
+</Modal>
+
