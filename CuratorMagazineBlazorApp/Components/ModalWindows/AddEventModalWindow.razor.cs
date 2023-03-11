@@ -1,8 +1,8 @@
-﻿using API.Models.Entities.Domains;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
 using Newtonsoft.Json;
+using Shared.Entities.Domains;
 
 namespace WebClient.Components.ModalWindows;
 

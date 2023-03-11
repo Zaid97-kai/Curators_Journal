@@ -1,5 +1,5 @@
-﻿using API.Models.Entities.Domains;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Shared.Entities.Domains;
 
 namespace API.Models.Context;
 

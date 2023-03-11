@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace API.Models.Entities.Domains;
+namespace Shared.Entities.Domains;
 
 /// <summary>
 /// Пользователь системы

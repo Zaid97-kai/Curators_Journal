@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace API.Models.Entities.Domains
+namespace Shared.Entities.Domains
 {
     public class Event
     {

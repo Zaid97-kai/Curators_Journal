@@ -1,7 +1,7 @@
-﻿using API.Models.Entities.Domains;
-using API.Models.EntityTypeConfigurations;
+﻿using API.Models.EntityTypeConfigurations;
 using Castle.Components.DictionaryAdapter;
 using Microsoft.EntityFrameworkCore;
+using Shared.Entities.Domains;
 using DataProtectionKey = Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey;
 
 namespace API.Models.Context;

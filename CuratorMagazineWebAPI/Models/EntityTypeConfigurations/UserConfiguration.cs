@@ -1,6 +1,6 @@
-﻿using API.Models.Entities.Domains;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Shared.Entities.Domains;
 
 namespace API.Models.EntityTypeConfigurations;
 
